@@ -2,7 +2,7 @@ package residencia.clases;
 
 /**
  * @author Gorka
- *
+ * @version 2.0
  */
 public class Estudiante extends Personas {
 	public String codigoEstudiante;
@@ -43,26 +43,41 @@ public class Estudiante extends Personas {
 		this.codigoEstudiante = codigoEstudiante;
 	}
 
-
+	/**
+	 * @return - Devuelve un valor int que contienen la cuota anual del estudiante
+	 */
 	public int getCuotaAnual() {
 		return cuotaAnual;
 	}
 
-
+	/**
+	 * @param cuotaAnual - - Define un valor int que contiene la cuota anual del estudiante
+	 */
 	public void setCuotaAnual(int cuotaAnual) {
 		this.cuotaAnual = cuotaAnual;
 	}
 
-
+	/**
+	 * @return - Devuelve un valor int que contienen el numero de la habitacion actual del estudiante
+	 */
 	public int getHabitacion() {
 		return habitacion;
 	}
 
-
+	/**
+	 * @param habitacion - Define un valor int que contiene el numero de la habitacion actual del estudiante
+	 */
 	public void setHabitacion(int habitacion) {
 		this.habitacion = habitacion;
 	}
 	
+	/**
+	 * metodo void que imprime por pantalla datos del estudiante
+	 */
+	@Override
+	public String mostrarInformacion(){
+		return codigoEstudiante + ";" + super.getNombre() + ";" + super.getDNI() + ";" + cuotaAnual;
+		
+	}
 
 }
-

@@ -2,7 +2,7 @@ package residencia.clases;
 
 /**
  * @author Gorka y Ruben
- *
+ * @version 2.0
  */
 public class Trabajador extends Personas {
 	public String codigoTrabajador;
@@ -26,14 +26,17 @@ public class Trabajador extends Personas {
 		this.codigoTrabajador = codigoTrabajador;
 		this.funcion = funcion;
 		this.salario=salario;
-		this.funcion=funcion;
 		
 	}
-
+	/**
+	 * @return - Devuelve un valor String que contienen la funion del trabajador 
+	 */
 	public String getFuncion() {
 		return funcion;
 	}
-
+	/**
+	 * @param funcion - Define un valor String que contiene la funcion del trabajador
+	 */
 	public void setFuncion(String funcion) {
 		this.funcion = funcion;
 	}
@@ -66,5 +69,30 @@ public class Trabajador extends Personas {
 		this.salario = salario;
 	}
 	
+	/**
+	 * metodo void que imprime por pantalla datos del trabajador 
+	 */
+	@Override
+	public String mostrarInformacion(){
+		return codigoTrabajador + ";" + super.getNombre() + ";" + super.getDNI() + ";" + funcion + ";" + salario;
+	}
+	
+	/**
+	 * metodo que comprueba si la funcion del trabajador es correcta 
+	 */
+	public boolean comprobarFuncion(){
+		if(funcion == "Mantenimiento" || funcion == "mantenimiento"){
+			return true;
+		}else if (funcion == "Limpieza" || funcion == "limpieza"){
+			return true;
+		}else if (funcion == "Director" || funcion == "director"){
+			return true;
+		}else{
+			System.out.println("Error al introducir la funcion");
+			return false;
+		}
+}
+		
+
 
 }
