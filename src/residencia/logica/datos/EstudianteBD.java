@@ -31,7 +31,7 @@ public class EstudianteBD {
 					+ "    nombre text NOT NULL,\n" 
 					+ "    DNI text NOT NULL,\n" 
 					+ "    cuotaAnual integer NOT NULL,\n"  
-					+ "    habitacion integer NOT NULL\n"
+					+ "    habitacion integer NOT NULL,\n"
 					+ "    usuario text NOT NULL,\n" 
 					+ "    contrasenia text NOT NULL\n" 
 					+ ");";
@@ -96,9 +96,9 @@ public class EstudianteBD {
 						String nom = rs.getString("nombre");
 						String dni = rs.getString("DNI");
 						int cuot = rs.getInt("cuotaAnual");
-						int habita = rs.getInt("cuotaAnual");
-						String user = rs.getString("nombre");
-						String contra = rs.getString("DNI");
+						int habita = rs.getInt("habitacion");
+						String user = rs.getString("usuario");
+						String contra = rs.getString("contrasenia");
 						
 
 						Estudiante seleccionado = new Estudiante(codigo,nom,dni,cuot,habita,user,contra);
