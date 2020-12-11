@@ -112,9 +112,7 @@ public class RegistroEmpleado extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RegistroEmpleado.this.setVisible(false);
-				LoginEmpleado loginEmpleado = new LoginEmpleado();
-				loginEmpleado.setVisible(true);
+				RegistroEmpleado.this.dispose();
 			}
 		});
 		btnCancelar.setBounds(298, 133, 115, 29);

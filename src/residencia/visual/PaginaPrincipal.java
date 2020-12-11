@@ -6,8 +6,14 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import residencia.clases.Estudiante;
+import residencia.clases.Trabajador;
+import residencia.logica.datos.CrearBD;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 /**
@@ -16,6 +22,8 @@ import java.awt.event.ActionEvent;
 public class PaginaPrincipal extends JFrame {
 
 	private JPanel contentPane;
+	private ArrayList<Estudiante> estudiantes;
+	private ArrayList<Trabajador> empleado;
 
 	/**
 	 * Launch the application.
@@ -37,6 +45,16 @@ public class PaginaPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public PaginaPrincipal() {
+		
+		CrearBD base = new CrearBD("ResidenciaEstudiantes.db");
+		base.createLink();
+		base.inicializarBD();
+		
+		estudiantes = residencia.logica.datos.EstudianteBD.seleccionEstudiantes(base.getConn());
+		empleado = residencia.logica.datos.EmpleadoBD.seleccionEmpleados(base.getConn());
+		
+		base.closeLink();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -47,7 +65,7 @@ public class PaginaPrincipal extends JFrame {
 		JButton btnEmpleado = new JButton("Empleado");
 		btnEmpleado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LoginEmpleado loginEmpleado = new LoginEmpleado();
+				LoginEmpleado loginEmpleado = new LoginEmpleado(empleado);
 				loginEmpleado.setVisible(true);
 				PaginaPrincipal.this.setVisible(false);
 			}
@@ -58,7 +76,7 @@ public class PaginaPrincipal extends JFrame {
 		JButton btnEstudiante = new JButton("Estudiante");
 		btnEstudiante.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LoginEstudiante loginEstudiante = new LoginEstudiante();
+				LoginEstudiante loginEstudiante = new LoginEstudiante(estudiantes);
 				loginEstudiante.setVisible(true);
 				PaginaPrincipal.this.setVisible(false);
 			}

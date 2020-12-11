@@ -6,11 +6,16 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import residencia.clases.Trabajador;
+import residencia.excepciones.UsuarioNoExiste;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 
@@ -20,30 +25,17 @@ import javax.swing.JPasswordField;
  */
 public class LoginEmpleado extends JFrame {
 
+	private ArrayList<Trabajador> empleadoBD = new ArrayList<Trabajador>();
 	private JPanel contentPane;
 	private JTextField textField;
 	private JPasswordField passwordField;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LoginEmpleado frame = new LoginEmpleado();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the frame.
 	 */
-	public LoginEmpleado() {
+	public LoginEmpleado(ArrayList<Trabajador> empleado) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -72,9 +64,23 @@ public class LoginEmpleado extends JFrame {
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LoginEmpleado.this.setVisible(false);
-				MenuEmpleado menuEmpleado = new MenuEmpleado();
-				menuEmpleado.setVisible(true);
+				
+				String usuario = textField.getText();
+				String password = passwordField.getText();
+				try {
+					boolean encontrado = comprobarEmpleado(usuario, password);
+					if (encontrado){
+						LoginEmpleado.this.setVisible(false);
+						MenuEmpleado menuEmpleado = new MenuEmpleado();
+						menuEmpleado.setVisible(true);
+					}
+				} catch (UsuarioNoExiste e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				
+				
 			}
 		});
 		btnAceptar.setBounds(265, 34, 115, 29);
@@ -108,5 +114,28 @@ public class LoginEmpleado extends JFrame {
 		
 		
 	}
-}
+	public boolean comprobarEmpleado(String usuario, String password) throws UsuarioNoExiste{
+		boolean existencia = false;
+		
+		for (Trabajador a: empleadoBD){
+			if(a.getUsuario().equals(usuario)){
+				existencia = true;
+				break;
+			}else{
+				if(a.getContrasenia().equals(password)){
+					existencia = true;
+					break;
+				}
+			}
+		}
+		if (existencia==true){
+			return true;
+		}else{
+			throw new UsuarioNoExiste("Usuario o contrasenya no Existente");
+		}
+		
+	
+	}
+	
 
+}

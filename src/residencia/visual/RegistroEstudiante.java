@@ -97,13 +97,6 @@ public class RegistroEstudiante extends JFrame {
 		dni.setColumns(10);
 		
 		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				RegistroEstudiante.this.setVisible(false);
-				RegistroEstudiante registroEstudiante = new RegistroEstudiante();
-				registroEstudiante.setVisible(true);
-			}
-		});
 		btnAceptar.setBounds(298, 70, 115, 29);
 		contentPane.add(btnAceptar);
 		
@@ -115,4 +108,3 @@ public class RegistroEstudiante extends JFrame {
 	}
 
 }
-
