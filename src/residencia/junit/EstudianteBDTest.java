@@ -35,12 +35,12 @@ public class EstudianteBDTest {
 	public void testInsertar() throws SQLException {
 
 		residencia.logica.datos.EstudianteBD.crearTablaEstudiante(base.getConn());
-		residencia.logica.datos.EstudianteBD.insertarEstudiante(base.getConn(), "ES0300","Nombre Prueba", "12345678A", 1000, 100, "nombre", "prueba");
+		residencia.logica.datos.EstudianteBD.insertarEstudiante(base.getConn(), "ES0400","Nombre Prueba", "12345678A", 9999, 999, "nombre", "prueba");
 		ArrayList<Estudiante> listaEstudiante = residencia.logica.datos.EstudianteBD.seleccionEstudiantes(base.getConn());
 
 		for (Estudiante a : listaEstudiante) {
 
-			if (a.getCodigoEstudiante().equals("ES0300")) {
+			if (a.getCodigoEstudiante().equals("ES0400")) {
 			
 				assertEquals(a.getNombre(), "Nombre Prueba");
 				assertEquals(a.getDNI(), "12345678A");
