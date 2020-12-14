@@ -31,23 +31,56 @@ public class SalonBDTest {
 
 
 	@Test
-	public void testInsertar() throws SQLException {
+	public void testInsertarSalon() throws SQLException {
 
 		residencia.logica.datos.SalonBD.crearTablaSalon(base.getConn());
-		residencia.logica.datos.SalonBD.insertarSalon(base.getConn(), 999,"Prueba", true, "Prueba");
+		residencia.logica.datos.SalonBD.insertarSalon(base.getConn(), 900,"Prueba", true, "Prueba");
 		ArrayList<SalonComunitario> listaSalon = residencia.logica.datos.SalonBD.seleccionSalones(base.getConn());
 
 		for (SalonComunitario a : listaSalon) {
 
-			
-				assertEquals(a.getNumero(), 999);
+			if (a.getNumero()==999){
+				
 				assertEquals(a.getTipo(), "Prueba");
 				assertEquals(a.isEstaReservada(), true);
+				assertEquals(a.getCodigoAlumnoSalon(), "Prueba");
+				
+			}
+			}
+		}
+	@Test
+	public void testSeleccionarSalon() throws SQLException {
+
+		residencia.logica.datos.SalonBD.crearTablaSalon(base.getConn());
+		residencia.logica.datos.SalonBD.insertarSalon(base.getConn(), 990,"Prueba", false, "Prueba");
+		ArrayList<SalonComunitario> listaSalon = residencia.logica.datos.SalonBD.seleccionSalones(base.getConn());
+
+		for (SalonComunitario a : listaSalon) {
+
+			if (a.getNumero()==990){
+				
+				assertEquals(a.getTipo(), "Prueba");
+				assertEquals(a.isEstaReservada(), false);
 				assertEquals(a.getCodigoAlumnoSalon(), "Prueba");
 				
 			
 			}
 		}
 	}
+	@Test
+	public void testEliminarSalon() throws SQLException {
+
+		residencia.logica.datos.SalonBD.borrarSalon(base.getConn(), 999);
+		ArrayList<SalonComunitario> listaSalon = residencia.logica.datos.SalonBD.seleccionSalones(base.getConn());
+		
+		for (SalonComunitario a : listaSalon) {
+
+			if (a.getNumero()==999) {
+				assertEquals(1, 0);
+			}
+			
+		}
+	}
+}
 		
 

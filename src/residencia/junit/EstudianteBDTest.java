@@ -32,7 +32,7 @@ public class EstudianteBDTest {
 
 
 	@Test
-	public void testInsertar() throws SQLException {
+	public void testInsertarEstudiante() throws SQLException {
 
 		residencia.logica.datos.EstudianteBD.crearTablaEstudiante(base.getConn());
 		residencia.logica.datos.EstudianteBD.insertarEstudiante(base.getConn(), "ES0400","Nombre Prueba", "12345678A", 9999, 999, "nombre", "prueba");
@@ -53,5 +53,41 @@ public class EstudianteBDTest {
 			}
 		}
 	}
-		
+	@Test
+	public void testSeleccionarEstudiante() throws SQLException {
+
+		residencia.logica.datos.EstudianteBD.crearTablaEstudiante(base.getConn());
+		residencia.logica.datos.EstudianteBD.insertarEstudiante(base.getConn(), "ES0500","Nombre Prueba", "12345678A", 9999, 999, "nombre", "prueba");
+		ArrayList<Estudiante> listaEstudiante = residencia.logica.datos.EstudianteBD.seleccionEstudiantes(base.getConn());
+
+		for (Estudiante a : listaEstudiante) {
+
+			if (a.getCodigoEstudiante().equals("ES0500")) {
+			
+				assertEquals(a.getNombre(), "Nombre Prueba");
+				assertEquals(a.getDNI(), "12345678A");
+				assertEquals(a.getCuotaAnual(), 9999);
+				assertEquals(a.getHabitacion(), 999);
+				assertEquals(a.getUsuario(), "nombre");
+				assertEquals(a.getContrasenia(), "prueba");
+				
+			
+			}
+		}
+
 	}
+	@Test
+	public void testEliminarEstudiante() throws SQLException {
+
+		residencia.logica.datos.EstudianteBD.borrarEstudiante(base.getConn(), "ES0600");
+		ArrayList<Estudiante> listaEstudiante = residencia.logica.datos.EstudianteBD.seleccionEstudiantes(base.getConn());
+		
+		for (Estudiante a : listaEstudiante) {
+
+			if (a.getCodigoEstudiante().equals("ES0600")) {
+				assertEquals(1, 0);
+			}
+			
+		}
+	}
+}

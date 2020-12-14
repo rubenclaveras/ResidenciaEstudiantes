@@ -31,7 +31,7 @@ public class EmpleadoBDTest {
 
 
 	@Test
-	public void testInsertar() throws SQLException {
+	public void testInsertarEmpleado() throws SQLException {
 
 		residencia.logica.datos.EmpleadoBD.crearTablaEmpleado(base.getConn());
 		residencia.logica.datos.EmpleadoBD.insertarEmpleado(base.getConn(), "EM0400","Nombre Prueba", "12345678A", 9999, "limpieza", "nombre", "prueba");
@@ -52,6 +52,42 @@ public class EmpleadoBDTest {
 			}
 		}
 	}
-		
+	@Test
+	public void testSeleccionarEmpleado() throws SQLException {
+
+		residencia.logica.datos.EmpleadoBD.crearTablaEmpleado(base.getConn());
+		residencia.logica.datos.EmpleadoBD.insertarEmpleado(base.getConn(), "EM0500","Nombre Prueba", "12345678A", 9999, "mantenimiento", "nombre", "prueba");
+		ArrayList<Trabajador> listaTrabajador = residencia.logica.datos.EmpleadoBD.seleccionEmpleados(base.getConn());
+
+		for (Trabajador a : listaTrabajador) {
+
+			if (a.getCodigoTrabajador().equals("ES0500")) {
+			
+				assertEquals(a.getNombre(), "Nombre Prueba");
+				assertEquals(a.getDNI(), "12345678A");
+				assertEquals(a.getSalario(), 9999);
+				assertEquals(a.getFuncion(), "mantenimiento");
+				assertEquals(a.getUsuario(), "nombre");
+				assertEquals(a.getContrasenia(), "prueba");
+				
+			
+			}
+		}
 	}
+	@Test
+	public void testEliminarEmpleado() throws SQLException {
+
+		residencia.logica.datos.EmpleadoBD.borrarEmpleado(base.getConn(), "EM0600");
+		ArrayList<Trabajador> listaEmpleado = residencia.logica.datos.EmpleadoBD.seleccionEmpleados(base.getConn());
+		
+		for (Trabajador a : listaEmpleado) {
+
+			if (a.getCodigoTrabajador().equals("EM0600")) {
+				assertEquals(1, 0);
+			}
+			
+		}
+	}
+		
+}
 
