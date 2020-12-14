@@ -119,7 +119,7 @@ public class EstudianteBD {
 		 * @param codigoEst - codigo del estudiante a eliminar
 		 */
 		public static void borrarEstudiante(Connection conn, String codigoEst) {
-			String sql = "DELETE FROM estudiante WHERE codigoEst = ?";
+			String sql = "DELETE FROM estudiante WHERE codigoEstudiante = ?";
 
 			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 

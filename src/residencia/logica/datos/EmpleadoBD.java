@@ -30,8 +30,8 @@ public class EmpleadoBD {
 					+ "    nombre text NOT NULL,\n" 
 					+ "    DNI text NOT NULL,\n" 
 					+ "    salario integer NOT NULL,\n" 
-					+ "    funcion text  NOT NULL,\n" 
-					+ "    usuario text  NOT NULL,\n" 
+					+ "    funcion text NOT NULL,\n" 
+					+ "    usuario text NOT NULL,\n" 
 					+ "    contrasenia text  NOT NULL\n" 
 					+ ");";
 
@@ -84,7 +84,7 @@ public class EmpleadoBD {
 		 * @return lista - lista con todos los empleados; selecciona todos los datos de cada uno
 		 */
 		public static ArrayList<Trabajador> seleccionEmpleados(Connection conn) {
-			String sql = "SELECT codigoEmpleado,nombre, DNI,salario,funcion FROM empleado";
+			String sql = "SELECT codigoEmpleado,nombre, DNI,salario,funcion, usuario, contrasenia FROM empleado";
 			ArrayList<Trabajador> lista = new ArrayList<Trabajador>();
 			try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -118,7 +118,7 @@ public class EmpleadoBD {
 		 * @param codigoEmp - codigo del empleado a borrar
 		 */
 		public static void borrarEmpleado(Connection conn, String codigoEmp) {
-			String sql = "DELETE FROM empleado WHERE codigoEmp = ?";
+			String sql = "DELETE FROM empleado WHERE codigoEmpleado = ?";
 
 			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 

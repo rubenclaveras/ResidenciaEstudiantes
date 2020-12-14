@@ -77,6 +77,7 @@ public class EmpleadoBDTest {
 	@Test
 	public void testEliminarEmpleado() throws SQLException {
 
+		residencia.logica.datos.EmpleadoBD.crearTablaEmpleado(base.getConn());
 		residencia.logica.datos.EmpleadoBD.borrarEmpleado(base.getConn(), "EM0600");
 		ArrayList<Trabajador> listaEmpleado = residencia.logica.datos.EmpleadoBD.seleccionEmpleados(base.getConn());
 		

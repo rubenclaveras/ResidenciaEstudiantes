@@ -67,6 +67,7 @@ public class HabitacionBDTest {
 	@Test
 	public void testEliminarHabitacion() throws SQLException {
 
+		residencia.logica.datos.HabitacionBD.crearTablaHabitacion(base.getConn());
 		residencia.logica.datos.HabitacionBD.borrarHabitacion(base.getConn(), 999);
 		ArrayList<Habitacion> listaHabitacion = residencia.logica.datos.HabitacionBD.seleccionHabitaciones(base.getConn());
 		

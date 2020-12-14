@@ -79,12 +79,13 @@ public class EstudianteBDTest {
 	@Test
 	public void testEliminarEstudiante() throws SQLException {
 
-		residencia.logica.datos.EstudianteBD.borrarEstudiante(base.getConn(), "ES0600");
+		residencia.logica.datos.EstudianteBD.crearTablaEstudiante(base.getConn());
+		residencia.logica.datos.EstudianteBD.borrarEstudiante(base.getConn(), "ES0500");
 		ArrayList<Estudiante> listaEstudiante = residencia.logica.datos.EstudianteBD.seleccionEstudiantes(base.getConn());
 		
 		for (Estudiante a : listaEstudiante) {
 
-			if (a.getCodigoEstudiante().equals("ES0600")) {
+			if (a.getCodigoEstudiante().equals("ES0500")) {
 				assertEquals(1, 0);
 			}
 			

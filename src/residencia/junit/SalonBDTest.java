@@ -34,12 +34,12 @@ public class SalonBDTest {
 	public void testInsertarSalon() throws SQLException {
 
 		residencia.logica.datos.SalonBD.crearTablaSalon(base.getConn());
-		residencia.logica.datos.SalonBD.insertarSalon(base.getConn(), 900,"Prueba", true, "Prueba");
+		residencia.logica.datos.SalonBD.insertarSalon(base.getConn(), 4,"Prueba", true, "Prueba");
 		ArrayList<SalonComunitario> listaSalon = residencia.logica.datos.SalonBD.seleccionSalones(base.getConn());
 
 		for (SalonComunitario a : listaSalon) {
 
-			if (a.getNumero()==999){
+			if (a.getNumero()==4){
 				
 				assertEquals(a.getTipo(), "Prueba");
 				assertEquals(a.isEstaReservada(), true);
@@ -70,6 +70,7 @@ public class SalonBDTest {
 	@Test
 	public void testEliminarSalon() throws SQLException {
 
+		residencia.logica.datos.SalonBD.crearTablaSalon(base.getConn());
 		residencia.logica.datos.SalonBD.borrarSalon(base.getConn(), 999);
 		ArrayList<SalonComunitario> listaSalon = residencia.logica.datos.SalonBD.seleccionSalones(base.getConn());
 		

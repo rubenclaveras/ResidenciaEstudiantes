@@ -76,6 +76,17 @@ public class SalonComunitario extends Sala {
 	public void setCodigoAlumnoSalon(String codigoAlumnoSalon) {
 		this.codigoAlumnoSalon = codigoAlumnoSalon;
 	}
+	@Override
+	public int getNumero() {
+		// TODO Auto-generated method stub
+		return super.getNumero();
+	}
+
+@Override
+	public void setNumero(int numero) {
+		// TODO Auto-generated method stub
+		super.setNumero(numero);
+	}
 	
 
 	

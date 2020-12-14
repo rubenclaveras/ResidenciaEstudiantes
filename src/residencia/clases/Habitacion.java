@@ -69,6 +69,17 @@ public class Habitacion extends Sala {
 	public void setCodigoAlumnoHab(String codigoAlumnoHab) {
 		this.codigoAlumnoHab = codigoAlumnoHab;
 	}
+	@Override
+		public int getNumero() {
+			// TODO Auto-generated method stub
+			return super.getNumero();
+		}
+	
+	@Override
+		public void setNumero(int numero) {
+			// TODO Auto-generated method stub
+			super.setNumero(numero);
+		}
 	
 
 }
