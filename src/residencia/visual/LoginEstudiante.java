@@ -104,7 +104,7 @@ public class LoginEstudiante extends JFrame {
 		btnRegistrarse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LoginEstudiante.this.setVisible(false);
-				RegistroEstudiante registroEstudiante = new RegistroEstudiante();
+				RegistroEstudiante registroEstudiante = new RegistroEstudiante(estudiantes);
 				registroEstudiante.setVisible(true);
 			}
 		});

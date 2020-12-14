@@ -1,8 +1,5 @@
 package residencia.visual;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -36,6 +33,9 @@ public class LoginEmpleado extends JFrame {
 	 * Create the frame.
 	 */
 	public LoginEmpleado(ArrayList<Trabajador> empleado) {
+		
+		this.empleadoBD= empleado;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -61,6 +61,10 @@ public class LoginEmpleado extends JFrame {
 		passwordField.setBounds(15, 146, 146, 26);
 		contentPane.add(passwordField);
 		
+		JCheckBox chckbxDirector = new JCheckBox("Director");
+		chckbxDirector.setBounds(15, 199, 139, 29);
+		contentPane.add(chckbxDirector);
+		
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -70,9 +74,15 @@ public class LoginEmpleado extends JFrame {
 				try {
 					boolean encontrado = comprobarEmpleado(usuario, password);
 					if (encontrado){
-						LoginEmpleado.this.setVisible(false);
-						MenuEmpleado menuEmpleado = new MenuEmpleado();
-						menuEmpleado.setVisible(true);
+						if (chckbxDirector.isSelected()){
+							LoginEmpleado.this.setVisible(false);
+							MenuDirector menuDirector = new MenuDirector();
+							menuDirector.setVisible(true);
+						}else{
+							LoginEmpleado.this.setVisible(false);
+							MenuEmpleado menuEmpleado = new MenuEmpleado();
+							menuEmpleado.setVisible(true);
+						}
 					}
 				} catch (UsuarioNoExiste e1) {
 					// TODO Auto-generated catch block
@@ -101,16 +111,14 @@ public class LoginEmpleado extends JFrame {
 		btnRegistrarse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LoginEmpleado.this.setVisible(false);
-				RegistroEmpleado registroEmpleado = new RegistroEmpleado();
+				RegistroEmpleado registroEmpleado = new RegistroEmpleado(empleado);
 				registroEmpleado.setVisible(true);
 			}
 		});
 		btnRegistrarse.setBounds(265, 199, 115, 29);
 		contentPane.add(btnRegistrarse);
 		
-		JCheckBox chckbxDirector = new JCheckBox("Director");
-		chckbxDirector.setBounds(15, 199, 139, 29);
-		contentPane.add(chckbxDirector);
+
 		
 		
 	}
