@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import residencia.clases.Habitacion;
 import residencia.clases.Trabajador;
 import residencia.excepciones.DniIncorrecto;
 import residencia.excepciones.UsuarioExistente;
@@ -29,12 +30,40 @@ public class RegistroEmpleado extends JFrame {
 	private JTextField dni;
 	private JTextField Ocupacion;
 	private ArrayList<Trabajador> empleadoBD = new ArrayList<Trabajador>();
+	private String[] codEmpleado = new String[23];
+	
 	
 
 	/**
 	 * Create the frame.
 	 */
 	public RegistroEmpleado(ArrayList<Trabajador> empleado) {
+		
+		
+		codEmpleado[0]="EM0001";
+		codEmpleado[1]="EM0002";
+		codEmpleado[2]="EM0003";
+		codEmpleado[3]="EM0004";
+		codEmpleado[4]="EM0005";
+		codEmpleado[5]="EM0006";
+		codEmpleado[6]="EM0007";
+		codEmpleado[7]="EM0008";
+		codEmpleado[8]="EM0009";
+		codEmpleado[9]="EM0010";
+		codEmpleado[10]="EM0011";
+		codEmpleado[11]="EM0012";
+		codEmpleado[12]="EM0013";
+		codEmpleado[13]="EM0014";
+		codEmpleado[14]="EM0015";
+		codEmpleado[15]="EM0016";
+		codEmpleado[16]="EM0017";
+		codEmpleado[17]="EM0018";
+		codEmpleado[18]="EM0019";
+		codEmpleado[19]="EM0020";
+		codEmpleado[20]="EM0021";
+		codEmpleado[21]="EM0022";
+		codEmpleado[22]="EM0023";
+		codEmpleado[23]="EM0024";
 		
 		this.empleadoBD= empleado;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -92,9 +121,11 @@ public class RegistroEmpleado extends JFrame {
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String codEmpleado = asignarCodEmpleado();
 				String Nombre = nombre.getText();
 				String DNI = dni.getText();
 				String ocupacion = Ocupacion.getText();
+				int salario = calcularSalario(ocupacion);
 				String Usuario = usuario.getText();
 				String Contrasenia = contrasenia.getText();
 				
@@ -105,7 +136,8 @@ public class RegistroEmpleado extends JFrame {
 						if(DCorrecto){
 							CrearBD base = new CrearBD("ResidenciaEstudiantes.db");
 							base.createLink();
-							residencia.logica.datos.EmpleadoBD.insertarEmpleado(base.getConn(), "aibdai" , Nombre, DNI, 10293, ocupacion, Usuario, Contrasenia);
+							residencia.logica.datos.EmpleadoBD.insertarEmpleado(base.getConn(), codEmpleado , 
+									Nombre, DNI, salario, ocupacion, Usuario, Contrasenia);
 							base.closeLink();
 						}
 					}
@@ -172,5 +204,43 @@ public class RegistroEmpleado extends JFrame {
 			throw new DniIncorrecto("DNI existente");
 		}
 	}
+	
+	
+	public String asignarCodEmpleado(){
+		String numEmpleado = null;
+		int i;
+		for(i=0;i<=codEmpleado.length;i++){
+			for(Trabajador a: empleadoBD){
+				if(!codEmpleado[i].equals(a.getCodigoTrabajador())){
+					numEmpleado = codEmpleado[i];
+					break;
+				}
+			}
+			if(numEmpleado!= null){
+				break;
+			}
+		}
+		return numEmpleado;	
+	}
+	
+	
+	public int calcularSalario(String ocupacion){
+		int Salario = 0;
+		if(ocupacion == "Mantenimiento" || ocupacion == "mantenimiento"){
+			Salario = 25000;
+		}else if (ocupacion == "Limpieza" || ocupacion == "limpieza"){
+			Salario = 20000;
+		}else if (ocupacion == "Director" || ocupacion == "director"){
+			Salario = 30000;
+		}else{
+			System.out.println("ocupacion no correcta");
+		}
+		return Salario;
+	}
+	
+	
+	
+	
+	
 }
 

@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import residencia.clases.Estudiante;
+import residencia.clases.Habitacion;
 import residencia.clases.Trabajador;
 import residencia.excepciones.DniIncorrecto;
 import residencia.excepciones.UsuarioExistente;
@@ -31,13 +32,45 @@ public class RegistroEstudiante extends JFrame {
 	private JTextField contrasenia;
 	private JTextField dni;
 	private ArrayList<Estudiante> estudianteBD = new ArrayList<Estudiante>();
+	private ArrayList<Habitacion> habitacionBD = new ArrayList<Habitacion>();
+	private String[] codEstudiante = new String[23];
 
 
 	/**
 	 * Create the frame.
 	 */
-	public RegistroEstudiante(ArrayList<Estudiante> estudiantes) {
+	public RegistroEstudiante(ArrayList<Estudiante> estudiantes, ArrayList<Habitacion> habitacion) {
+		
+		
+		
+		codEstudiante[0]="ES0001";
+		codEstudiante[1]="ES0002";
+		codEstudiante[2]="ES0003";
+		codEstudiante[3]="ES0004";
+		codEstudiante[4]="ES0005";
+		codEstudiante[5]="ES0006";
+		codEstudiante[6]="ES0007";
+		codEstudiante[7]="ES0008";
+		codEstudiante[8]="ES0009";
+		codEstudiante[9]="ES0010";
+		codEstudiante[10]="ES0011";
+		codEstudiante[11]="ES0012";
+		codEstudiante[12]="ES0013";
+		codEstudiante[13]="ES0014";
+		codEstudiante[14]="ES0015";
+		codEstudiante[15]="ES0016";
+		codEstudiante[16]="ES0017";
+		codEstudiante[17]="ES0018";
+		codEstudiante[18]="ES0019";
+		codEstudiante[19]="ES0020";
+		codEstudiante[20]="ES0021";
+		codEstudiante[21]="ES0022";
+		codEstudiante[22]="ES0023";
+		codEstudiante[23]="ES0024";
+		
 		this.estudianteBD = estudiantes;
+		this.habitacionBD = habitacion;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -84,10 +117,13 @@ public class RegistroEstudiante extends JFrame {
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String codEstudiante= asignarCodEstudiante();
 				String Nombre = nombre.getText();
 				String DNI = dni.getText();
 				String Usuario = usuario.getText();
 				String Contrasenia = contrasenia.getText();
+				int numeroHabitacion = asignarHabitacion();
+				int salario= calcularSalario(numeroHabitacion);
 				
 				try {
 					boolean UCorrecto = comprobarEstudiante(Usuario, Contrasenia);
@@ -96,8 +132,8 @@ public class RegistroEstudiante extends JFrame {
 						if(DCorrecto){
 							CrearBD base = new CrearBD("ResidenciaEstudiantes.db");
 							base.createLink();
-							residencia.logica.datos.EstudianteBD.insertarEstudiante(base.getConn(), "susb",
-									Nombre, DNI, 10293, 103, Usuario, Contrasenia);
+							residencia.logica.datos.EstudianteBD.insertarEstudiante(base.getConn(), codEstudiante,
+									Nombre, DNI, salario, numeroHabitacion, Usuario, Contrasenia);
 							base.closeLink();
 						}
 					}
@@ -163,6 +199,56 @@ public class RegistroEstudiante extends JFrame {
 			throw new DniIncorrecto("DNI existente");
 		}
 	}
+	
+	
+	public String asignarCodEstudiante(){
+		String numEstudiante = null;
+		int i;
+		for(i=0;i<=codEstudiante.length;i++){
+			for(Estudiante e: estudianteBD){
+				if(!codEstudiante[i].equals(e.getCodigoEstudiante())){
+					numEstudiante = codEstudiante[i];
+					break;
+				}
+			}
+			if(numEstudiante!= null){
+				break;
+			}
+		}
+		return numEstudiante;	
+	}
+	
+	public int asignarHabitacion(){
+		int numHabitacion = 0;
+		for(Habitacion h: habitacionBD){
+			if(h.isEstaOcupada()== false){
+				numHabitacion= h.getNumero();
+				break;
+			}
+		}
+		return numHabitacion;
+	}
+	
+	
+	public int calcularSalario(int numeroHabitacion){
+		int salario = 0;
+		for(Habitacion h: habitacionBD){
+			if(h.getNumero()== numeroHabitacion){
+				if(h.getTipo().equals("Individual")){
+					salario=  5400;//450 X 12
+					break;
+				}else if(h.getTipo().equals("Doble")){
+					salario = 4200; //350 X 12
+					break;
+				}
+				
+			}
+		}
+		return salario;
+		
+		
+	}
+	
+	
 }
 
-}

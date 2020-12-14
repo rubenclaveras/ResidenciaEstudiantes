@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import residencia.clases.Estudiante;
+import residencia.clases.Habitacion;
 import residencia.clases.Trabajador;
 import residencia.logica.datos.CrearBD;
 
@@ -24,6 +25,7 @@ public class PaginaPrincipal extends JFrame {
 	private JPanel contentPane;
 	private ArrayList<Estudiante> estudiantes;
 	private ArrayList<Trabajador> empleado;
+	private ArrayList<Habitacion> habitacion;
 
 	/**
 	 * Launch the application.
@@ -76,7 +78,7 @@ public class PaginaPrincipal extends JFrame {
 		JButton btnEstudiante = new JButton("Estudiante");
 		btnEstudiante.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LoginEstudiante loginEstudiante = new LoginEstudiante(estudiantes);
+				LoginEstudiante loginEstudiante = new LoginEstudiante(estudiantes, habitacion);
 				loginEstudiante.setVisible(true);
 				PaginaPrincipal.this.setVisible(false);
 			}
