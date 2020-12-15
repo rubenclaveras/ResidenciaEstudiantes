@@ -102,11 +102,11 @@ public class Main {
 
         // insert three new rows
 
-        app.insertarSalon(connect(), 101, "Television", true, "ES0001");
-		app.insertarSalon(connect(), 102, "Billar", true, "ES0003");
-		app.insertarSalon(connect(), 103, "Videojuegos", true, "ES0004");
-		app.insertarSalon(connect(), 104, "Futbolin", true, "ES0006");
-		app.insertarSalon(connect(), 105, "Musica", true, "ES0007");
+        app.insertarSalon(connect(), 106, "Videojuegos", false, null);
+		app.insertarSalon(connect(), 107, "Billar", false, null);
+		app.insertarSalon(connect(), 108, "Television", false, null);
+		app.insertarSalon(connect(), 109, "Futbolin", false, null);
+		app.insertarSalon(connect(), 110, "Musica", false, null);
     }
 	
 
