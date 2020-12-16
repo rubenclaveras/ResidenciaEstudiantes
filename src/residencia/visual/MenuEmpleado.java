@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -38,6 +39,36 @@ public class MenuEmpleado extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		
+
+		
+		
+		DefaultListModel<String> model = new DefaultListModel<String>();
+		int i = 0;
+		String ocupacion=obtenerOcupacion(usuario, password);
+		for(Trabajador a: empleadoBD){
+			if(ocupacion.equals(a.getFuncion())){
+				model.add(i, a.getNombre());
+				i++;
+			}
+		
+		}
+		
+		JList list = new JList(model);
+		list.setBounds(15, 16, 204, 212);
+		list.setVisible(false);
+		contentPane.add(list);
+		
+		
+		JButton btnListaCompaeros = new JButton("Lista compa\u00F1eros");
+		btnListaCompaeros.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				list.setVisible(true);
+			}
+		});
+		btnListaCompaeros.setBounds(253, 44, 160, 29);
+		contentPane.add(btnListaCompaeros);
+		
 		JButton btnCalcularSalario = new JButton("Calcular salario");
 		btnCalcularSalario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -54,7 +85,7 @@ public class MenuEmpleado extends JFrame {
 
 			}
 		});
-		btnCalcularSalario.setBounds(15, 44, 160, 29);
+		btnCalcularSalario.setBounds(253, 98, 160, 29);
 		contentPane.add(btnCalcularSalario);
 		
 		JButton btnVerTusDatos = new JButton("Ver tus datos");
@@ -74,7 +105,7 @@ public class MenuEmpleado extends JFrame {
 								
 			}
 		});
-		btnVerTusDatos.setBounds(15, 116, 160, 29);
+		btnVerTusDatos.setBounds(253, 143, 160, 29);
 		contentPane.add(btnVerTusDatos);
 		
 		JButton btnSalir = new JButton("Salir");
@@ -83,9 +114,22 @@ public class MenuEmpleado extends JFrame {
 				MenuEmpleado.this.dispose();
 			}
 		});
-		btnSalir.setBounds(15, 199, 115, 29);
+		btnSalir.setBounds(253, 199, 115, 29);
 		contentPane.add(btnSalir);
-	}
+		
 
+	}
+	
+	
+	public String obtenerOcupacion(String usuario, String password){
+		String ocupacion = null;
+		for(Trabajador a: empleadoBD){
+			if(a.getUsuario().equals(usuario) || a.getContrasenia().equals(password)){
+				ocupacion=a.getFuncion();
+				break;
+			}
+		}
+		return ocupacion;
+	}
 }
 

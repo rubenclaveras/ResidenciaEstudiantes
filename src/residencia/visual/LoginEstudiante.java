@@ -11,8 +11,7 @@ import javax.swing.border.EmptyBorder;
 import residencia.clases.Estudiante;
 import residencia.clases.Habitacion;
 import residencia.clases.SalonComunitario;
-import residencia.excepciones.UsuarioNoExiste;
-
+import residencia.excepciones.Excepciones;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -80,7 +79,7 @@ public class LoginEstudiante extends JFrame {
 						menuEstudiante.setVisible(true);
 					}
 					
-				} catch (UsuarioNoExiste e1) {
+				} catch (Excepciones e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
@@ -117,7 +116,7 @@ public class LoginEstudiante extends JFrame {
 		
 	}
 	
-	public boolean comprobarEstudiante(String usuario, String password) throws UsuarioNoExiste{
+	public boolean comprobarEstudiante(String usuario, String password) throws Excepciones{
 		boolean existencia = false;
 		
 		for (Estudiante a: estudianteBD){
@@ -136,7 +135,7 @@ public class LoginEstudiante extends JFrame {
 		if (existencia==true){
 			return true;
 		}else{
-			throw new UsuarioNoExiste("Usuario o contrasenya no Existente");
+			throw new Excepciones("Usuario o contrasenya no Existente");
 		}
 	}
 

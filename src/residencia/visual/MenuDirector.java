@@ -51,15 +51,17 @@ public class MenuDirector extends JFrame {
 		
 		
 		DefaultListModel<String> model = new DefaultListModel<String>();
+		int i=0;
 		for(Trabajador a: empleadoBD){
-			int i = 0;
-				model.add(i, a.getNombre());
+			model.add(i, a.getNombre());
+			i++;
 		}
 		
 		DefaultListModel<String> model_1 = new DefaultListModel<String>();
+		int x=0;
 		for(Estudiante c: estudianteBD){
-			int i = 0;
-				model_1.add(i, c.getNombre());
+			model_1.add(x, c.getNombre());
+			x++;
 		}
 		
 		JList list;

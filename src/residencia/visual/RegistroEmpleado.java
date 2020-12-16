@@ -6,10 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import residencia.clases.Habitacion;
 import residencia.clases.Trabajador;
-import residencia.excepciones.DniIncorrecto;
-import residencia.excepciones.UsuarioExistente;
+import residencia.excepciones.Excepciones;
 import residencia.logica.datos.CrearBD;
 
 import javax.swing.JLabel;
@@ -125,7 +123,13 @@ public class RegistroEmpleado extends JFrame {
 				String Nombre = nombre.getText();
 				String DNI = dni.getText();
 				String ocupacion = Ocupacion.getText();
-				int salario = calcularSalario(ocupacion);
+				int salario = 0;
+				try {
+					salario = calcularSalario(ocupacion);
+				} catch (Excepciones e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
 				String Usuario = usuario.getText();
 				String Contrasenia = contrasenia.getText();
 				
@@ -143,10 +147,7 @@ public class RegistroEmpleado extends JFrame {
 					}
 					
 					
-				} catch (UsuarioExistente e1) {
-					e1.printStackTrace();
-				} catch (DniIncorrecto e1) {
-					// TODO Auto-generated catch block
+				} catch (Excepciones e1) {
 					e1.printStackTrace();
 				}
 				
@@ -169,7 +170,7 @@ public class RegistroEmpleado extends JFrame {
 	
 	
 	
-	public boolean comprobarEmpleado(String usuario, String password) throws UsuarioExistente{
+	public boolean comprobarEmpleado(String usuario, String password) throws Excepciones{
 		boolean UsuarioCorrecto = true;
 		
 		for (Trabajador a: empleadoBD){
@@ -186,12 +187,12 @@ public class RegistroEmpleado extends JFrame {
 		if (UsuarioCorrecto==true){
 			return true;
 		}else{
-			throw new UsuarioExistente("Usuario o contrasenya existente, por favor cambielas");
+			throw new Excepciones("Usuario o contrasenya existente, por favor cambielas");
 		}
 	}
 	
 	
-	public boolean comprobarDNI(String DNI) throws DniIncorrecto{
+	public boolean comprobarDNI(String DNI) throws Excepciones{
 		boolean DNICorrecto = true;
 		for (Trabajador a: empleadoBD){
 			if(a.getDNI().equals(DNI)){
@@ -201,7 +202,7 @@ public class RegistroEmpleado extends JFrame {
 		}if (DNICorrecto = true){
 			return true;
 		}else{
-			throw new DniIncorrecto("DNI existente");
+			throw new Excepciones("DNI existente");
 		}
 	}
 	
@@ -224,7 +225,7 @@ public class RegistroEmpleado extends JFrame {
 	}
 	
 	
-	public int calcularSalario(String ocupacion){
+	public int calcularSalario(String ocupacion)throws Excepciones{
 		int Salario = 0;
 		if(ocupacion == "Mantenimiento" || ocupacion == "mantenimiento"){
 			Salario = 25000;
@@ -233,7 +234,7 @@ public class RegistroEmpleado extends JFrame {
 		}else if (ocupacion == "Director" || ocupacion == "director"){
 			Salario = 30000;
 		}else{
-			System.out.println("ocupacion no correcta");
+			throw new Excepciones("ocupacion no correcta");
 		}
 		return Salario;
 	}

@@ -9,9 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import residencia.clases.Estudiante;
 import residencia.clases.Habitacion;
-import residencia.clases.Trabajador;
-import residencia.excepciones.DniIncorrecto;
-import residencia.excepciones.UsuarioExistente;
+import residencia.excepciones.Excepciones;
 import residencia.logica.datos.CrearBD;
 
 import javax.swing.JLabel;
@@ -117,13 +115,26 @@ public class RegistroEstudiante extends JFrame {
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String codEstudiante= asignarCodEstudiante();
+				String codEstudiante = null;
+				codEstudiante = asignarCodEstudiante();
 				String Nombre = nombre.getText();
 				String DNI = dni.getText();
 				String Usuario = usuario.getText();
 				String Contrasenia = contrasenia.getText();
-				int numeroHabitacion = asignarHabitacion();
-				int salario= calcularSalario(numeroHabitacion);
+				int numeroHabitacion = 0;
+				try {
+					numeroHabitacion = asignarHabitacion();
+				} catch (Excepciones e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+				int salario = 0;
+				try {
+					salario = calcularSalario(numeroHabitacion);
+				} catch (Excepciones e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
 				
 				try {
 					boolean UCorrecto = comprobarEstudiante(Usuario, Contrasenia);
@@ -139,10 +150,7 @@ public class RegistroEstudiante extends JFrame {
 					}
 					
 					
-				} catch (UsuarioExistente e1) {
-					e1.printStackTrace();
-				} catch (DniIncorrecto e1) {
-					// TODO Auto-generated catch block
+				} catch (Excepciones e1) {
 					e1.printStackTrace();
 				}
 				
@@ -165,7 +173,7 @@ public class RegistroEstudiante extends JFrame {
 	}
 	
 	
-	public boolean comprobarEstudiante(String usuario, String password) throws UsuarioExistente{
+	public boolean comprobarEstudiante(String usuario, String password) throws Excepciones{
 		boolean UsuarioCorrecto = true;
 		
 		for (Estudiante e: estudianteBD){
@@ -182,11 +190,11 @@ public class RegistroEstudiante extends JFrame {
 		if (UsuarioCorrecto==true){
 			return true;
 		}else{
-			throw new UsuarioExistente("Usuario o contrasenya existente, por favor cambielas");
+			throw new Excepciones("Usuario o contrasenya existente, por favor cambielas");
 		}
 	}
 	
-	public boolean comprobarDNI(String DNI) throws DniIncorrecto{
+	public boolean comprobarDNI(String DNI) throws Excepciones{
 		boolean DNICorrecto = true;
 		for (Estudiante e: estudianteBD){
 			if(e.getDNI().equals(DNI)){
@@ -196,7 +204,7 @@ public class RegistroEstudiante extends JFrame {
 		}if (DNICorrecto = true){
 			return true;
 		}else{
-			throw new DniIncorrecto("DNI existente");
+			throw new Excepciones("El DNI introducido ya existe");
 		}
 	}
 	
@@ -208,29 +216,32 @@ public class RegistroEstudiante extends JFrame {
 			for(Estudiante e: estudianteBD){
 				if(!codEstudiante[i].equals(e.getCodigoEstudiante())){
 					numEstudiante = codEstudiante[i];
-					break;
 				}
 			}
 			if(numEstudiante!= null){
-				break;
+				break;				
 			}
 		}
 		return numEstudiante;	
 	}
 	
-	public int asignarHabitacion(){
+	public int asignarHabitacion() throws Excepciones{
 		int numHabitacion = 0;
 		for(Habitacion h: habitacionBD){
 			if(h.isEstaOcupada()== false){
 				numHabitacion= h.getNumero();
 				break;
 			}
+		}if(numHabitacion!= 0){
+			return numHabitacion;
+		}else{
+			throw new Excepciones ("Todas las habitaciones estan ocupadas");
 		}
-		return numHabitacion;
+		
 	}
 	
 	
-	public int calcularSalario(int numeroHabitacion){
+	public int calcularSalario(int numeroHabitacion) throws Excepciones{
 		int salario = 0;
 		for(Habitacion h: habitacionBD){
 			if(h.getNumero()== numeroHabitacion){
@@ -243,8 +254,12 @@ public class RegistroEstudiante extends JFrame {
 				}
 				
 			}
+		}if(salario!=0){
+			return salario;
+		}else{
+			throw new Excepciones("No se ha podido calcular el salario");
 		}
-		return salario;
+		
 		
 		
 	}

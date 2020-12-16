@@ -10,10 +10,7 @@ import javax.swing.border.EmptyBorder;
 import residencia.clases.Estudiante;
 import residencia.clases.Habitacion;
 import residencia.clases.SalonComunitario;
-import residencia.clases.Trabajador;
 import residencia.logica.datos.CrearBD;
-import residencia.logica.datos.EmpleadoBD;
-
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.DefaultListModel;
@@ -50,10 +47,11 @@ public class MenuEstudiante extends JFrame {
 		
 		
 		DefaultListModel<String> model = new DefaultListModel<String>();
+		int i = 0;
 			for(SalonComunitario s: salonBD){
-				int i = 0;
 				if(s.isEstaReservada()== false){
 					model.add(i, String.valueOf(s.getNumero()));
+					i++;
 				}
 			}
 		
