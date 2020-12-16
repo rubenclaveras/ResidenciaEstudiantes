@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import residencia.clases.Estudiante;
 import residencia.clases.Habitacion;
+import residencia.clases.SalonComunitario;
 import residencia.excepciones.UsuarioNoExiste;
 
 import javax.swing.JTextField;
@@ -38,7 +39,7 @@ public class LoginEstudiante extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public LoginEstudiante(ArrayList<Estudiante> estudiantes, ArrayList<Habitacion> habitacion) {
+	public LoginEstudiante(ArrayList<Estudiante> estudiantes, ArrayList<Habitacion> habitacion, ArrayList<SalonComunitario> salonComunitario) {
 		this.estudianteBD= estudiantes;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -75,7 +76,7 @@ public class LoginEstudiante extends JFrame {
 					boolean encontrado = comprobarEstudiante(usuario, password);
 					if (encontrado){
 						LoginEstudiante.this.setVisible(false);
-						MenuEstudiante menuEstudiante = new MenuEstudiante();
+						MenuEstudiante menuEstudiante = new MenuEstudiante(estudiantes, habitacion,salonComunitario, usuario, password);
 						menuEstudiante.setVisible(true);
 					}
 					

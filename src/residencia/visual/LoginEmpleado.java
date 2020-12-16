@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import residencia.clases.Estudiante;
 import residencia.clases.Trabajador;
 import residencia.excepciones.UsuarioNoExiste;
 
@@ -32,7 +33,7 @@ public class LoginEmpleado extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public LoginEmpleado(ArrayList<Trabajador> empleado) {
+	public LoginEmpleado(ArrayList<Trabajador> empleado, ArrayList<Estudiante> estudiantes) {
 		
 		this.empleadoBD= empleado;
 		
@@ -76,11 +77,11 @@ public class LoginEmpleado extends JFrame {
 					if (encontrado){
 						if (chckbxDirector.isSelected()){
 							LoginEmpleado.this.setVisible(false);
-							MenuDirector menuDirector = new MenuDirector();
+							MenuDirector menuDirector = new MenuDirector(usuario, password, empleado, estudiantes);
 							menuDirector.setVisible(true);
 						}else{
 							LoginEmpleado.this.setVisible(false);
-							MenuEmpleado menuEmpleado = new MenuEmpleado();
+							MenuEmpleado menuEmpleado = new MenuEmpleado(usuario, password, empleado);
 							menuEmpleado.setVisible(true);
 						}
 					}

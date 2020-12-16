@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import residencia.clases.Estudiante;
 import residencia.clases.Habitacion;
+import residencia.clases.SalonComunitario;
 import residencia.clases.Trabajador;
 import residencia.logica.datos.CrearBD;
 
@@ -26,6 +27,7 @@ public class PaginaPrincipal extends JFrame {
 	private ArrayList<Estudiante> estudiantes;
 	private ArrayList<Trabajador> empleado;
 	private ArrayList<Habitacion> habitacion;
+	private ArrayList<SalonComunitario> salonComunitario;
 
 	/**
 	 * Launch the application.
@@ -54,6 +56,8 @@ public class PaginaPrincipal extends JFrame {
 		
 		estudiantes = residencia.logica.datos.EstudianteBD.seleccionEstudiantes(base.getConn());
 		empleado = residencia.logica.datos.EmpleadoBD.seleccionEmpleados(base.getConn());
+		habitacion = residencia.logica.datos.HabitacionBD.seleccionHabitaciones(base.getConn());
+		salonComunitario = residencia.logica.datos.SalonBD.seleccionSalones(base.getConn());
 		
 		base.closeLink();
 		
@@ -67,7 +71,7 @@ public class PaginaPrincipal extends JFrame {
 		JButton btnEmpleado = new JButton("Empleado");
 		btnEmpleado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LoginEmpleado loginEmpleado = new LoginEmpleado(empleado);
+				LoginEmpleado loginEmpleado = new LoginEmpleado(empleado, estudiantes);
 				loginEmpleado.setVisible(true);
 				PaginaPrincipal.this.setVisible(false);
 			}
@@ -78,7 +82,7 @@ public class PaginaPrincipal extends JFrame {
 		JButton btnEstudiante = new JButton("Estudiante");
 		btnEstudiante.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LoginEstudiante loginEstudiante = new LoginEstudiante(estudiantes, habitacion);
+				LoginEstudiante loginEstudiante = new LoginEstudiante(estudiantes, habitacion, salonComunitario);
 				loginEstudiante.setVisible(true);
 				PaginaPrincipal.this.setVisible(false);
 			}
