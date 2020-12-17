@@ -8,10 +8,18 @@ import org.junit.Test;
 
 import residencia.logica.datos.CrearBD;
 
+/**
+ * Clase junit test case que va a comprobar que funcionen correctamente los metodos de la clase CrearBD
+ * @author Ruben
+ * @version 1.0
+ */
 public class CrearBDTest {
 	
 	private CrearBD prueba;
 
+	/**
+	 * metodo que se ejecutara antes de cada test en el cual se conecta con la base de datos Junit
+	 */
 	@Before
 	public void setUp() throws Exception {
 		
@@ -21,6 +29,9 @@ public class CrearBDTest {
 		
 	}
 
+	/**
+	 * metodo que se ejecutara para compobar si el metodo CrearBD funciona correctamente
+	 */
 	@Test
 	public void testCrearBD() {
 		
@@ -29,6 +40,9 @@ public class CrearBDTest {
 		assertEquals(esperado, prueba.toString());
 	}
 	
+	/**
+	 * metodo que se ejecutara al final de cada test en el cual se cierra la conexion con la base de datos Junit
+	 */
 	@After
 	public void tearDown() throws Exception {
 		prueba.closeLink();

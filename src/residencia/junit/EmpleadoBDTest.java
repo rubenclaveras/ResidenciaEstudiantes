@@ -12,10 +12,18 @@ import org.junit.Test;
 import residencia.clases.Trabajador;
 import residencia.logica.datos.CrearBD;
 
+/**
+ * Clase junit test case que va a comprobar que funcionen correctamente los metodos de la clase SalonEmpleado
+ * @author Ruben
+ * @version 1.0
+ */
 public class EmpleadoBDTest {
 
 	private CrearBD base = null;
 	
+	/**
+	 * metodo que se ejecutara antes de cada test en el cual se conecta con la base de datos Junit
+	 */
 	@Before
 	public void setUp() throws Exception {
 
@@ -23,6 +31,9 @@ public class EmpleadoBDTest {
 		base.createLink();
 	}
 
+	/**
+	 * metodo que se ejecutara al final de cada test en el cual se cierra la conexion con la base de datos Junit
+	 */
 	@After
 	public void tearDown() throws Exception {
 		base.closeLink();
@@ -30,6 +41,9 @@ public class EmpleadoBDTest {
 	}
 
 
+	/**
+	 * metodo que se ejecutara para compobar si el metodo InsertarEmpleado funciona correctamente
+	 */
 	@Test
 	public void testInsertarEmpleado() throws SQLException {
 
@@ -52,6 +66,9 @@ public class EmpleadoBDTest {
 			}
 		}
 	}
+	/**
+	 * metodo que se ejecutara para compobar si el metodo SeleccionarEmpleado funciona correctamente
+	 */
 	@Test
 	public void testSeleccionarEmpleado() throws SQLException {
 
@@ -74,6 +91,9 @@ public class EmpleadoBDTest {
 			}
 		}
 	}
+	/**
+	 * metodo que se ejecutara para compobar si el metodo EliminarEmpleado funciona correctamente
+	 */
 	@Test
 	public void testEliminarEmpleado() throws SQLException {
 

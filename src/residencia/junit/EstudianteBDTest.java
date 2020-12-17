@@ -12,11 +12,18 @@ import org.junit.Test;
 import residencia.clases.Estudiante;
 import residencia.logica.datos.CrearBD;
 
-
+/**
+ * Clase junit test case que va a comprobar que funcionen correctamente los metodos de la clase EstudianteBD
+ * @author Ruben
+ * @version 1.0
+ */
 public class EstudianteBDTest {
 
 	private CrearBD base = null;
 	
+	/**
+	 * metodo que se ejecutara antes de cada test en el cual se conecta con la base de datos Junit
+	 */
 	@Before
 	public void setUp() throws Exception {
 
@@ -24,6 +31,9 @@ public class EstudianteBDTest {
 		base.createLink();
 	}
 
+	/**
+	 * metodo que se ejecutara al final de cada test en el cual se cierra la conexion con la base de datos Junit
+	 */
 	@After
 	public void tearDown() throws Exception {
 		base.closeLink();
@@ -31,6 +41,9 @@ public class EstudianteBDTest {
 	}
 
 
+	/**
+	 * metodo que se ejecutara para compobar si el metodo InsertarEstudiante funciona correctamente
+	 */
 	@Test
 	public void testInsertarEstudiante() throws SQLException {
 
@@ -53,6 +66,9 @@ public class EstudianteBDTest {
 			}
 		}
 	}
+	/**
+	 * metodo que se ejecutara para compobar si el metodo SeleccionarEstudiante funciona correctamente
+	 */
 	@Test
 	public void testSeleccionarEstudiante() throws SQLException {
 
@@ -76,6 +92,9 @@ public class EstudianteBDTest {
 		}
 
 	}
+	/**
+	 * metodo que se ejecutara para compobar si el metodo EliminarEstudiante funciona correctamente
+	 */
 	@Test
 	public void testEliminarEstudiante() throws SQLException {
 

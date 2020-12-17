@@ -12,10 +12,19 @@ import org.junit.Test;
 import residencia.clases.SalonComunitario;
 import residencia.logica.datos.CrearBD;
 
+
+/**
+ * Clase junit test case que va a comprobar que funcionen correctamente los metodos de la clase SalonBD
+ * @author Ruben
+ * @version 1.0
+ */
 public class SalonBDTest {
 
 	private CrearBD base = null;
 	
+	/**
+	 * metodo que se ejecutara antes de cada test en el cual se conecta con la base de datos Junit
+	 */
 	@Before
 	public void setUp() throws Exception {
 
@@ -23,6 +32,9 @@ public class SalonBDTest {
 		base.createLink();
 	}
 
+	/**
+	 * metodo que se ejecutara al final de cada test en el cual se cierra la conexion con la base de datos Junit
+	 */
 	@After
 	public void tearDown() throws Exception {
 		base.closeLink();
@@ -30,6 +42,9 @@ public class SalonBDTest {
 	}
 
 
+	/**
+	 * metodo que se ejecutara para compobar si el metodo InsertarSalon funciona correctamente
+	 */
 	@Test
 	public void testInsertarSalon() throws SQLException {
 
@@ -48,6 +63,10 @@ public class SalonBDTest {
 			}
 			}
 		}
+	
+	/**
+	 * metodo que se ejecutara para compobar si el metodo SeleccionarSalon funciona correctamente
+	 */
 	@Test
 	public void testSeleccionarSalon() throws SQLException {
 
@@ -67,6 +86,10 @@ public class SalonBDTest {
 			}
 		}
 	}
+	
+	/**
+	 * metodo que se ejecutara para compobar si el metodo EliminarSalon funciona correctamente
+	 */
 	@Test
 	public void testEliminarSalon() throws SQLException {
 

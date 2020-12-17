@@ -12,10 +12,18 @@ import org.junit.Test;
 import residencia.clases.Habitacion;
 import residencia.logica.datos.CrearBD;
 
+/**
+ * Clase junit test case que va a comprobar que funcionen correctamente los metodos de la clase HabitacionBD
+ * @author Ruben
+ * @version 1.0
+ */
 public class HabitacionBDTest {
 
 	private CrearBD base = null;
 	
+	/**
+	 * metodo que se ejecutara antes de cada test en el cual se conecta con la base de datos Junit
+	 */
 	@Before
 	public void setUp() throws Exception {
 
@@ -23,6 +31,9 @@ public class HabitacionBDTest {
 		base.createLink();
 	}
 
+	/**
+	 * metodo que se ejecutara al final de cada test en el cual se cierra la conexion con la base de datos Junit
+	 */
 	@After
 	public void tearDown() throws Exception {
 		base.closeLink();
@@ -30,6 +41,9 @@ public class HabitacionBDTest {
 	}
 
 
+	/**
+	 * metodo que se ejecutara para compobar si el metodo InsertarHabitacion funciona correctamente
+	 */
 	@Test
 	public void testInsertarHabitacion() throws SQLException {
 
@@ -47,6 +61,9 @@ public class HabitacionBDTest {
 			}
 			}
 		}
+	/**
+	 * metodo que se ejecutara para compobar si el metodo SeleccionarHabitacion funciona correctamente
+	 */
 	@Test
 	public void testSeleccionarHabitacion() throws SQLException {
 
@@ -64,6 +81,9 @@ public class HabitacionBDTest {
 			}
 			}
 		}
+	/**
+	 * metodo que se ejecutara para compobar si el metodo EliminarHabitacion funciona correctamente
+	 */
 	@Test
 	public void testEliminarHabitacion() throws SQLException {
 
