@@ -1,8 +1,5 @@
 package residencia.visual;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -48,23 +45,22 @@ public class MenuEstudiante extends JFrame {
 		
 		DefaultListModel<String> model = new DefaultListModel<String>();
 		int i = 0;
-			for(SalonComunitario s: salonBD){
-				if(s.isEstaReservada()== false){
-					model.add(i, String.valueOf(s.getNumero()));
-					i++;
-				}
+		for(SalonComunitario s: salonBD){
+			if(s.isEstaReservada()==false){
+				model.add(i, String.valueOf(s.getNumero()));
+				i++;
 			}
+		}
 		
 		
-		JList list = new JList(model);
+		JList list = new JList();
 		list.setBounds(15, 16, 205, 212);
-		list.setVisible(false);
 		contentPane.add(list);
 		
 		JButton btnSalonesDisponibles = new JButton("Salones disponibles");
 		btnSalonesDisponibles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				list.setVisible(true);
+				list.setModel(model);
 			}
 		});
 		btnSalonesDisponibles.setBounds(235, 13, 178, 29);

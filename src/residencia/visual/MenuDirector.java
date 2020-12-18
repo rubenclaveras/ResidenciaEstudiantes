@@ -1,14 +1,10 @@
 package residencia.visual;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import residencia.clases.Estudiante;
-import residencia.clases.SalonComunitario;
 import residencia.clases.Trabajador;
 import residencia.logica.datos.CrearBD;
 
@@ -64,8 +60,9 @@ public class MenuDirector extends JFrame {
 			x++;
 		}
 		
-		JList list;
-
+		JList list = new JList();
+		list.setBounds(15, 16, 203, 212);
+		contentPane.add(list);
 		
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.addActionListener(new ActionListener() {
@@ -79,9 +76,8 @@ public class MenuDirector extends JFrame {
 		JButton btnVerEstudiantes = new JButton("Ver Estudiantes");
 		btnVerEstudiantes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				list = new JList(model_1);
-				list.setBounds(15, 16, 203, 212);
-				contentPane.add(list);
+				list.setModel(model_1);
+
 			}
 		});
 		btnVerEstudiantes.setBounds(243, 13, 170, 29);
@@ -90,9 +86,7 @@ public class MenuDirector extends JFrame {
 		JButton btnVerEmpleados = new JButton("Ver Empleados");
 		btnVerEmpleados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				list = new JList(model);
-				list.setBounds(15, 16, 203, 212);
-				contentPane.add(list);
+				list.setModel(model);
 			}
 		});
 		btnVerEmpleados.setBounds(243, 58, 170, 29);

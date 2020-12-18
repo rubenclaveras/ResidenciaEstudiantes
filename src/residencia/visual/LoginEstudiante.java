@@ -1,9 +1,5 @@
 package residencia.visual;
 
-import java.awt.BorderLayout;
-
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -12,6 +8,7 @@ import residencia.clases.Estudiante;
 import residencia.clases.Habitacion;
 import residencia.clases.SalonComunitario;
 import residencia.excepciones.Excepciones;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -30,9 +27,7 @@ public class LoginEstudiante extends JFrame {
 	private JTextField usuarioField;
 	private JPasswordField passwordField;
 
-	/**
-	 * Launch the application.
-	 */
+
 
 
 	/**
@@ -71,18 +66,19 @@ public class LoginEstudiante extends JFrame {
 				String usuario = usuarioField.getText();
 				String password = passwordField.getText();
 				
+				boolean encontrado;
 				try {
-					boolean encontrado = comprobarEstudiante(usuario, password);
+					encontrado = comprobarEstudiante(usuario, password);
 					if (encontrado){
 						LoginEstudiante.this.setVisible(false);
 						MenuEstudiante menuEstudiante = new MenuEstudiante(estudiantes, habitacion,salonComunitario, usuario, password);
 						menuEstudiante.setVisible(true);
 					}
-					
 				} catch (Excepciones e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+
 
 				
 			}
@@ -130,13 +126,13 @@ public class LoginEstudiante extends JFrame {
 					break;
 				}
 			}
-		}
-		
-		if (existencia==true){
+		}if(existencia==true){
 			return true;
 		}else{
-			throw new Excepciones("Usuario o contrasenya no Existente");
+			throw new Excepciones ("Usuario o contraseña incorrectas");
 		}
+		
+		
 	}
 
 }

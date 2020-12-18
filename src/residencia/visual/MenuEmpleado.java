@@ -1,8 +1,5 @@
 package residencia.visual;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -54,16 +51,15 @@ public class MenuEmpleado extends JFrame {
 		
 		}
 		
-		JList list = new JList(model);
+		JList list = new JList();
 		list.setBounds(15, 16, 204, 212);
-		list.setVisible(false);
 		contentPane.add(list);
 		
 		
 		JButton btnListaCompaeros = new JButton("Lista compa\u00F1eros");
 		btnListaCompaeros.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				list.setVisible(true);
+				list.setModel(model);
 			}
 		});
 		btnListaCompaeros.setBounds(253, 44, 160, 29);
