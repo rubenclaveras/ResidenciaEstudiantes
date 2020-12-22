@@ -1,9 +1,14 @@
 package residencia.logica.datos;
 
+import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import residencia.clases.Personas;
+import residencia.clases.Trabajador;
 
 public class Main {
 	
@@ -93,20 +98,17 @@ public class Main {
     public static void main(String[] args)
 
     {
+    	CrearBD base = null;
+    	base = new CrearBD("ResidenciaEstudiantes.db");
+		base.createLink();
 
-
-
-        Main app = new Main();
-
-
-
-        // insert three new rows
-
-        app.insertarSalon(connect(), 106, "Videojuegos", false, null);
-		app.insertarSalon(connect(), 107, "Billar", false, null);
-		app.insertarSalon(connect(), 108, "Television", false, null);
-		app.insertarSalon(connect(), 109, "Futbolin", false, null);
-		app.insertarSalon(connect(), 110, "Musica", false, null);
+		ArrayList<Trabajador> empleado;
+		empleado = residencia.logica.datos.EmpleadoBD.seleccionEmpleados(base.getConn());
+		
+    	
+    	
+    	
+        
     }
 	
 

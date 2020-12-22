@@ -1,6 +1,5 @@
 package residencia.visual;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -52,7 +51,6 @@ public class PaginaPrincipal extends JFrame {
 		
 		CrearBD base = new CrearBD("ResidenciaEstudiantes.db");
 		base.createLink();
-		base.inicializarBD();
 		
 		estudiantes = residencia.logica.datos.EstudianteBD.seleccionEstudiantes(base.getConn());
 		empleado = residencia.logica.datos.EmpleadoBD.seleccionEmpleados(base.getConn());
@@ -99,6 +97,4 @@ public class PaginaPrincipal extends JFrame {
 		btnSalir.setBounds(145, 160, 135, 53);
 		contentPane.add(btnSalir);
 	}
-
 }
-

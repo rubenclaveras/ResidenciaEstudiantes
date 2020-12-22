@@ -122,36 +122,20 @@ public class RegistroEstudiante extends JFrame {
 				String Usuario = usuario.getText();
 				String Contrasenia = contrasenia.getText();
 				int numeroHabitacion = 0;
-				try {
-					numeroHabitacion = asignarHabitacion();
-				} catch (Excepciones e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
+				numeroHabitacion = asignarHabitacion();
 				int salario = 0;
-				try {
-					salario = calcularSalario(numeroHabitacion);
-				} catch (Excepciones e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
+				salario = calcularSalario(numeroHabitacion);
 				
-				try {
-					boolean UCorrecto = comprobarEstudiante(Usuario, Contrasenia);
-					if(UCorrecto){
-						boolean DCorrecto= comprobarDNI(DNI);
-						if(DCorrecto){
-							CrearBD base = new CrearBD("ResidenciaEstudiantes.db");
-							base.createLink();
-							residencia.logica.datos.EstudianteBD.insertarEstudiante(base.getConn(), codEstudiante,
-									Nombre, DNI, salario, numeroHabitacion, Usuario, Contrasenia);
-							base.closeLink();
-						}
+				boolean UCorrecto = comprobarEstudiante(Usuario, Contrasenia);
+				if(UCorrecto){
+					boolean DCorrecto= comprobarDNI(DNI);
+					if(DCorrecto){
+						CrearBD base = new CrearBD("ResidenciaEstudiantes.db");
+						base.createLink();
+						residencia.logica.datos.EstudianteBD.insertarEstudiante(base.getConn(), codEstudiante,
+								Nombre, DNI, salario, numeroHabitacion, Usuario, Contrasenia);
+						base.closeLink();
 					}
-					
-					
-				} catch (Excepciones e1) {
-					e1.printStackTrace();
 				}
 				
 			}
@@ -173,7 +157,7 @@ public class RegistroEstudiante extends JFrame {
 	}
 	
 	
-	public boolean comprobarEstudiante(String usuario, String password) throws Excepciones{
+	public boolean comprobarEstudiante(String usuario, String password) {
 		boolean UsuarioCorrecto = true;
 		
 		for (Estudiante e: estudianteBD){
@@ -187,25 +171,18 @@ public class RegistroEstudiante extends JFrame {
 				}
 			}
 		}
-		if (UsuarioCorrecto==true){
-			return true;
-		}else{
-			throw new Excepciones("Usuario o contrasenya existente, por favor cambielas");
-		}
+		return UsuarioCorrecto;
 	}
 	
-	public boolean comprobarDNI(String DNI) throws Excepciones{
+	public boolean comprobarDNI(String DNI) {
 		boolean DNICorrecto = true;
 		for (Estudiante e: estudianteBD){
 			if(e.getDNI().equals(DNI)){
 				DNICorrecto = false;
 				break;
 			}
-		}if (DNICorrecto = true){
-			return true;
-		}else{
-			throw new Excepciones("El DNI introducido ya existe");
 		}
+		return DNICorrecto;
 	}
 	
 	
@@ -225,23 +202,20 @@ public class RegistroEstudiante extends JFrame {
 		return numEstudiante;	
 	}
 	
-	public int asignarHabitacion() throws Excepciones{
+	public int asignarHabitacion() {
 		int numHabitacion = 0;
 		for(Habitacion h: habitacionBD){
 			if(h.isEstaOcupada()== false){
 				numHabitacion= h.getNumero();
 				break;
 			}
-		}if(numHabitacion!= 0){
-			return numHabitacion;
-		}else{
-			throw new Excepciones ("Todas las habitaciones estan ocupadas");
 		}
+		return numHabitacion;
 		
 	}
 	
 	
-	public int calcularSalario(int numeroHabitacion) throws Excepciones{
+	public int calcularSalario(int numeroHabitacion) {
 		int salario = 0;
 		for(Habitacion h: habitacionBD){
 			if(h.getNumero()== numeroHabitacion){
@@ -254,11 +228,8 @@ public class RegistroEstudiante extends JFrame {
 				}
 				
 			}
-		}if(salario!=0){
-			return salario;
-		}else{
-			throw new Excepciones("No se ha podido calcular el salario");
 		}
+		return salario;
 		
 		
 		
@@ -266,4 +237,3 @@ public class RegistroEstudiante extends JFrame {
 	
 	
 }
-

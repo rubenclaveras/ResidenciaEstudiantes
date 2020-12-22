@@ -1,13 +1,10 @@
 package residencia.visual;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import residencia.clases.Trabajador;
-import residencia.excepciones.Excepciones;
 import residencia.logica.datos.CrearBD;
 
 import javax.swing.JLabel;
@@ -64,6 +61,7 @@ public class RegistroEmpleado extends JFrame {
 		codEmpleado[23]="EM0024";
 		
 		this.empleadoBD= empleado;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -72,47 +70,47 @@ public class RegistroEmpleado extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setBounds(15, 16, 69, 20);
+		lblNombre.setBounds(37, 16, 69, 20);
 		contentPane.add(lblNombre);
 		
 		nombre = new JTextField();
-		nombre.setBounds(109, 13, 146, 26);
+		nombre.setBounds(121, 13, 146, 26);
 		contentPane.add(nombre);
 		nombre.setColumns(10);
 		
 		JLabel lblUsuario = new JLabel("Usuario:");
-		lblUsuario.setBounds(15, 59, 69, 20);
+		lblUsuario.setBounds(35, 58, 69, 20);
 		contentPane.add(lblUsuario);
 		
 		usuario = new JTextField();
-		usuario.setBounds(109, 56, 146, 26);
+		usuario.setBounds(121, 55, 146, 26);
 		contentPane.add(usuario);
 		usuario.setColumns(10);
 		
 		JLabel lblContrasenia = new JLabel("Contrase\u00F1a:");
-		lblContrasenia.setBounds(15, 106, 85, 20);
+		lblContrasenia.setBounds(25, 106, 85, 20);
 		contentPane.add(lblContrasenia);
 		
 		contrasenia = new JTextField();
-		contrasenia.setBounds(109, 103, 146, 26);
+		contrasenia.setBounds(121, 103, 146, 26);
 		contentPane.add(contrasenia);
 		contrasenia.setColumns(10);
 		
 		JLabel lblDni = new JLabel("DNI:");
-		lblDni.setBounds(15, 152, 69, 20);
+		lblDni.setBounds(37, 148, 69, 20);
 		contentPane.add(lblDni);
 		
 		dni = new JTextField();
-		dni.setBounds(109, 145, 146, 26);
+		dni.setBounds(121, 145, 146, 26);
 		contentPane.add(dni);
 		dni.setColumns(10);
 		
 		JLabel lblFuncion = new JLabel("Funci\u00F3n:");
-		lblFuncion.setBounds(15, 188, 95, 20);
+		lblFuncion.setBounds(25, 188, 95, 20);
 		contentPane.add(lblFuncion);
 		
 		Ocupacion = new JTextField();
-		Ocupacion.setBounds(109, 185, 146, 26);
+		Ocupacion.setBounds(121, 185, 146, 26);
 		contentPane.add(Ocupacion);
 		Ocupacion.setColumns(10);
 		
@@ -124,31 +122,20 @@ public class RegistroEmpleado extends JFrame {
 				String DNI = dni.getText();
 				String ocupacion = Ocupacion.getText();
 				int salario = 0;
-				try {
-					salario = calcularSalario(ocupacion);
-				} catch (Excepciones e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
+				salario = calcularSalario(ocupacion);
 				String Usuario = usuario.getText();
 				String Contrasenia = contrasenia.getText();
 				
-				try {
-					boolean UCorrecto = comprobarEmpleado(Usuario, Contrasenia);
-					if(UCorrecto){
-						boolean DCorrecto= comprobarDNI(DNI);
-						if(DCorrecto){
-							CrearBD base = new CrearBD("ResidenciaEstudiantes.db");
-							base.createLink();
-							residencia.logica.datos.EmpleadoBD.insertarEmpleado(base.getConn(), codEmpleado , 
-									Nombre, DNI, salario, ocupacion, Usuario, Contrasenia);
-							base.closeLink();
-						}
+				boolean UCorrecto = comprobarEmpleado(Usuario, Contrasenia);
+				if(UCorrecto){
+					boolean DCorrecto= comprobarDNI(DNI);
+					if(DCorrecto){
+						CrearBD base = new CrearBD("ResidenciaEstudiantes.db");
+						base.createLink();
+						residencia.logica.datos.EmpleadoBD.insertarEmpleado(base.getConn(), codEmpleado , 
+								Nombre, DNI, salario, ocupacion, Usuario, Contrasenia);
+						base.closeLink();
 					}
-					
-					
-				} catch (Excepciones e1) {
-					e1.printStackTrace();
 				}
 				
 
@@ -170,7 +157,7 @@ public class RegistroEmpleado extends JFrame {
 	
 	
 	
-	public boolean comprobarEmpleado(String usuario, String password) throws Excepciones{
+	public boolean comprobarEmpleado(String usuario, String password) {
 		boolean UsuarioCorrecto = true;
 		
 		for (Trabajador a: empleadoBD){
@@ -184,28 +171,20 @@ public class RegistroEmpleado extends JFrame {
 				}
 			}
 		}
-		if (UsuarioCorrecto==true){
-			return true;
-		}else{
-			throw new Excepciones("Usuario o contrasenya existente, por favor cambielas");
-		}
+		return UsuarioCorrecto;
 	}
 	
 	
-	public boolean comprobarDNI(String DNI) throws Excepciones{
+	public boolean comprobarDNI(String DNI) {
 		boolean DNICorrecto = true;
 		for (Trabajador a: empleadoBD){
 			if(a.getDNI().equals(DNI)){
 				DNICorrecto = false;
 				break;
 			}
-		}if (DNICorrecto = true){
-			return true;
-		}else{
-			throw new Excepciones("DNI existente");
 		}
-	}
-	
+		return DNICorrecto;
+}
 	
 	public String asignarCodEmpleado(){
 		String numEmpleado = null;
@@ -225,7 +204,7 @@ public class RegistroEmpleado extends JFrame {
 	}
 	
 	
-	public int calcularSalario(String ocupacion)throws Excepciones{
+	public int calcularSalario(String ocupacion){
 		int Salario = 0;
 		if(ocupacion == "Mantenimiento" || ocupacion == "mantenimiento"){
 			Salario = 25000;
@@ -233,8 +212,6 @@ public class RegistroEmpleado extends JFrame {
 			Salario = 20000;
 		}else if (ocupacion == "Director" || ocupacion == "director"){
 			Salario = 30000;
-		}else{
-			throw new Excepciones("ocupacion no correcta");
 		}
 		return Salario;
 	}
@@ -244,4 +221,3 @@ public class RegistroEmpleado extends JFrame {
 	
 	
 }
-

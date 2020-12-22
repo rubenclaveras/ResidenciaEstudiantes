@@ -7,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 import residencia.clases.Estudiante;
 import residencia.clases.Trabajador;
 import residencia.excepciones.Excepciones;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -71,8 +72,9 @@ public class LoginEmpleado extends JFrame {
 				
 				String usuario = textField.getText();
 				String password = passwordField.getText();
+				boolean encontrado;
 				try {
-					boolean encontrado = comprobarEmpleado(usuario, password);
+					encontrado = comprobarEmpleado(usuario, password);
 					if (encontrado){
 						if (chckbxDirector.isSelected()){
 							LoginEmpleado.this.setVisible(false);
@@ -85,12 +87,10 @@ public class LoginEmpleado extends JFrame {
 						}
 					}
 				} catch (Excepciones e1) {
-					// TODO Auto-generated catch block
+					
 					e1.printStackTrace();
 				}
-				
-				
-				
+
 			}
 		});
 		btnAceptar.setBounds(265, 34, 115, 29);
@@ -122,7 +122,7 @@ public class LoginEmpleado extends JFrame {
 		
 		
 	}
-	public boolean comprobarEmpleado(String usuario, String password) throws Excepciones{
+	public boolean comprobarEmpleado(String usuario, String password)throws Excepciones{
 		boolean existencia = false;
 		
 		for (Trabajador a: empleadoBD){
@@ -135,11 +135,10 @@ public class LoginEmpleado extends JFrame {
 					break;
 				}
 			}
-		}
-		if (existencia==true){
+		}if(existencia==true){
 			return true;
 		}else{
-			throw new Excepciones("Usuario o contrasenya no Existente");
+			throw new Excepciones ("Usuario o contraseña incorrectas");
 		}
 		
 	

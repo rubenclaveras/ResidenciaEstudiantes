@@ -75,7 +75,7 @@ public class HabitacionBD {
 		 * @return lista con todos los datos de todas las habitaciones de la base de datos
 		 */
 		public static ArrayList<Habitacion> seleccionHabitaciones(Connection conn) {
-			String sql = "SELECT numero,tipo,ocupada,alumno FROM empleado";
+			String sql = "SELECT numero,tipo,ocupada,codigoAlumno FROM habitacion";
 			ArrayList<Habitacion> lista = new ArrayList<Habitacion>();
 			try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -86,7 +86,7 @@ public class HabitacionBD {
 						int num= rs.getInt("numero");
 						String tip= rs.getString("tipo");
 						boolean ocu= rs.getBoolean("ocupada");
-						String alum = rs.getString("alumno");
+						String alum = rs.getString("codigoAlumno");
 
 						Habitacion seleccionado = new Habitacion(num, tip,ocu,alum);
 						lista.add(seleccionado);

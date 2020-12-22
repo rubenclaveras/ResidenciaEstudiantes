@@ -74,7 +74,7 @@ public class SalonBD {
 		 * @return lista con todos los datos de todos los salones de la base de datos
 		 */
 		public static ArrayList<SalonComunitario> seleccionSalones(Connection conn) {
-			String sql = "SELECT numero,tipo,reservado,codigoAlumno FROM empleado";
+			String sql = "SELECT numero,tipo,reservado,codigoAlumno FROM salon";
 			ArrayList<SalonComunitario> lista = new ArrayList<SalonComunitario>();
 			try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
 
