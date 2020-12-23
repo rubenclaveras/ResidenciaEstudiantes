@@ -114,25 +114,34 @@ public class LoginEstudiante extends JFrame {
 	
 	public boolean comprobarEstudiante(String usuario, String password) throws Excepciones{
 		boolean existencia = false;
+		boolean usuarioCorrecto=true;
 		
 		for (Estudiante a: estudianteBD){
 			if (a.getUsuario().equals(usuario)){
-				existencia = true;
-				break;
-
-			}else{
 				if(a.getContrasenia().equals(password)){
 					existencia = true;
+					usuarioCorrecto=true;
 					break;
+					
+				}else{
+					usuarioCorrecto=true;
+					throw new Excepciones ("Contraseña incorrecta");
+					
 				}
-			}
-		}if(existencia==true){
-			return true;
-		}else{
-			throw new Excepciones ("Usuario o contraseña incorrectas");
-		}
-		
-		
-	}
 
+			}else{
+				usuarioCorrecto=false;
+				existencia=false;
+				
+			}
+		}
+		if (usuarioCorrecto==false){
+			throw new Excepciones ("Usuario incorrecto");
+		}
+		return existencia;
+	}
+			
+		
+		
+		
 }

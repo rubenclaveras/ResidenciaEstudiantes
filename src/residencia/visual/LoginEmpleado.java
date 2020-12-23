@@ -122,26 +122,33 @@ public class LoginEmpleado extends JFrame {
 		
 		
 	}
-	public boolean comprobarEmpleado(String usuario, String password)throws Excepciones{
+	public boolean comprobarEmpleado(String usuario, String password) throws Excepciones{
 		boolean existencia = false;
+		boolean usuarioCorrecto=true;
 		
 		for (Trabajador a: empleadoBD){
-			if(a.getUsuario().equals(usuario)){
-				existencia = true;
-				break;
-			}else{
+			if (a.getUsuario().equals(usuario)){
 				if(a.getContrasenia().equals(password)){
 					existencia = true;
+					usuarioCorrecto=true;
 					break;
+					
+				}else{
+					usuarioCorrecto=true;
+					throw new Excepciones ("Contraseña incorrecta");
+					
 				}
+
+			}else{
+				usuarioCorrecto=false;
+				existencia=false;
+				
 			}
-		}if(existencia==true){
-			return true;
-		}else{
-			throw new Excepciones ("Usuario o contraseña incorrectas");
 		}
-		
-	
+		if (usuarioCorrecto==false){
+			throw new Excepciones ("Usuario incorrecto");
+		}
+		return existencia;
 	}
 	
 
