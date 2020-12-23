@@ -1,16 +1,22 @@
 package residencia.visual;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
-import residencia.clases.Trabajador;;
+import residencia.clases.Trabajador;
+import java.awt.Font;;
 
 /**
  * Clase que muestra una ventana que sera el menu de las diversas acciones que podra realizar el trabajador
@@ -19,7 +25,7 @@ public class MenuEmpleado extends JFrame {
 
 	private JPanel contentPane;
 	private ArrayList<Trabajador> empleadoBD = new ArrayList<Trabajador>();
-
+	private JLabel fondo;
 
 
 
@@ -30,13 +36,14 @@ public class MenuEmpleado extends JFrame {
 		this.empleadoBD = empleado;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 600, 412);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		
+		//poner fondo
+		((JPanel) getContentPane()).setOpaque(false);
+		ImageIcon imagen = new ImageIcon(this.getClass().getResource("imagenes/Trabajadores.jpg"));
 
 		
 		
@@ -52,7 +59,8 @@ public class MenuEmpleado extends JFrame {
 		}
 		
 		JList list = new JList();
-		list.setBounds(15, 16, 204, 212);
+		list.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		list.setBounds(15, 16, 204, 324);
 		contentPane.add(list);
 		
 		
@@ -62,7 +70,7 @@ public class MenuEmpleado extends JFrame {
 				list.setModel(model);
 			}
 		});
-		btnListaCompaeros.setBounds(253, 44, 160, 29);
+		btnListaCompaeros.setBounds(341, 16, 160, 50);
 		contentPane.add(btnListaCompaeros);
 		
 		JButton btnCalcularSalario = new JButton("Calcular salario");
@@ -81,7 +89,7 @@ public class MenuEmpleado extends JFrame {
 
 			}
 		});
-		btnCalcularSalario.setBounds(253, 98, 160, 29);
+		btnCalcularSalario.setBounds(341, 103, 160, 50);
 		contentPane.add(btnCalcularSalario);
 		
 		JButton btnVerTusDatos = new JButton("Ver tus datos");
@@ -101,7 +109,7 @@ public class MenuEmpleado extends JFrame {
 								
 			}
 		});
-		btnVerTusDatos.setBounds(253, 143, 160, 29);
+		btnVerTusDatos.setBounds(341, 199, 160, 50);
 		contentPane.add(btnVerTusDatos);
 		
 		JButton btnSalir = new JButton("Salir");
@@ -110,8 +118,16 @@ public class MenuEmpleado extends JFrame {
 				MenuEmpleado.this.dispose();
 			}
 		});
-		btnSalir.setBounds(253, 199, 115, 29);
+		btnSalir.setBounds(341, 290, 160, 50);
 		contentPane.add(btnSalir);
+		
+		fondo = new JLabel();
+		fondo.setVerticalAlignment(SwingConstants.TOP);
+		fondo.setHorizontalAlignment(SwingConstants.RIGHT);
+		fondo.setIcon(imagen);
+		getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
+		fondo.setBounds(-24, -16, 600, 412);
+		getContentPane().add(fondo, BorderLayout.CENTER);
 		
 
 	}

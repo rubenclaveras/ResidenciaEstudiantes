@@ -10,12 +10,17 @@ import residencia.clases.SalonComunitario;
 import residencia.excepciones.Excepciones;
 
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
+import java.awt.Font;
 
 /**
  * Clase que permitira iniciar sesion al estudiante y poder acceder al menu correcpondiente 
@@ -26,6 +31,7 @@ public class LoginEstudiante extends JFrame {
 	private JPanel contentPane;
 	private JTextField usuarioField;
 	private JPasswordField passwordField;
+	private JLabel fondo;
 
 
 
@@ -36,28 +42,37 @@ public class LoginEstudiante extends JFrame {
 	public LoginEstudiante(ArrayList<Estudiante> estudiantes, ArrayList<Habitacion> habitacion, ArrayList<SalonComunitario> salonComunitario) {
 		this.estudianteBD= estudiantes;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 600, 412);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		//poner fondo
+		((JPanel) getContentPane()).setOpaque(false);
+		ImageIcon imagen = new ImageIcon(this.getClass().getResource("imagenes/Estudiantes.jpg"));
+				
+
 		
 		
 		JLabel lblUsuario = new JLabel("Usuario:");
-		lblUsuario.setBounds(25, 16, 69, 20);
+		lblUsuario.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblUsuario.setBounds(25, 16, 83, 29);
 		contentPane.add(lblUsuario);
 		
 		usuarioField = new JTextField();
-		usuarioField.setBounds(25, 52, 146, 26);
+		usuarioField.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		usuarioField.setBounds(25, 52, 169, 38);
 		contentPane.add(usuarioField);
 		usuarioField.setColumns(10);
 		
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
-		lblContrasea.setBounds(25, 106, 132, 20);
+		lblContrasea.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblContrasea.setBounds(25, 117, 132, 20);
 		contentPane.add(lblContrasea);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(25, 153, 146, 26);
+		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		passwordField.setBounds(25, 153, 169, 38);
 		contentPane.add(passwordField);
 		
 		JButton btnAceptar = new JButton("Aceptar");
@@ -83,7 +98,7 @@ public class LoginEstudiante extends JFrame {
 				
 			}
 		});
-		btnAceptar.setBounds(260, 51, 115, 29);
+		btnAceptar.setBounds(26, 288, 145, 52);
 		contentPane.add(btnAceptar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -94,7 +109,7 @@ public class LoginEstudiante extends JFrame {
 				paginaPrincipal.setVisible(true);
 			}
 		});
-		btnCancelar.setBounds(260, 108, 115, 29);
+		btnCancelar.setBounds(174, 287, 145, 55);
 		contentPane.add(btnCancelar);
 		
 		JButton btnRegistrarse = new JButton("Registrarse");
@@ -105,9 +120,16 @@ public class LoginEstudiante extends JFrame {
 				registroEstudiante.setVisible(true);
 			}
 		});
-		btnRegistrarse.setBounds(260, 179, 115, 29);
+		btnRegistrarse.setBounds(407, 287, 145, 55);
 		contentPane.add(btnRegistrarse);
 		
+		fondo = new JLabel();
+		fondo.setVerticalAlignment(SwingConstants.TOP);
+		fondo.setHorizontalAlignment(SwingConstants.RIGHT);
+		fondo.setIcon(imagen);
+		getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
+		fondo.setBounds(-24, -16, 600, 412);
+		getContentPane().add(fondo, BorderLayout.CENTER);
 		
 		
 	}

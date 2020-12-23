@@ -1,7 +1,10 @@
 package residencia.visual;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import residencia.clases.Estudiante;
@@ -11,10 +14,13 @@ import residencia.logica.datos.CrearBD;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 /**
  * Clase que muestra una ventana que sera el menu de las diversas acciones que podra realizar el estudiante
@@ -25,7 +31,7 @@ public class MenuEstudiante extends JFrame {
 	private ArrayList<Estudiante> estudianteBD = new ArrayList<Estudiante>();
 	private ArrayList<Habitacion> habitacionBD = new ArrayList<Habitacion>();
 	private ArrayList<SalonComunitario> salonBD = new ArrayList<SalonComunitario>();
-
+	private JLabel fondo;
 
 	/**
 	 * Create the frame.
@@ -36,11 +42,14 @@ public class MenuEstudiante extends JFrame {
 		this.salonBD = salonComunitario;
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 600, 412);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		//poner fondo
+		((JPanel) getContentPane()).setOpaque(false);
+		ImageIcon imagen = new ImageIcon(this.getClass().getResource("imagenes/Estudiantes.jpg"));
 		
 		
 		DefaultListModel<String> model = new DefaultListModel<String>();
@@ -54,7 +63,8 @@ public class MenuEstudiante extends JFrame {
 		
 		
 		JList list = new JList();
-		list.setBounds(15, 16, 205, 212);
+		list.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		list.setBounds(15, 16, 205, 324);
 		contentPane.add(list);
 		
 		JButton btnSalonesDisponibles = new JButton("Salones disponibles");
@@ -63,7 +73,7 @@ public class MenuEstudiante extends JFrame {
 				list.setModel(model);
 			}
 		});
-		btnSalonesDisponibles.setBounds(235, 13, 178, 29);
+		btnSalonesDisponibles.setBounds(321, 16, 197, 51);
 		contentPane.add(btnSalonesDisponibles);
 		
 		JButton btnReservar = new JButton("Reservar");
@@ -88,7 +98,7 @@ public class MenuEstudiante extends JFrame {
 				}
 			}
 		});
-		btnReservar.setBounds(235, 58, 178, 29);
+		btnReservar.setBounds(321, 88, 197, 51);
 		contentPane.add(btnReservar);
 		
 		JButton btnCalcularCuota = new JButton("Calcular Cuota");
@@ -107,7 +117,7 @@ public class MenuEstudiante extends JFrame {
 
 			}
 		});
-		btnCalcularCuota.setBounds(235, 103, 178, 29);
+		btnCalcularCuota.setBounds(321, 155, 197, 51);
 		contentPane.add(btnCalcularCuota);
 		
 		JButton btnVerTusDatos = new JButton("Ver tus datos");
@@ -134,7 +144,7 @@ public class MenuEstudiante extends JFrame {
 				}
 			}
 		});
-		btnVerTusDatos.setBounds(235, 158, 178, 29);
+		btnVerTusDatos.setBounds(321, 222, 197, 51);
 		contentPane.add(btnVerTusDatos);
 		
 		JButton btnSalir = new JButton("Salir");
@@ -143,7 +153,15 @@ public class MenuEstudiante extends JFrame {
 				MenuEstudiante.this.dispose();
 			}
 		});
-		btnSalir.setBounds(235, 203, 178, 29);
+		btnSalir.setBounds(321, 289, 197, 51);
 		contentPane.add(btnSalir);
+		
+		fondo = new JLabel();
+		fondo.setVerticalAlignment(SwingConstants.TOP);
+		fondo.setHorizontalAlignment(SwingConstants.RIGHT);
+		fondo.setIcon(imagen);
+		getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
+		fondo.setBounds(-24, -16, 600, 412);
+		getContentPane().add(fondo, BorderLayout.CENTER);
 	}
 }

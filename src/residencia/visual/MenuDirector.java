@@ -1,6 +1,8 @@
 package residencia.visual;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -11,11 +13,15 @@ import residencia.logica.datos.CrearBD;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
+import java.awt.Font;
 
 /**
  * Clase que muestra una ventana que sera el menu de las diversas acciones que podra realizar el director
@@ -25,7 +31,8 @@ public class MenuDirector extends JFrame {
 	private JPanel contentPane;
 	private ArrayList<Trabajador> empleadoBD = new ArrayList<Trabajador>();
 	private ArrayList<Estudiante> estudianteBD = new ArrayList<Estudiante>();
-
+	private JLabel fondo;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -35,11 +42,15 @@ public class MenuDirector extends JFrame {
 		this.estudianteBD = estudiantes;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 600, 412);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		//poner fondo
+		((JPanel) getContentPane()).setOpaque(false);
+		ImageIcon imagen = new ImageIcon(this.getClass().getResource("imagenes/Director.jpg"));
+				
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(201, 13, -184, 215);
@@ -61,7 +72,8 @@ public class MenuDirector extends JFrame {
 		}
 		
 		JList list = new JList();
-		list.setBounds(15, 16, 203, 212);
+		list.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		list.setBounds(15, 16, 203, 324);
 		contentPane.add(list);
 		
 		JButton btnSalir = new JButton("Salir");
@@ -70,8 +82,16 @@ public class MenuDirector extends JFrame {
 				MenuDirector.this.dispose();
 			}
 		});
-		btnSalir.setBounds(243, 199, 170, 29);
+		btnSalir.setBounds(343, 286, 190, 54);
 		contentPane.add(btnSalir);
+		
+		fondo = new JLabel();
+		fondo.setVerticalAlignment(SwingConstants.TOP);
+		fondo.setHorizontalAlignment(SwingConstants.RIGHT);
+		fondo.setIcon(imagen);
+		getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
+		fondo.setBounds(-24, -16, 600, 412);
+		getContentPane().add(fondo, BorderLayout.CENTER);
 		
 		JButton btnVerEstudiantes = new JButton("Ver Estudiantes");
 		btnVerEstudiantes.addActionListener(new ActionListener() {

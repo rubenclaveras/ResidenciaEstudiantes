@@ -9,13 +9,21 @@ import residencia.clases.Trabajador;
 import residencia.excepciones.Excepciones;
 
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
+import java.awt.Font;
+import javax.swing.UIManager;
+import java.awt.Color;
+import java.awt.SystemColor;
 
 
 /**
@@ -27,6 +35,7 @@ public class LoginEmpleado extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JPasswordField passwordField;
+	private JLabel fondo;
 
 
 
@@ -38,32 +47,43 @@ public class LoginEmpleado extends JFrame {
 		this.empleadoBD= empleado;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 600, 412);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		//poner fondo
+		((JPanel) getContentPane()).setOpaque(false);
+		ImageIcon imagen = new ImageIcon(this.getClass().getResource("imagenes/Trabajadores.jpg"));
+
+				
 		
 		
 		JLabel lblUsuario = new JLabel("Usuario:");
+		lblUsuario.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblUsuario.setBounds(15, 19, 104, 20);
 		contentPane.add(lblUsuario);
 		
 		textField = new JTextField();
-		textField.setBounds(15, 55, 146, 26);
+		textField.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		textField.setBounds(15, 55, 175, 42);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
-		lblContrasea.setBounds(15, 97, 128, 20);
+		lblContrasea.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblContrasea.setBounds(15, 113, 128, 20);
 		contentPane.add(lblContrasea);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(15, 146, 146, 26);
+		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		passwordField.setBounds(15, 146, 175, 41);
 		contentPane.add(passwordField);
 		
-		JCheckBox chckbxDirector = new JCheckBox("Director");
-		chckbxDirector.setBounds(15, 199, 139, 29);
+		JCheckBox chckbxDirector = new JCheckBox("DIRECTOR");
+		chckbxDirector.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		chckbxDirector.setBackground(SystemColor.inactiveCaption);
+		chckbxDirector.setBounds(15, 210, 175, 42);
 		contentPane.add(chckbxDirector);
 		
 		JButton btnAceptar = new JButton("Aceptar");
@@ -93,7 +113,7 @@ public class LoginEmpleado extends JFrame {
 
 			}
 		});
-		btnAceptar.setBounds(265, 34, 115, 29);
+		btnAceptar.setBounds(15, 289, 138, 51);
 		contentPane.add(btnAceptar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -104,7 +124,7 @@ public class LoginEmpleado extends JFrame {
 				paginaPrincipal.setVisible(true);
 			}
 		});
-		btnCancelar.setBounds(265, 98, 115, 29);
+		btnCancelar.setBounds(154, 289, 138, 51);
 		contentPane.add(btnCancelar);
 		
 		JButton btnRegistrarse = new JButton("Registrarse");
@@ -115,10 +135,16 @@ public class LoginEmpleado extends JFrame {
 				registroEmpleado.setVisible(true);
 			}
 		});
-		btnRegistrarse.setBounds(265, 199, 115, 29);
+		btnRegistrarse.setBounds(413, 289, 138, 51);
 		contentPane.add(btnRegistrarse);
 		
-
+		fondo = new JLabel();
+		fondo.setVerticalAlignment(SwingConstants.TOP);
+		fondo.setHorizontalAlignment(SwingConstants.RIGHT);
+		fondo.setIcon(imagen);
+		getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
+		fondo.setBounds(-24, -16, 600, 412);
+		getContentPane().add(fondo, BorderLayout.CENTER);
 		
 		
 	}

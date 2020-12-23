@@ -78,7 +78,7 @@ public class PaginaPrincipal extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		////////poner fondo
+		//poner fondo
 		((JPanel) getContentPane()).setOpaque(false);
         ImageIcon imagen = new ImageIcon(this.getClass().getResource("imagenes/Imagen1.jpg"));
 		
