@@ -1,5 +1,7 @@
 package residencia.visual;
 
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -11,29 +13,24 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.awt.event.ActionEvent;
-/**
- * Clase que muestra una ventana en la cual el trabajador podra registrarse metiendo sus datos, los cuales e guardaran en la base de datos
- */
+
 public class RegistroEmpleado extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField nombre;
+	private JTextField dni;
+	private JTextField funcion;
 	private JTextField usuario;
 	private JTextField contrasenia;
-	private JTextField dni;
-	private JTextField Ocupacion;
 	private ArrayList<Trabajador> empleadoBD = new ArrayList<Trabajador>();
 	private String[] codEmpleado = new String[23];
-	
-	
+
 
 	/**
 	 * Create the frame.
 	 */
 	public RegistroEmpleado(ArrayList<Trabajador> empleado) {
-		
 		
 		codEmpleado[0]="EM0001";
 		codEmpleado[1]="EM0002";
@@ -70,49 +67,49 @@ public class RegistroEmpleado extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setBounds(37, 16, 69, 20);
+		lblNombre.setBounds(38, 30, 69, 20);
 		contentPane.add(lblNombre);
 		
 		nombre = new JTextField();
-		nombre.setBounds(121, 13, 146, 26);
+		nombre.setBounds(122, 27, 146, 26);
 		contentPane.add(nombre);
 		nombre.setColumns(10);
 		
+		JLabel lblDni = new JLabel("DNI:");
+		lblDni.setBounds(38, 71, 69, 20);
+		contentPane.add(lblDni);
+		
+		dni = new JTextField();
+		dni.setBounds(122, 68, 146, 26);
+		contentPane.add(dni);
+		dni.setColumns(10);
+		
+		JLabel lblFuncion = new JLabel("Funcion:");
+		lblFuncion.setBounds(38, 110, 69, 20);
+		contentPane.add(lblFuncion);
+		
+		funcion = new JTextField();
+		funcion.setBounds(122, 107, 146, 26);
+		contentPane.add(funcion);
+		funcion.setColumns(10);
+		
 		JLabel lblUsuario = new JLabel("Usuario:");
-		lblUsuario.setBounds(35, 58, 69, 20);
+		lblUsuario.setBounds(38, 152, 69, 20);
 		contentPane.add(lblUsuario);
 		
 		usuario = new JTextField();
-		usuario.setBounds(121, 55, 146, 26);
+		usuario.setBounds(122, 149, 146, 26);
 		contentPane.add(usuario);
 		usuario.setColumns(10);
 		
 		JLabel lblContrasenia = new JLabel("Contrase\u00F1a:");
-		lblContrasenia.setBounds(25, 106, 85, 20);
+		lblContrasenia.setBounds(25, 193, 92, 20);
 		contentPane.add(lblContrasenia);
 		
 		contrasenia = new JTextField();
-		contrasenia.setBounds(121, 103, 146, 26);
+		contrasenia.setBounds(122, 191, 146, 26);
 		contentPane.add(contrasenia);
 		contrasenia.setColumns(10);
-		
-		JLabel lblDni = new JLabel("DNI:");
-		lblDni.setBounds(37, 148, 69, 20);
-		contentPane.add(lblDni);
-		
-		dni = new JTextField();
-		dni.setBounds(121, 145, 146, 26);
-		contentPane.add(dni);
-		dni.setColumns(10);
-		
-		JLabel lblFuncion = new JLabel("Funci\u00F3n:");
-		lblFuncion.setBounds(25, 188, 95, 20);
-		contentPane.add(lblFuncion);
-		
-		Ocupacion = new JTextField();
-		Ocupacion.setBounds(121, 185, 146, 26);
-		contentPane.add(Ocupacion);
-		Ocupacion.setColumns(10);
 		
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
@@ -120,9 +117,9 @@ public class RegistroEmpleado extends JFrame {
 				String codEmpleado = asignarCodEmpleado();
 				String Nombre = nombre.getText();
 				String DNI = dni.getText();
-				String ocupacion = Ocupacion.getText();
+				String Funcion = funcion.getText();
 				int salario = 0;
-				salario = calcularSalario(ocupacion);
+				salario = calcularSalario(Funcion);
 				String Usuario = usuario.getText();
 				String Contrasenia = contrasenia.getText();
 				
@@ -133,15 +130,13 @@ public class RegistroEmpleado extends JFrame {
 						CrearBD base = new CrearBD("ResidenciaEstudiantes.db");
 						base.createLink();
 						residencia.logica.datos.EmpleadoBD.insertarEmpleado(base.getConn(), codEmpleado , 
-								Nombre, DNI, salario, ocupacion, Usuario, Contrasenia);
+								Nombre, DNI, salario, Funcion, Usuario, Contrasenia);
 						base.closeLink();
 					}
 				}
-				
-
 			}
 		});
-		btnAceptar.setBounds(298, 59, 115, 29);
+		btnAceptar.setBounds(283, 67, 115, 29);
 		contentPane.add(btnAceptar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -150,12 +145,9 @@ public class RegistroEmpleado extends JFrame {
 				RegistroEmpleado.this.dispose();
 			}
 		});
-		btnCancelar.setBounds(298, 133, 115, 29);
+		btnCancelar.setBounds(283, 141, 115, 29);
 		contentPane.add(btnCancelar);
-		
 	}
-	
-	
 	
 	public boolean comprobarEmpleado(String usuario, String password) {
 		boolean UsuarioCorrecto = true;
@@ -215,9 +207,5 @@ public class RegistroEmpleado extends JFrame {
 		}
 		return Salario;
 	}
-	
-	
-	
-	
-	
+
 }
