@@ -10,10 +10,16 @@ import residencia.clases.Trabajador;
 import residencia.logica.datos.CrearBD;
 
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import java.awt.Color;
 
 public class RegistroEmpleado extends JFrame {
 
@@ -25,6 +31,8 @@ public class RegistroEmpleado extends JFrame {
 	private JTextField contrasenia;
 	private ArrayList<Trabajador> empleadoBD = new ArrayList<Trabajador>();
 	private String[] codEmpleado = new String[23];
+	private JLabel fondo;
+	private JLabel lblmantenimientoOLimpieza;
 
 
 	/**
@@ -32,7 +40,7 @@ public class RegistroEmpleado extends JFrame {
 	 */
 	public RegistroEmpleado(ArrayList<Trabajador> empleado) {
 		
-		codEmpleado[0]="EM0001";
+		codEmpleado[0]="D0001";
 		codEmpleado[1]="EM0002";
 		codEmpleado[2]="EM0003";
 		codEmpleado[3]="EM0004";
@@ -48,68 +56,80 @@ public class RegistroEmpleado extends JFrame {
 		codEmpleado[13]="EM0014";
 		codEmpleado[14]="EM0015";
 		codEmpleado[15]="EM0016";
-		codEmpleado[16]="EM0017";
-		codEmpleado[17]="EM0018";
-		codEmpleado[18]="EM0019";
-		codEmpleado[19]="EM0020";
-		codEmpleado[20]="EM0021";
-		codEmpleado[21]="EM0022";
-		codEmpleado[22]="EM0023";
-		codEmpleado[23]="EM0024";
-		
+		codEmpleado[15]="EM0017";
+		codEmpleado[16]="EM0018";
+		codEmpleado[17]="EM0019";
+		codEmpleado[18]="EM0020";
+		codEmpleado[19]="EM0021";
+		codEmpleado[20]="EM0022";
+		codEmpleado[21]="EM0023";
+		codEmpleado[22]="EM0024";
+	
 		this.empleadoBD= empleado;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 600, 412);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		//poner fondo
+		((JPanel) getContentPane()).setOpaque(false);
+		ImageIcon imagen = new ImageIcon(this.getClass().getResource("imagenes/Trabajadores.jpg"));
+
+					
 		
-		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setBounds(38, 30, 69, 20);
+		JLabel lblNombre = new JLabel("NOMBRE:");
+		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNombre.setBounds(15, 52, 103, 20);
 		contentPane.add(lblNombre);
 		
 		nombre = new JTextField();
-		nombre.setBounds(122, 27, 146, 26);
+		nombre.setBounds(133, 45, 160, 37);
 		contentPane.add(nombre);
 		nombre.setColumns(10);
 		
 		JLabel lblDni = new JLabel("DNI:");
-		lblDni.setBounds(38, 71, 69, 20);
+		lblDni.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblDni.setBounds(15, 83, 69, 20);
 		contentPane.add(lblDni);
 		
 		dni = new JTextField();
-		dni.setBounds(122, 68, 146, 26);
+		dni.setBounds(133, 88, 160, 37);
 		contentPane.add(dni);
 		dni.setColumns(10);
 		
-		JLabel lblFuncion = new JLabel("Funcion:");
-		lblFuncion.setBounds(38, 110, 69, 20);
+		JLabel lblFuncion = new JLabel("FUNCION:");
+		lblFuncion.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblFuncion.setBounds(15, 220, 103, 20);
 		contentPane.add(lblFuncion);
 		
 		funcion = new JTextField();
-		funcion.setBounds(122, 107, 146, 26);
+		funcion.setBounds(133, 213, 160, 37);
 		contentPane.add(funcion);
 		funcion.setColumns(10);
 		
-		JLabel lblUsuario = new JLabel("Usuario:");
-		lblUsuario.setBounds(38, 152, 69, 20);
+		JLabel lblUsuario = new JLabel("USUARIO:");
+		lblUsuario.setForeground(Color.BLACK);
+		lblUsuario.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblUsuario.setBounds(15, 263, 85, 20);
 		contentPane.add(lblUsuario);
 		
 		usuario = new JTextField();
-		usuario.setBounds(122, 149, 146, 26);
+		usuario.setBounds(133, 256, 160, 37);
 		contentPane.add(usuario);
 		usuario.setColumns(10);
 		
-		JLabel lblContrasenia = new JLabel("Contrase\u00F1a:");
-		lblContrasenia.setBounds(25, 193, 92, 20);
+		JLabel lblContrasenia = new JLabel("CONTRASE\u00D1A:");
+		lblContrasenia.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblContrasenia.setBounds(15, 302, 132, 20);
 		contentPane.add(lblContrasenia);
 		
 		contrasenia = new JTextField();
-		contrasenia.setBounds(122, 191, 146, 26);
+		contrasenia.setBounds(133, 295, 160, 37);
 		contentPane.add(contrasenia);
 		contrasenia.setColumns(10);
+		
 		
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
@@ -136,7 +156,7 @@ public class RegistroEmpleado extends JFrame {
 				}
 			}
 		});
-		btnAceptar.setBounds(283, 67, 115, 29);
+		btnAceptar.setBounds(385, 246, 132, 43);
 		contentPane.add(btnAceptar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -145,8 +165,23 @@ public class RegistroEmpleado extends JFrame {
 				RegistroEmpleado.this.dispose();
 			}
 		});
-		btnCancelar.setBounds(283, 141, 115, 29);
+		btnCancelar.setBounds(385, 289, 132, 43);
 		contentPane.add(btnCancelar);
+		
+		lblmantenimientoOLimpieza = new JLabel("(Mantenimiento \r\no limpieza)");
+		lblmantenimientoOLimpieza.setForeground(new Color(255, 255, 255));
+		lblmantenimientoOLimpieza.setBackground(new Color(255, 255, 255));
+		lblmantenimientoOLimpieza.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblmantenimientoOLimpieza.setBounds(297, 216, 243, 29);
+		contentPane.add(lblmantenimientoOLimpieza);
+		
+		fondo = new JLabel();
+		fondo.setVerticalAlignment(SwingConstants.TOP);
+		fondo.setHorizontalAlignment(SwingConstants.RIGHT);
+		fondo.setIcon(imagen);
+		getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
+		fondo.setBounds(-24, -16, 600, 412);
+		getContentPane().add(fondo, BorderLayout.CENTER);
 	}
 	
 	public boolean comprobarEmpleado(String usuario, String password) {
@@ -207,5 +242,4 @@ public class RegistroEmpleado extends JFrame {
 		}
 		return Salario;
 	}
-
 }

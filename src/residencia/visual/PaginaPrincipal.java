@@ -90,7 +90,7 @@ public class PaginaPrincipal extends JFrame {
 				PaginaPrincipal.this.setVisible(false);
 			}
 		});
-		btnEmpleado.setBounds(15, 311, 128, 29);
+		btnEmpleado.setBounds(15, 298, 155, 42);
 		contentPane.add(btnEmpleado);
 		
 		JButton btnEstudiante = new JButton("Estudiante");
@@ -101,7 +101,7 @@ public class PaginaPrincipal extends JFrame {
 				PaginaPrincipal.this.setVisible(false);
 			}
 		});
-		btnEstudiante.setBounds(147, 311, 128, 29);
+		btnEstudiante.setBounds(171, 298, 155, 42);
 		contentPane.add(btnEstudiante);
 		
 		JButton btnSalir = new JButton("Salir");
@@ -110,7 +110,7 @@ public class PaginaPrincipal extends JFrame {
 				PaginaPrincipal.this.dispose();
 			}
 		});
-		btnSalir.setBounds(428, 311, 135, 29);
+		btnSalir.setBounds(408, 298, 155, 42);
 		contentPane.add(btnSalir);
 		
 		fondo = new JLabel();

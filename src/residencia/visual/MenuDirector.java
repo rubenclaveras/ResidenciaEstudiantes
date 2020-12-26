@@ -85,14 +85,6 @@ public class MenuDirector extends JFrame {
 		btnSalir.setBounds(343, 286, 190, 54);
 		contentPane.add(btnSalir);
 		
-		fondo = new JLabel();
-		fondo.setVerticalAlignment(SwingConstants.TOP);
-		fondo.setHorizontalAlignment(SwingConstants.RIGHT);
-		fondo.setIcon(imagen);
-		getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
-		fondo.setBounds(-24, -16, 600, 412);
-		getContentPane().add(fondo, BorderLayout.CENTER);
-		
 		JButton btnVerEstudiantes = new JButton("Ver Estudiantes");
 		btnVerEstudiantes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -100,7 +92,7 @@ public class MenuDirector extends JFrame {
 
 			}
 		});
-		btnVerEstudiantes.setBounds(243, 13, 170, 29);
+		btnVerEstudiantes.setBounds(343, 16, 190, 54);
 		contentPane.add(btnVerEstudiantes);
 		
 		JButton btnVerEmpleados = new JButton("Ver Empleados");
@@ -109,7 +101,7 @@ public class MenuDirector extends JFrame {
 				list.setModel(model);
 			}
 		});
-		btnVerEmpleados.setBounds(243, 58, 170, 29);
+		btnVerEmpleados.setBounds(343, 76, 190, 54);
 		contentPane.add(btnVerEmpleados);
 		
 		JButton btnEliminar = new JButton("Eliminar");
@@ -134,7 +126,7 @@ public class MenuDirector extends JFrame {
 				}
 			}
 		});
-		btnEliminar.setBounds(243, 103, 170, 29);
+		btnEliminar.setBounds(343, 135, 190, 54);
 		contentPane.add(btnEliminar);
 		
 		JButton btnVerTusDatos = new JButton("Ver tus datos");
@@ -153,8 +145,16 @@ public class MenuDirector extends JFrame {
 				}
 			}
 		});
-		btnVerTusDatos.setBounds(243, 154, 170, 29);
+		btnVerTusDatos.setBounds(343, 195, 190, 54);
 		contentPane.add(btnVerTusDatos);
+		
+		fondo = new JLabel();
+		fondo.setVerticalAlignment(SwingConstants.TOP);
+		fondo.setHorizontalAlignment(SwingConstants.RIGHT);
+		fondo.setIcon(imagen);
+		getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
+		fondo.setBounds(-24, -16, 600, 412);
+		getContentPane().add(fondo, BorderLayout.CENTER);
 		
 
 

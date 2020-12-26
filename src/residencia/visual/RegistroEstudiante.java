@@ -11,10 +11,15 @@ import residencia.clases.Habitacion;
 import residencia.logica.datos.CrearBD;
 
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class RegistroEstudiante extends JFrame {
 
@@ -26,7 +31,9 @@ public class RegistroEstudiante extends JFrame {
 	private ArrayList<Estudiante> estudianteBD = new ArrayList<Estudiante>();
 	private ArrayList<Habitacion> habitacionBD = new ArrayList<Habitacion>();
 	private String[] codEstudiante = new String[23];
-
+	private JLabel fondo;
+	
+	
 
 
 	/**
@@ -49,57 +56,66 @@ public class RegistroEstudiante extends JFrame {
 		codEstudiante[13]="ES0014";
 		codEstudiante[14]="ES0015";
 		codEstudiante[15]="ES0016";
-		codEstudiante[16]="ES0017";
-		codEstudiante[17]="ES0018";
-		codEstudiante[18]="ES0019";
-		codEstudiante[19]="ES0020";
-		codEstudiante[20]="ES0021";
-		codEstudiante[21]="ES0022";
-		codEstudiante[22]="ES0023";
-		codEstudiante[23]="ES0024";
+		codEstudiante[15]="ES0017";
+		codEstudiante[16]="ES0018";
+		codEstudiante[17]="ES0019";
+		codEstudiante[18]="ES0020";
+		codEstudiante[19]="ES0021";
+		codEstudiante[20]="ES0022";
+		codEstudiante[21]="ES0023";
+		codEstudiante[22]="ES0024";
 		
 		this.estudianteBD = estudiantes;
 		this.habitacionBD = habitacion;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 600, 412);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		//poner fondo
+		((JPanel) getContentPane()).setOpaque(false);
+		ImageIcon imagen = new ImageIcon(this.getClass().getResource("imagenes/Estudiantes.jpg"));
+				
 		
-		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setBounds(31, 29, 69, 20);
+		JLabel lblNombre = new JLabel("NOMBRE:");
+		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNombre.setBounds(31, 42, 102, 20);
 		contentPane.add(lblNombre);
 		
 		nombre = new JTextField();
-		nombre.setBounds(115, 26, 146, 26);
+		nombre.setBounds(167, 33, 163, 41);
 		contentPane.add(nombre);
 		nombre.setColumns(10);
 		
 		JLabel lblDni = new JLabel("DNI:");
-		lblDni.setBounds(31, 84, 69, 20);
+		lblDni.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblDni.setBounds(31, 131, 69, 20);
 		contentPane.add(lblDni);
 		
 		dni = new JTextField();
-		dni.setBounds(115, 81, 146, 26);
+		dni.setBounds(167, 122, 163, 41);
 		contentPane.add(dni);
 		dni.setColumns(10);
 		
-		JLabel lblUsuario = new JLabel("Usuario:");
-		lblUsuario.setBounds(31, 131, 69, 20);
+		JLabel lblUsuario = new JLabel("USUARIO:");
+		lblUsuario.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblUsuario.setBounds(31, 221, 121, 20);
 		contentPane.add(lblUsuario);
 		
 		usuario = new JTextField();
-		usuario.setBounds(115, 131, 146, 26);
+		usuario.setBounds(167, 212, 163, 41);
 		contentPane.add(usuario);
 		usuario.setColumns(10);
 		
-		JLabel lblContrasenia = new JLabel("Contrase\u00F1a:");
-		lblContrasenia.setBounds(15, 183, 85, 20);
+		JLabel lblContrasenia = new JLabel("CONTRASE\u00D1A:");
+		lblContrasenia.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblContrasenia.setBounds(31, 303, 136, 20);
 		contentPane.add(lblContrasenia);
 		
 		contrasenia = new JTextField();
-		contrasenia.setBounds(115, 180, 146, 26);
+		contrasenia.setBounds(167, 294, 163, 41);
 		contentPane.add(contrasenia);
 		contrasenia.setColumns(10);
 		
@@ -130,7 +146,7 @@ public class RegistroEstudiante extends JFrame {
 				}
 			}
 		});
-		btnAceptar.setBounds(298, 65, 115, 29);
+		btnAceptar.setBounds(401, 238, 136, 51);
 		contentPane.add(btnAceptar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -139,8 +155,16 @@ public class RegistroEstudiante extends JFrame {
 				RegistroEstudiante.this.dispose();
 			}
 		});
-		btnCancelar.setBounds(298, 127, 115, 29);
+		btnCancelar.setBounds(401, 289, 136, 51);
 		contentPane.add(btnCancelar);
+		
+		fondo = new JLabel();
+		fondo.setVerticalAlignment(SwingConstants.TOP);
+		fondo.setHorizontalAlignment(SwingConstants.RIGHT);
+		fondo.setIcon(imagen);
+		getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
+		fondo.setBounds(-24, -16, 600, 412);
+		getContentPane().add(fondo, BorderLayout.CENTER);
 	}
 	
 	public boolean comprobarEstudiante(String usuario, String password) {
@@ -177,8 +201,9 @@ public class RegistroEstudiante extends JFrame {
 		int i;
 		for(i=0;i<=codEstudiante.length;i++){
 			for(Estudiante e: estudianteBD){
-				if(!codEstudiante[i].equals(e.getCodigoEstudiante())){
+				if (!codEstudiante[i].equals(e.getCodigoEstudiante())){
 					numEstudiante = codEstudiante[i];
+					break;
 				}
 			}
 			if(numEstudiante!= null){
@@ -223,4 +248,3 @@ public class RegistroEstudiante extends JFrame {
 	
 	
 }
-
