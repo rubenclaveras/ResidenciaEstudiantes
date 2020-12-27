@@ -79,7 +79,9 @@ public class MenuDirector extends JFrame {
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MenuDirector.this.dispose();
+				MenuDirector.this.setVisible(false);
+				PaginaPrincipal paginaPrincipal= new PaginaPrincipal();
+				paginaPrincipal.setVisible(true);
 			}
 		});
 		btnSalir.setBounds(343, 286, 190, 54);

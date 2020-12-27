@@ -150,7 +150,9 @@ public class MenuEstudiante extends JFrame {
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MenuEstudiante.this.dispose();
+				MenuEstudiante.this.setVisible(false);
+				PaginaPrincipal paginaPrincipal= new PaginaPrincipal();
+				paginaPrincipal.setVisible(true);
 			}
 		});
 		btnSalir.setBounds(321, 289, 197, 51);

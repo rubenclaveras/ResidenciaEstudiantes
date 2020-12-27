@@ -8,10 +8,12 @@ import javax.swing.border.EmptyBorder;
 
 import residencia.clases.Estudiante;
 import residencia.clases.Habitacion;
+import residencia.junit.EstudianteBDTest;
 import residencia.logica.datos.CrearBD;
 
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
@@ -85,6 +87,7 @@ public class RegistroEstudiante extends JFrame {
 		contentPane.add(lblNombre);
 		
 		nombre = new JTextField();
+		nombre.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		nombre.setBounds(167, 33, 163, 41);
 		contentPane.add(nombre);
 		nombre.setColumns(10);
@@ -95,6 +98,7 @@ public class RegistroEstudiante extends JFrame {
 		contentPane.add(lblDni);
 		
 		dni = new JTextField();
+		dni.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		dni.setBounds(167, 122, 163, 41);
 		contentPane.add(dni);
 		dni.setColumns(10);
@@ -105,6 +109,7 @@ public class RegistroEstudiante extends JFrame {
 		contentPane.add(lblUsuario);
 		
 		usuario = new JTextField();
+		usuario.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		usuario.setBounds(167, 212, 163, 41);
 		contentPane.add(usuario);
 		usuario.setColumns(10);
@@ -115,6 +120,7 @@ public class RegistroEstudiante extends JFrame {
 		contentPane.add(lblContrasenia);
 		
 		contrasenia = new JTextField();
+		contrasenia.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		contrasenia.setBounds(167, 294, 163, 41);
 		contentPane.add(contrasenia);
 		contrasenia.setColumns(10);
@@ -142,6 +148,7 @@ public class RegistroEstudiante extends JFrame {
 						residencia.logica.datos.EstudianteBD.insertarEstudiante(base.getConn(), codEstudiante,
 								Nombre, DNI, salario, numeroHabitacion, Usuario, Contrasenia);
 						base.closeLink();
+						JOptionPane.showMessageDialog(null, "Registro completado correctamente");
 					}
 				}
 			}
@@ -152,7 +159,9 @@ public class RegistroEstudiante extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RegistroEstudiante.this.dispose();
+				RegistroEstudiante.this.setVisible(false);
+				PaginaPrincipal paginaPrincipal= new PaginaPrincipal();
+				paginaPrincipal.setVisible(true);
 			}
 		});
 		btnCancelar.setBounds(401, 289, 136, 51);
@@ -198,18 +207,8 @@ public class RegistroEstudiante extends JFrame {
 	
 	public String asignarCodEstudiante(){
 		String numEstudiante = null;
-		int i;
-		for(i=0;i<=codEstudiante.length;i++){
-			for(Estudiante e: estudianteBD){
-				if (!codEstudiante[i].equals(e.getCodigoEstudiante())){
-					numEstudiante = codEstudiante[i];
-					break;
-				}
-			}
-			if(numEstudiante!= null){
-				break;				
-			}
-		}
+		int i =estudianteBD.size();
+		numEstudiante= codEstudiante[i];
 		return numEstudiante;	
 	}
 	
