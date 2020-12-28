@@ -141,7 +141,8 @@ public class RegistroEstudiante extends JFrame {
 				
 				boolean UCorrecto = comprobarEstudiante(Usuario, Contrasenia);
 				if(UCorrecto){
-					boolean DCorrecto= comprobarDNI(DNI);
+					int indice=0;
+					boolean DCorrecto= comprobarDNI(DNI, indice);
 					if(DCorrecto){
 						CrearBD base = new CrearBD("ResidenciaEstudiantes.db");
 						base.createLink();
@@ -193,16 +194,21 @@ public class RegistroEstudiante extends JFrame {
 		return UsuarioCorrecto;
 	}
 	
-	public boolean comprobarDNI(String DNI) {
-		boolean DNICorrecto = true;
-		for (Estudiante e: estudianteBD){
-			if(e.getDNI().equals(DNI)){
+	public boolean comprobarDNI(String DNI, int indice) {
+		boolean DNICorrecto = false;
+		
+		if (indice==estudianteBD.size()){
+			DNICorrecto = true;
+		}else{
+			if (DNI.equals(estudianteBD.get(indice).DNI)){
+				JOptionPane.showMessageDialog(null, "DNI ya registrado");
 				DNICorrecto = false;
-				break;
+			}else{
+				comprobarDNI (DNI, indice+1);
 			}
 		}
 		return DNICorrecto;
-	}
+}
 	
 	
 	public String asignarCodEstudiante(){

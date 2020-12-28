@@ -215,14 +215,14 @@ public class RegistroEmpleado extends JFrame {
 	
 	
 	public boolean comprobarDNI(String DNI, int indice) {
-		boolean DNICorrecto= true;
+		boolean DNICorrecto = false;
 		
 		if (indice==empleadoBD.size()){
-			DNICorrecto=true;
+			DNICorrecto = true;
 		}else{
 			if (DNI.equals(empleadoBD.get(indice).DNI)){
-				DNICorrecto=false;
 				JOptionPane.showMessageDialog(null, "DNI ya registrado");
+				DNICorrecto = false;
 			}else{
 				comprobarDNI (DNI, indice+1);
 			}
