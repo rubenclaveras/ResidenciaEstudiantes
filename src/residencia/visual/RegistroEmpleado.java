@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.xml.ws.Endpoint;
 
 import residencia.clases.Trabajador;
 import residencia.logica.datos.CrearBD;
 
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
@@ -20,6 +22,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.SystemColor;
 
 public class RegistroEmpleado extends JFrame {
 
@@ -80,53 +83,59 @@ public class RegistroEmpleado extends JFrame {
 					
 		
 		JLabel lblNombre = new JLabel("NOMBRE:");
+		lblNombre.setBackground(SystemColor.inactiveCaption);
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblNombre.setBounds(15, 52, 103, 20);
 		contentPane.add(lblNombre);
 		
 		nombre = new JTextField();
+		nombre.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		nombre.setBounds(133, 45, 160, 37);
 		contentPane.add(nombre);
 		nombre.setColumns(10);
 		
 		JLabel lblDni = new JLabel("DNI:");
 		lblDni.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblDni.setBounds(15, 83, 69, 20);
+		lblDni.setBounds(15, 96, 69, 20);
 		contentPane.add(lblDni);
 		
 		dni = new JTextField();
+		dni.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		dni.setBounds(133, 88, 160, 37);
 		contentPane.add(dni);
 		dni.setColumns(10);
 		
 		JLabel lblFuncion = new JLabel("FUNCION:");
 		lblFuncion.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblFuncion.setBounds(15, 220, 103, 20);
+		lblFuncion.setBounds(15, 199, 103, 20);
 		contentPane.add(lblFuncion);
 		
 		funcion = new JTextField();
-		funcion.setBounds(133, 213, 160, 37);
+		funcion.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		funcion.setBounds(133, 191, 160, 37);
 		contentPane.add(funcion);
 		funcion.setColumns(10);
 		
 		JLabel lblUsuario = new JLabel("USUARIO:");
 		lblUsuario.setForeground(Color.BLACK);
 		lblUsuario.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblUsuario.setBounds(15, 263, 85, 20);
+		lblUsuario.setBounds(15, 245, 85, 20);
 		contentPane.add(lblUsuario);
 		
 		usuario = new JTextField();
-		usuario.setBounds(133, 256, 160, 37);
+		usuario.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		usuario.setBounds(133, 237, 160, 37);
 		contentPane.add(usuario);
 		usuario.setColumns(10);
 		
 		JLabel lblContrasenia = new JLabel("CONTRASE\u00D1A:");
 		lblContrasenia.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblContrasenia.setBounds(15, 302, 132, 20);
+		lblContrasenia.setBounds(15, 295, 132, 20);
 		contentPane.add(lblContrasenia);
 		
 		contrasenia = new JTextField();
-		contrasenia.setBounds(133, 295, 160, 37);
+		contrasenia.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		contrasenia.setBounds(133, 287, 160, 37);
 		contentPane.add(contrasenia);
 		contrasenia.setColumns(10);
 		
@@ -138,41 +147,44 @@ public class RegistroEmpleado extends JFrame {
 				String Nombre = nombre.getText();
 				String DNI = dni.getText();
 				String Funcion = funcion.getText();
-				int salario = 0;
-				salario = calcularSalario(Funcion);
+				int salario = calcularSalario(Funcion);
 				String Usuario = usuario.getText();
 				String Contrasenia = contrasenia.getText();
 				
 				boolean UCorrecto = comprobarEmpleado(Usuario, Contrasenia);
 				if(UCorrecto){
-					boolean DCorrecto= comprobarDNI(DNI);
+					int indice=0;
+					boolean DCorrecto= comprobarDNI(DNI, indice);
 					if(DCorrecto){
 						CrearBD base = new CrearBD("ResidenciaEstudiantes.db");
 						base.createLink();
 						residencia.logica.datos.EmpleadoBD.insertarEmpleado(base.getConn(), codEmpleado , 
 								Nombre, DNI, salario, Funcion, Usuario, Contrasenia);
 						base.closeLink();
+						JOptionPane.showMessageDialog(null, "Registro completado correctamente");
 					}
 				}
 			}
 		});
-		btnAceptar.setBounds(385, 246, 132, 43);
+		btnAceptar.setBounds(385, 235, 132, 43);
 		contentPane.add(btnAceptar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RegistroEmpleado.this.dispose();
+				RegistroEmpleado.this.setVisible(false);
+				PaginaPrincipal paginaPrincipal= new PaginaPrincipal();
+				paginaPrincipal.setVisible(true);
 			}
 		});
-		btnCancelar.setBounds(385, 289, 132, 43);
+		btnCancelar.setBounds(385, 279, 132, 43);
 		contentPane.add(btnCancelar);
 		
-		lblmantenimientoOLimpieza = new JLabel("(Mantenimiento \r\no limpieza)");
-		lblmantenimientoOLimpieza.setForeground(new Color(255, 255, 255));
+		lblmantenimientoOLimpieza = new JLabel("(Mantenimiento \r\no Limpieza)");
+		lblmantenimientoOLimpieza.setForeground(SystemColor.info);
 		lblmantenimientoOLimpieza.setBackground(new Color(255, 255, 255));
 		lblmantenimientoOLimpieza.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblmantenimientoOLimpieza.setBounds(297, 216, 243, 29);
+		lblmantenimientoOLimpieza.setBounds(296, 195, 243, 29);
 		contentPane.add(lblmantenimientoOLimpieza);
 		
 		fondo = new JLabel();
@@ -202,12 +214,17 @@ public class RegistroEmpleado extends JFrame {
 	}
 	
 	
-	public boolean comprobarDNI(String DNI) {
-		boolean DNICorrecto = true;
-		for (Trabajador a: empleadoBD){
-			if(a.getDNI().equals(DNI)){
+	public boolean comprobarDNI(String DNI, int indice) {
+		boolean DNICorrecto = false;
+		
+		if (indice==empleadoBD.size()){
+			DNICorrecto = true;
+		}else{
+			if (DNI.equals(empleadoBD.get(indice).DNI)){
+				JOptionPane.showMessageDialog(null, "DNI ya registrado");
 				DNICorrecto = false;
-				break;
+			}else{
+				comprobarDNI (DNI, indice+1);
 			}
 		}
 		return DNICorrecto;
@@ -215,29 +232,19 @@ public class RegistroEmpleado extends JFrame {
 	
 	public String asignarCodEmpleado(){
 		String numEmpleado = null;
-		int i;
-		for(i=0;i<=codEmpleado.length;i++){
-			for(Trabajador a: empleadoBD){
-				if(!codEmpleado[i].equals(a.getCodigoTrabajador())){
-					numEmpleado = codEmpleado[i];
-					break;
-				}
-			}
-			if(numEmpleado!= null){
-				break;
-			}
-		}
+		int i =empleadoBD.size();
+		numEmpleado= codEmpleado[i];	
 		return numEmpleado;	
 	}
 	
 	
 	public int calcularSalario(String ocupacion){
-		int Salario = 0;
-		if(ocupacion == "Mantenimiento" || ocupacion == "mantenimiento"){
+		int Salario = 25000;
+		if(ocupacion.toString() == "Mantenimiento" || ocupacion.toString() == "mantenimiento"){
 			Salario = 25000;
-		}else if (ocupacion == "Limpieza" || ocupacion == "limpieza"){
+		}else if (ocupacion.toString() == "Limpieza" || ocupacion.toString() == "limpieza"){
 			Salario = 20000;
-		}else if (ocupacion == "Director" || ocupacion == "director"){
+		}else if (ocupacion.toString() == "Director" || ocupacion.toString() == "director"){
 			Salario = 30000;
 		}
 		return Salario;

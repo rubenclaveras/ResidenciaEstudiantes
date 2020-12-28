@@ -115,7 +115,9 @@ public class MenuEmpleado extends JFrame {
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MenuEmpleado.this.dispose();
+				MenuEmpleado.this.setVisible(false);
+				PaginaPrincipal paginaPrincipal= new PaginaPrincipal();
+				paginaPrincipal.setVisible(true);
 			}
 		});
 		btnSalir.setBounds(341, 290, 160, 50);
