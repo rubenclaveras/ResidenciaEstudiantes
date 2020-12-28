@@ -8,6 +8,8 @@ import javax.swing.border.EmptyBorder;
 
 import residencia.clases.Estudiante;
 import residencia.clases.Habitacion;
+import residencia.clases.Trabajador;
+import residencia.excepciones.Excepciones;
 import residencia.junit.EstudianteBDTest;
 import residencia.logica.datos.CrearBD;
 
@@ -135,11 +137,27 @@ public class RegistroEstudiante extends JFrame {
 				String Usuario = usuario.getText();
 				String Contrasenia = contrasenia.getText();
 				int numeroHabitacion = 0;
-				numeroHabitacion = asignarHabitacion();
+				try {
+					numeroHabitacion = asignarHabitacion();
+				} catch (Excepciones e3) {
+					// TODO Auto-generated catch block
+					e3.printStackTrace();
+				}
 				int salario = 0;
-				salario = calcularSalario(numeroHabitacion);
+				try {
+					salario = calcularSalario(numeroHabitacion);
+				} catch (Excepciones e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
 				
-				boolean UCorrecto = comprobarEstudiante(Usuario, Contrasenia);
+				boolean UCorrecto = false;
+				try {
+					UCorrecto = comprobarEstudiante(Usuario, Contrasenia);
+				} catch (Excepciones e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				if(UCorrecto){
 					int indice=0;
 					boolean DCorrecto= comprobarDNI(DNI, indice);
@@ -177,21 +195,20 @@ public class RegistroEstudiante extends JFrame {
 		getContentPane().add(fondo, BorderLayout.CENTER);
 	}
 	
-	public boolean comprobarEstudiante(String usuario, String password) {
+	public boolean comprobarEstudiante(String usuario, String password) throws Excepciones {
 		boolean UsuarioCorrecto = true;
 		
 		for (Estudiante e: estudianteBD){
 			if(e.getUsuario().equals(usuario)){
 				UsuarioCorrecto = false;
 				break;
-			}else{
-				if(e.getContrasenia().equals(password)){
-					UsuarioCorrecto = false;
-					break;
-				}
 			}
 		}
-		return UsuarioCorrecto;
+		if(UsuarioCorrecto == true){
+			return true;
+		}else{
+			throw new Excepciones ("Usuario ya esitente ");
+		}
 	}
 	
 	public boolean comprobarDNI(String DNI, int indice) {
@@ -218,7 +235,7 @@ public class RegistroEstudiante extends JFrame {
 		return numEstudiante;	
 	}
 	
-	public int asignarHabitacion() {
+	public int asignarHabitacion() throws Excepciones {
 		int numHabitacion = 0;
 		for(Habitacion h: habitacionBD){
 			if(h.isEstaOcupada()== false){
@@ -226,12 +243,18 @@ public class RegistroEstudiante extends JFrame {
 				break;
 			}
 		}
-		return numHabitacion;
+		if(numHabitacion!= 0){
+			return numHabitacion;
+		}else{
+			throw new Excepciones ("Todas las habitaciones estan ocupadas en este instante");
+		}
+		
+		
 		
 	}
 	
 	
-	public int calcularSalario(int numeroHabitacion) {
+	public int calcularSalario(int numeroHabitacion) throws Excepciones {
 		int salario = 0;
 		for(Habitacion h: habitacionBD){
 			if(h.getNumero()== numeroHabitacion){
@@ -245,7 +268,12 @@ public class RegistroEstudiante extends JFrame {
 				
 			}
 		}
-		return salario;
+		if(salario!=0){
+			return salario;
+		}else{
+			throw new Excepciones ("No se ha podido calcular el salario");
+		}
+		
 		
 		
 		

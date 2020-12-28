@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 import javax.xml.ws.Endpoint;
 
 import residencia.clases.Trabajador;
+import residencia.excepciones.Excepciones;
 import residencia.logica.datos.CrearBD;
 
 import javax.swing.JLabel;
@@ -147,11 +148,23 @@ public class RegistroEmpleado extends JFrame {
 				String Nombre = nombre.getText();
 				String DNI = dni.getText();
 				String Funcion = funcion.getText();
-				int salario = calcularSalario(Funcion);
+				int salario = 0;
+				try {
+					salario = calcularSalario(Funcion);
+				} catch (Excepciones e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
 				String Usuario = usuario.getText();
 				String Contrasenia = contrasenia.getText();
 				
-				boolean UCorrecto = comprobarEmpleado(Usuario, Contrasenia);
+				boolean UCorrecto = false;
+				try {
+					UCorrecto = comprobarEmpleado(Usuario, Contrasenia);
+				} catch (Excepciones e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				if(UCorrecto){
 					int indice=0;
 					boolean DCorrecto= comprobarDNI(DNI, indice);
@@ -196,21 +209,20 @@ public class RegistroEmpleado extends JFrame {
 		getContentPane().add(fondo, BorderLayout.CENTER);
 	}
 	
-	public boolean comprobarEmpleado(String usuario, String password) {
+	public boolean comprobarEmpleado(String usuario, String password) throws Excepciones  {
 		boolean UsuarioCorrecto = true;
 		
 		for (Trabajador a: empleadoBD){
 			if(a.getUsuario().equals(usuario)){
 				UsuarioCorrecto = false;
 				break;
-			}else{
-				if(a.getContrasenia().equals(password)){
-					UsuarioCorrecto = false;
-					break;
-				}
 			}
 		}
-		return UsuarioCorrecto;
+		if(UsuarioCorrecto == true){
+			return true;
+		}else{
+			throw new Excepciones ("Usuario ya esitente ");
+		}
 	}
 	
 	
@@ -238,8 +250,8 @@ public class RegistroEmpleado extends JFrame {
 	}
 	
 	
-	public int calcularSalario(String ocupacion){
-		int Salario = 25000;
+	public int calcularSalario(String ocupacion) throws Excepciones{
+		int Salario = 0;
 		if(ocupacion.toString() == "Mantenimiento" || ocupacion.toString() == "mantenimiento"){
 			Salario = 25000;
 		}else if (ocupacion.toString() == "Limpieza" || ocupacion.toString() == "limpieza"){
@@ -247,6 +259,11 @@ public class RegistroEmpleado extends JFrame {
 		}else if (ocupacion.toString() == "Director" || ocupacion.toString() == "director"){
 			Salario = 30000;
 		}
-		return Salario;
+		if(Salario!= 0){
+			return Salario;
+		}else{
+			throw new Excepciones ("No se ha podido calcular bien el salario");
+		}
+		
 	}
 }
