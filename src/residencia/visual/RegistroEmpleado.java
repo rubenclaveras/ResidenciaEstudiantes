@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.xml.ws.Endpoint;
 
 import residencia.clases.Trabajador;
 import residencia.logica.datos.CrearBD;
@@ -152,7 +153,8 @@ public class RegistroEmpleado extends JFrame {
 				
 				boolean UCorrecto = comprobarEmpleado(Usuario, Contrasenia);
 				if(UCorrecto){
-					boolean DCorrecto= comprobarDNI(DNI);
+					int indice=0;
+					boolean DCorrecto= comprobarDNI(DNI, indice);
 					if(DCorrecto){
 						CrearBD base = new CrearBD("ResidenciaEstudiantes.db");
 						base.createLink();
@@ -212,12 +214,17 @@ public class RegistroEmpleado extends JFrame {
 	}
 	
 	
-	public boolean comprobarDNI(String DNI) {
-		boolean DNICorrecto = true;
-		for (Trabajador a: empleadoBD){
-			if(a.getDNI().equals(DNI)){
-				DNICorrecto = false;
-				break;
+	public boolean comprobarDNI(String DNI, int indice) {
+		boolean DNICorrecto= true;
+		
+		if (indice==empleadoBD.size()){
+			DNICorrecto=true;
+		}else{
+			if (DNI.equals(empleadoBD.get(indice).DNI)){
+				DNICorrecto=false;
+				JOptionPane.showMessageDialog(null, "DNI ya registrado");
+			}else{
+				comprobarDNI (DNI, indice+1);
 			}
 		}
 		return DNICorrecto;
