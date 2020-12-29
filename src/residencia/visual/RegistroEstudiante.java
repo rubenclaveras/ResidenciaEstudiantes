@@ -207,6 +207,7 @@ public class RegistroEstudiante extends JFrame {
 		if(UsuarioCorrecto == true){
 			return true;
 		}else{
+			JOptionPane.showMessageDialog(null, "Usuario ya registrado");
 			throw new Excepciones ("Usuario ya esitente ");
 		}
 	}

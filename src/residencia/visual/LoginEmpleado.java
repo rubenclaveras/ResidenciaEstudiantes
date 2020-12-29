@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -97,9 +98,14 @@ public class LoginEmpleado extends JFrame {
 					encontrado = comprobarEmpleado(usuario, password);
 					if (encontrado){
 						if (chckbxDirector.isSelected()){
-							LoginEmpleado.this.setVisible(false);
-							MenuDirector menuDirector = new MenuDirector(usuario, password, empleado, estudiantes);
-							menuDirector.setVisible(true);
+							boolean director= comprobarDirector (usuario, password);
+							if (director){
+								LoginEmpleado.this.setVisible(false);
+								MenuDirector menuDirector = new MenuDirector(usuario, password, empleado, estudiantes);
+								menuDirector.setVisible(true);
+							}else{
+								JOptionPane.showMessageDialog(null, "Opción solo disponible para el director");
+							}
 						}else{
 							LoginEmpleado.this.setVisible(false);
 							MenuEmpleado menuEmpleado = new MenuEmpleado(usuario, password, empleado);
@@ -161,6 +167,7 @@ public class LoginEmpleado extends JFrame {
 					
 				}else{
 					usuarioCorrecto=true;
+					JOptionPane.showMessageDialog(null, "Contraseña incorrecta");
 					throw new Excepciones ("Contraseña incorrecta");
 					
 				}
@@ -172,10 +179,25 @@ public class LoginEmpleado extends JFrame {
 			}
 		}
 		if (usuarioCorrecto==false){
+			JOptionPane.showMessageDialog(null, "Usuario incorrecto");
 			throw new Excepciones ("Usuario incorrecto");
 		}
 		return existencia;
 	}
-	
+	public boolean comprobarDirector (String usuario, String password){
+		boolean isDirector = false;
+		for (Trabajador a: empleadoBD){
+			if (a.getUsuario().equals(usuario)){
+				if(a.getContrasenia().equals(password)){
+					if (a.getFuncion().equals("Director") ){
+						isDirector = true;
+					}else{
+						isDirector = false;
+					}
+				}
+			}
+		}
+		return isDirector;
+	}
 
 }

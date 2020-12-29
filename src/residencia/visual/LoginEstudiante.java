@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -147,6 +148,7 @@ public class LoginEstudiante extends JFrame {
 					
 				}else{
 					usuarioCorrecto=true;
+					JOptionPane.showMessageDialog(null, "Contraseña incorrecta");
 					throw new Excepciones ("Contraseña incorrecta");
 					
 				}
@@ -158,6 +160,7 @@ public class LoginEstudiante extends JFrame {
 			}
 		}
 		if (usuarioCorrecto==false){
+			JOptionPane.showMessageDialog(null, "Usuario incorrecto");
 			throw new Excepciones ("Usuario incorrecto");
 		}
 		return existencia;

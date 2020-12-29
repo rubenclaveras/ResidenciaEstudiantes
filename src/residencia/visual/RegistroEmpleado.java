@@ -221,6 +221,7 @@ public class RegistroEmpleado extends JFrame {
 		if(UsuarioCorrecto == true){
 			return true;
 		}else{
+			JOptionPane.showMessageDialog(null, "Usuario ya registrado");
 			throw new Excepciones ("Usuario ya esitente ");
 		}
 	}
@@ -262,6 +263,8 @@ public class RegistroEmpleado extends JFrame {
 		if(Salario!= 0){
 			return Salario;
 		}else{
+			JOptionPane.showMessageDialog(null, "Función no válida"
+										  +"\n" +"Elige Limpieza o Mantenimiento");
 			throw new Excepciones ("No se ha podido calcular bien el salario");
 		}
 		
