@@ -115,6 +115,7 @@ public class MenuDirector extends JFrame {
 						CrearBD base = new CrearBD("ResidenciaEstudiantes.db");
 						base.createLink();
 						residencia.logica.datos.EmpleadoBD.borrarEmpleado(base.getConn(), a.getCodigoTrabajador());
+						JOptionPane.showMessageDialog(null, "Trabajador eliminado");
 						base.closeLink();
 					}
 				}
@@ -123,6 +124,7 @@ public class MenuDirector extends JFrame {
 						CrearBD base = new CrearBD("ResidenciaEstudiantes.db");
 						base.createLink();
 						residencia.logica.datos.EstudianteBD.borrarEstudiante(base.getConn(), c.codigoEstudiante);
+						JOptionPane.showMessageDialog(null, "Estudiante eliminado");
 						base.closeLink();
 					}
 				}

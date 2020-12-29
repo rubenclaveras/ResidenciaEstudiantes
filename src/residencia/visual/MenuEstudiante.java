@@ -93,6 +93,7 @@ public class MenuEstudiante extends JFrame {
 						base.createLink();
 						residencia.logica.datos.SalonBD.borrarSalon(base.getConn(), s.getNumero());
 						residencia.logica.datos.SalonBD.insertarSalon(base.getConn(), s.getNumero(), s.getTipo(), true, codEstu);
+						JOptionPane.showMessageDialog(null, "Salon reservado");
 						base.closeLink();
 					}
 				}
