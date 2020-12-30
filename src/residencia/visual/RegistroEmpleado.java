@@ -251,7 +251,7 @@ public class RegistroEmpleado extends JFrame {
 	}
 	
 	
-	public int calcularSalario(String ocupacion) throws Excepciones{
+	public static int calcularSalario(String ocupacion) throws Excepciones{
 		int Salario = 0;
 		if(ocupacion.toString() == "Mantenimiento" || ocupacion.toString() == "mantenimiento"){
 			Salario = 25000;
