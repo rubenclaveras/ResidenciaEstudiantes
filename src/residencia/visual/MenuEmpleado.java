@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import residencia.clases.Trabajador;
+import residencia.excepciones.Excepciones;
+
 import java.awt.Font;;
 
 /**
@@ -24,7 +26,7 @@ import java.awt.Font;;
 public class MenuEmpleado extends JFrame {
 
 	private JPanel contentPane;
-	private ArrayList<Trabajador> empleadoBD = new ArrayList<Trabajador>();
+	private static ArrayList<Trabajador> empleadoBD = new ArrayList<Trabajador>();
 	private JLabel fondo;
 
 
@@ -33,7 +35,7 @@ public class MenuEmpleado extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuEmpleado(String usuario, String password, ArrayList<Trabajador> empleado) {
-		this.empleadoBD = empleado;
+		MenuEmpleado.empleadoBD = empleado;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 412);
@@ -49,7 +51,13 @@ public class MenuEmpleado extends JFrame {
 		
 		DefaultListModel<String> model = new DefaultListModel<String>();
 		int i = 0;
-		String ocupacion=obtenerOcupacion(usuario, password);
+		String ocupacion = null;
+		try {
+			ocupacion = obtenerOcupacion(usuario, password);
+		} catch (Excepciones e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		for(Trabajador a: empleadoBD){
 			if(ocupacion.equals(a.getFuncion())){
 				model.add(i, a.getNombre());
@@ -135,7 +143,7 @@ public class MenuEmpleado extends JFrame {
 	}
 	
 	
-	public String obtenerOcupacion(String usuario, String password){
+	public static String obtenerOcupacion(String usuario, String password) throws Excepciones{
 		String ocupacion = null;
 		for(Trabajador a: empleadoBD){
 			if(a.getUsuario().equals(usuario) || a.getContrasenia().equals(password)){
@@ -143,6 +151,11 @@ public class MenuEmpleado extends JFrame {
 				break;
 			}
 		}
-		return ocupacion;
+		if(ocupacion != null){
+			return ocupacion;
+		}else{
+			throw new Excepciones("No se ha obtenido la ocupacion");
+		}
+		
 	}
 }

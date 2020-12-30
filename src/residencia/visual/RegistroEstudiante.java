@@ -32,8 +32,8 @@ public class RegistroEstudiante extends JFrame {
 	private JTextField dni;
 	private JTextField usuario;
 	private JTextField contrasenia;
-	private ArrayList<Estudiante> estudianteBD = new ArrayList<Estudiante>();
-	private ArrayList<Habitacion> habitacionBD = new ArrayList<Habitacion>();
+	private static ArrayList<Estudiante> estudianteBD = new ArrayList<Estudiante>();
+	private static ArrayList<Habitacion> habitacionBD = new ArrayList<Habitacion>();
 	private String[] codEstudiante = new String[23];
 	private JLabel fondo;
 	
@@ -69,8 +69,8 @@ public class RegistroEstudiante extends JFrame {
 		codEstudiante[21]="ES0023";
 		codEstudiante[22]="ES0024";
 		
-		this.estudianteBD = estudiantes;
-		this.habitacionBD = habitacion;
+		RegistroEstudiante.estudianteBD = estudiantes;
+		RegistroEstudiante.habitacionBD = habitacion;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 412);
@@ -153,7 +153,7 @@ public class RegistroEstudiante extends JFrame {
 				
 				boolean UCorrecto = false;
 				try {
-					UCorrecto = comprobarEstudiante(Usuario, Contrasenia);
+					UCorrecto = comprobarEstudiante(Usuario);
 				} catch (Excepciones e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -195,7 +195,7 @@ public class RegistroEstudiante extends JFrame {
 		getContentPane().add(fondo, BorderLayout.CENTER);
 	}
 	
-	public boolean comprobarEstudiante(String usuario, String password) throws Excepciones {
+	public static boolean comprobarEstudiante(String usuario) throws Excepciones {
 		boolean UsuarioCorrecto = true;
 		
 		for (Estudiante e: estudianteBD){
@@ -212,7 +212,7 @@ public class RegistroEstudiante extends JFrame {
 		}
 	}
 	
-	public boolean comprobarDNI(String DNI, int indice) {
+	public static boolean comprobarDNI(String DNI, int indice) {
 		boolean DNICorrecto = false;
 		
 		if (indice==estudianteBD.size()){
@@ -236,7 +236,7 @@ public class RegistroEstudiante extends JFrame {
 		return numEstudiante;	
 	}
 	
-	public int asignarHabitacion() throws Excepciones {
+	public static int asignarHabitacion() throws Excepciones {
 		int numHabitacion = 0;
 		for(Habitacion h: habitacionBD){
 			if(h.isEstaOcupada()== false){
@@ -255,7 +255,7 @@ public class RegistroEstudiante extends JFrame {
 	}
 	
 	
-	public int calcularSalario(int numeroHabitacion) throws Excepciones {
+	public static int calcularSalario(int numeroHabitacion) throws Excepciones {
 		int salario = 0;
 		for(Habitacion h: habitacionBD){
 			if(h.getNumero()== numeroHabitacion){

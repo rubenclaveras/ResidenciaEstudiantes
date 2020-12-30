@@ -33,7 +33,7 @@ public class RegistroEmpleado extends JFrame {
 	private JTextField funcion;
 	private JTextField usuario;
 	private JTextField contrasenia;
-	private ArrayList<Trabajador> empleadoBD = new ArrayList<Trabajador>();
+	private static ArrayList<Trabajador> empleadoBD = new ArrayList<Trabajador>();
 	private String[] codEmpleado = new String[23];
 	private JLabel fondo;
 	private JLabel lblmantenimientoOLimpieza;
@@ -69,7 +69,7 @@ public class RegistroEmpleado extends JFrame {
 		codEmpleado[21]="EM0023";
 		codEmpleado[22]="EM0024";
 	
-		this.empleadoBD= empleado;
+		RegistroEmpleado.empleadoBD= empleado;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 412);
@@ -160,7 +160,7 @@ public class RegistroEmpleado extends JFrame {
 				
 				boolean UCorrecto = false;
 				try {
-					UCorrecto = comprobarEmpleado(Usuario, Contrasenia);
+					UCorrecto = comprobarEmpleado(Usuario);
 				} catch (Excepciones e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -209,7 +209,7 @@ public class RegistroEmpleado extends JFrame {
 		getContentPane().add(fondo, BorderLayout.CENTER);
 	}
 	
-	public boolean comprobarEmpleado(String usuario, String password) throws Excepciones  {
+	public static boolean comprobarEmpleado(String usuario) throws Excepciones  {
 		boolean UsuarioCorrecto = true;
 		
 		for (Trabajador a: empleadoBD){
@@ -227,7 +227,7 @@ public class RegistroEmpleado extends JFrame {
 	}
 	
 	
-	public boolean comprobarDNI(String DNI, int indice) {
+	public static boolean comprobarDNI(String DNI, int indice) {
 		boolean DNICorrecto = false;
 		
 		if (indice==empleadoBD.size()){

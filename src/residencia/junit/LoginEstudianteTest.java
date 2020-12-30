@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import residencia.excepciones.Excepciones;
+import residencia.visual.LoginEstudiante;
 
 public class LoginEstudianteTest {
 	
@@ -29,7 +30,21 @@ public class LoginEstudianteTest {
 	public void testComprobarEstudianteAssert() throws Excepciones {
 		usuario = "alejandro";
 		password = "diaz19";
-		boolean encontrado;
+		boolean encontrado= LoginEstudiante.comprobarEstudiante(usuario, password);
+		assertTrue(encontrado);
+		
+	}
+	
+	@Test
+	public void testComprobarEstudianteExcepcion(){
+		try{
+			usuario = "alsk";
+			password = "sd";
+			boolean encontrado= LoginEstudiante.comprobarEstudiante(usuario, password);
+			fail();
+		}catch(Excepciones e){
+			
+		}
 		
 		
 	}

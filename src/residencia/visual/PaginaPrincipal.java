@@ -133,7 +133,7 @@ public class PaginaPrincipal extends JFrame {
 		fondo.setBounds(-24, -16, 600, 412);
 		getContentPane().add(fondo, BorderLayout.CENTER);
 	}
-	public boolean comprobarSalones(){
+	public static boolean comprobarSalones(){
 		Date fecha = new Date();
 		int dia = fecha.getDate();
 		boolean resetearSalones = false;

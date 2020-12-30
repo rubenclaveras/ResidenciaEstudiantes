@@ -28,7 +28,7 @@ import java.awt.Font;
  */
 public class LoginEstudiante extends JFrame {
 	
-	private ArrayList<Estudiante> estudianteBD = new ArrayList<Estudiante>();
+	private static ArrayList<Estudiante> estudianteBD = new ArrayList<Estudiante>();
 	private JPanel contentPane;
 	private JTextField usuarioField;
 	private JPasswordField passwordField;
@@ -41,7 +41,7 @@ public class LoginEstudiante extends JFrame {
 	 * Create the frame.
 	 */
 	public LoginEstudiante(ArrayList<Estudiante> estudiantes, ArrayList<Habitacion> habitacion, ArrayList<SalonComunitario> salonComunitario) {
-		this.estudianteBD= estudiantes;
+		LoginEstudiante.estudianteBD= estudiantes;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 412);
 		contentPane = new JPanel();
@@ -135,7 +135,7 @@ public class LoginEstudiante extends JFrame {
 		
 	}
 	
-	public boolean comprobarEstudiante(String usuario, String password) throws Excepciones{
+	public static boolean comprobarEstudiante(String usuario, String password) throws Excepciones{
 		boolean existencia = false;
 		boolean usuarioCorrecto=true;
 		
