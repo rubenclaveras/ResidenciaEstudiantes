@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -19,6 +20,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.SystemColor;
@@ -96,6 +98,16 @@ public class PaginaPrincipal extends JFrame {
 		JButton btnEstudiante = new JButton("Estudiante");
 		btnEstudiante.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			boolean reseteo=comprobarSalones();
+			if (reseteo){
+				for(SalonComunitario s: salonComunitario){
+					CrearBD base = new CrearBD("ResidenciaEstudiantes.db");
+					base.createLink();
+					residencia.logica.datos.SalonBD.borrarSalon(base.getConn(), s.getNumero());
+					residencia.logica.datos.SalonBD.insertarSalon(base.getConn(), s.getNumero(), s.getTipo(), false, null);
+					base.closeLink();
+					}
+				}
 				LoginEstudiante loginEstudiante = new LoginEstudiante(estudiantes, habitacion, salonComunitario);
 				loginEstudiante.setVisible(true);
 				PaginaPrincipal.this.setVisible(false);
@@ -120,5 +132,15 @@ public class PaginaPrincipal extends JFrame {
 		getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
 		fondo.setBounds(-24, -16, 600, 412);
 		getContentPane().add(fondo, BorderLayout.CENTER);
+	}
+	public boolean comprobarSalones(){
+		Date fecha = new Date();
+		int dia = fecha.getDate();
+		boolean resetearSalones = false;
+		
+		if (dia %7 == 0){
+			resetearSalones = true;
+		}
+		return resetearSalones;
 	}
 }
