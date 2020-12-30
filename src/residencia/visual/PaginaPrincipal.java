@@ -133,12 +133,18 @@ public class PaginaPrincipal extends JFrame {
 		fondo.setBounds(-24, -16, 600, 412);
 		getContentPane().add(fondo, BorderLayout.CENTER);
 	}
+	/**
+	 * Metodo para resetear las reservas de los salones comunes
+	 * Los alumnos podrán reservar salones comunes que no esten ocupados durante una semana, hasta el siguiente lunes
+	 * Con este método, cada lunes se resetearán las reservas, quedando libres los salones, hasta que se reserven de nuevo
+	 * @return resetearSalones, un booleano que será true si deben resetearse (se resetarán los lunes) o false si no deben resetearse
+	 */
 	public static boolean comprobarSalones(){
 		Date fecha = new Date();
-		int dia = fecha.getDate();
+		int dia = fecha.getDay();
 		boolean resetearSalones = false;
 		
-		if (dia %7 == 0){
+		if (dia == 1){
 			resetearSalones = true;
 		}
 		return resetearSalones;
