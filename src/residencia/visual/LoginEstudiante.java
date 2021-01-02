@@ -134,7 +134,12 @@ public class LoginEstudiante extends JFrame {
 		
 		
 	}
-	
+	/**
+	 * Método para comprobar si el login es correcto
+	 * Primero se comprueba el usuarios, y a continuación su correspondiente contraseña
+	 * Nos avisará, en caso de que el login sea incorrecto, si el problema es por el usuario o la contraseña introducida
+	 * @return existencia, true si el login es correcto y false si no lo es
+	 */
 	public static boolean comprobarEstudiante(String usuario, String password) throws Excepciones{
 		boolean existencia = false;
 		boolean usuarioCorrecto=true;

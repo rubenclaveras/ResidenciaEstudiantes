@@ -208,7 +208,12 @@ public class RegistroEmpleado extends JFrame {
 		fondo.setBounds(-24, -16, 600, 412);
 		getContentPane().add(fondo, BorderLayout.CENTER);
 	}
-	
+	/**
+	 * Método para comprobar si el registro es correcto, no se puede utilizar un nombre de usuario que ya esté en uso
+	 * @param usuario
+	 * @return UsuarioCorrecto, true si es correcto, false si no lo es
+	 * @throws Excepciones
+	 */
 	public static boolean comprobarEmpleado(String usuario) throws Excepciones  {
 		boolean UsuarioCorrecto = true;
 		
@@ -226,7 +231,12 @@ public class RegistroEmpleado extends JFrame {
 		}
 	}
 	
-	
+	/**
+	 * Método para comprobar si el DNI es correcto, al ser un número único no puede coincidir con uno ya reegistrado en la base de datos
+	 * @param DNI
+	 * @param indice
+	 * @return DNICorrecto, true si es correcto, false si es incorrecto
+	 */
 	public static boolean comprobarDNI(String DNI, int indice) {
 		boolean DNICorrecto = false;
 		
@@ -241,8 +251,13 @@ public class RegistroEmpleado extends JFrame {
 			}
 		}
 		return DNICorrecto;
-}
-	
+	}
+	/**
+	 * Método para asignar el código, este es un identificador único.
+	 * Para ello, se dispone de una lista con todos los códigos disponibles (la residencia tiene un límite de aforo de 23 empleados)
+	 * Se mirará el numero de empleados que hay, y se cogerá de la lista de codigos el siguiente disponible
+	 * @return numEmpleado, el codigo a usar
+	 */
 	public String asignarCodEmpleado(){
 		String numEmpleado = null;
 		int i =empleadoBD.size();
@@ -250,7 +265,12 @@ public class RegistroEmpleado extends JFrame {
 		return numEmpleado;	
 	}
 	
-	
+	/**
+	 * Metodo para calcular el salario del trabajador, en base a la función que desempeña
+	 * @param ocupacion
+	 * @return Salario, el salario anual
+	 * @throws Excepciones
+	 */
 	public static int calcularSalario(String ocupacion) throws Excepciones{
 		int Salario = 0;
 		if(ocupacion.toString() == "Mantenimiento" || ocupacion.toString() == "mantenimiento"){

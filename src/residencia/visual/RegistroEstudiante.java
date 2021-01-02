@@ -145,7 +145,7 @@ public class RegistroEstudiante extends JFrame {
 				}
 				int salario = 0;
 				try {
-					salario = calcularSalario(numeroHabitacion);
+					salario = calcularCuota(numeroHabitacion);
 				} catch (Excepciones e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
@@ -195,6 +195,12 @@ public class RegistroEstudiante extends JFrame {
 		getContentPane().add(fondo, BorderLayout.CENTER);
 	}
 	
+	/**
+	 * Método para comprobar si el registro es correcto, no se puede utilizar un nombre de usuario que ya esté en uso
+	 * @param usuario
+	 * @return UsuarioCorrecto, true si es correcto, false si no lo es
+	 * @throws Excepciones
+	 */
 	public static boolean comprobarEstudiante(String usuario) throws Excepciones {
 		boolean UsuarioCorrecto = true;
 		
@@ -212,6 +218,12 @@ public class RegistroEstudiante extends JFrame {
 		}
 	}
 	
+	/**
+	 * Método para comprobar si el DNI es correcto, al ser un número único no puede coincidir con uno ya reegistrado en la base de datos
+	 * @param DNI
+	 * @param indice
+	 * @return DNICorrecto, true si es correcto, false si es incorrecto
+	 */
 	public static boolean comprobarDNI(String DNI, int indice) {
 		boolean DNICorrecto = false;
 		
@@ -226,9 +238,14 @@ public class RegistroEstudiante extends JFrame {
 			}
 		}
 		return DNICorrecto;
-}
+	}
 	
-	
+	/**
+	 * Método para asignar el código, este es un identificador único.
+	 * Para ello, se dispone de una lista con todos los códigos disponibles (la residencia tiene un límite de aforo de 23 estudiantes)
+	 * Se mirará el numero de estudiantes que hay, y se cogerá de la lista de codigos el siguiente disponible
+	 * @return numEstudiantes, el codigo a emplear
+	 */
 	public String asignarCodEstudiante(){
 		String numEstudiante = null;
 		int i =estudianteBD.size();
@@ -236,6 +253,11 @@ public class RegistroEstudiante extends JFrame {
 		return numEstudiante;	
 	}
 	
+	/**
+	 * Método para asignar una habitación a los nuevos estudiantes
+	 * @return numHabitacion, el numero de la habitacion que ocupará
+	 * @throws Excepciones
+	 */
 	public static int asignarHabitacion() throws Excepciones {
 		int numHabitacion = 0;
 		for(Habitacion h: habitacionBD){
@@ -254,23 +276,28 @@ public class RegistroEstudiante extends JFrame {
 		
 	}
 	
-	
-	public static int calcularSalario(int numeroHabitacion) throws Excepciones {
-		int salario = 0;
+	/**
+	 * Método para calcular la cuota a pagar por el estudiante, en función de si su habitación es doble o individual
+	 * @param numeroHabitacion
+	 * @return cuota, cantidad a pagar anualmente
+	 * @throws Excepciones
+	 */
+	public static int calcularCuota(int numeroHabitacion) throws Excepciones {
+		int cuota = 0;
 		for(Habitacion h: habitacionBD){
 			if(h.getNumero()== numeroHabitacion){
 				if(h.getTipo().equals("Individual")){
-					salario=  5400;//450 X 12
+					cuota=  5400;//450 X 12
 					break;
 				}else if(h.getTipo().equals("Doble")){
-					salario = 4200; //350 X 12
+					cuota = 4200; //350 X 12
 					break;
 				}
 				
 			}
 		}
-		if(salario!=0){
-			return salario;
+		if(cuota!=0){
+			return cuota;
 		}else{
 			throw new Excepciones ("No se ha podido calcular el salario");
 		}

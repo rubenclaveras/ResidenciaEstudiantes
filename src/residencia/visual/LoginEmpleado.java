@@ -154,6 +154,12 @@ public class LoginEmpleado extends JFrame {
 		
 		
 	}
+	/**
+	 * Método para comprobar si el login es correcto
+	 * Primero se comprueba el usuarios, y a continuación su correspondiente contraseña
+	 * Nos avisará, en caso de que el login sea incorrecto, si el problema es por el usuario o la contraseña introducida
+	 * @return existencia, true si el login es correcto y false si no lo es
+	 */
 	public boolean comprobarEmpleado(String usuario, String password) throws Excepciones{
 		boolean existencia = false;
 		boolean usuarioCorrecto=true;
@@ -184,6 +190,13 @@ public class LoginEmpleado extends JFrame {
 		}
 		return existencia;
 	}
+	/**
+	 * Método para comprobar si el empleado es o no el director
+	 * Solo el director podrá acceder al menu director, si un empleado intenta acceder sin serlo no podrá
+	 * @param usuario
+	 * @param password
+	 * @return isDirector, true si es el director y false si no lo es
+	 */
 	public boolean comprobarDirector (String usuario, String password){
 		boolean isDirector = false;
 		for (Trabajador a: empleadoBD){
