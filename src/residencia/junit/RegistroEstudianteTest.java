@@ -65,7 +65,7 @@ public class RegistroEstudianteTest {
 	@Test
 	public void testCalcularSalarioAssert() throws Excepciones{
 		numHabitacion = 002;
-		int salario = RegistroEstudiante.calcularSalario(numHabitacion);
+		int salario = RegistroEstudiante.calcularCuota(numHabitacion);
 		assertEquals(4200,salario);
 		
 	}
@@ -74,7 +74,7 @@ public class RegistroEstudianteTest {
 	public void testCalcularSalarioExcepcion(){
 		try{
 			numHabitacion= 026;
-			int salario = RegistroEstudiante.calcularSalario(numHabitacion);
+			int salario = RegistroEstudiante.calcularCuota(numHabitacion);
 			fail();
 		}catch(Excepciones e){
 			
