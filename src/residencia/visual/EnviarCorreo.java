@@ -7,9 +7,18 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.Properties;
 import java.awt.event.ActionEvent;
 
 public class EnviarCorreo extends JFrame {
@@ -54,6 +63,47 @@ public class EnviarCorreo extends JFrame {
 		txtCorreo.setColumns(10);
 		
 		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				Properties props = new Properties();
+				props.setProperty("mail.smtp.host", "smtp.gmail.com");
+				props.setProperty("mail.smtp.starttls.enable", "true");
+				props.setProperty("mail.smtp.port", "587");
+				props.setProperty("mail.smtp.auth", "true");
+
+				Session session = Session.getDefaultInstance(props);
+				String correoRemitente = "residencia.estudiante.correo@gmail.com";
+				String passwordRemitente = "residenciaestudiante";
+				String correoReceptor = txtCorreo.getText();
+				String asunto = "Bienvenide a la residencia de estudiantes";
+				String mensaje = "sjdbj";
+
+				MimeMessage message = new MimeMessage(session);
+				try {
+					message.setFrom(new InternetAddress(correoRemitente));
+
+					message.addRecipient(Message.RecipientType.TO, new InternetAddress(correoReceptor));
+					message.setSubject(asunto);
+					message.setText(mensaje);
+
+					Transport t = session.getTransport("smtp");
+					t.connect(correoRemitente, passwordRemitente);
+					t.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
+					t.close();
+
+					JOptionPane.showMessageDialog(null, "correo enviado correctamente");
+				} catch (AddressException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (MessagingException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+
+			}
+		});
 		btnAceptar.setBounds(62, 175, 115, 29);
 		contentPane.add(btnAceptar);
 		
