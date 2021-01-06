@@ -84,7 +84,7 @@ public class MenuDirector extends JFrame {
 				paginaPrincipal.setVisible(true);
 			}
 		});
-		btnSalir.setBounds(343, 286, 190, 54);
+		btnSalir.setBounds(343, 296, 190, 44);
 		contentPane.add(btnSalir);
 		
 		JButton btnVerEstudiantes = new JButton("Ver Estudiantes");
@@ -94,7 +94,7 @@ public class MenuDirector extends JFrame {
 
 			}
 		});
-		btnVerEstudiantes.setBounds(343, 16, 190, 54);
+		btnVerEstudiantes.setBounds(343, 16, 190, 44);
 		contentPane.add(btnVerEstudiantes);
 		
 		JButton btnVerEmpleados = new JButton("Ver Empleados");
@@ -103,7 +103,7 @@ public class MenuDirector extends JFrame {
 				list.setModel(model);
 			}
 		});
-		btnVerEmpleados.setBounds(343, 76, 190, 54);
+		btnVerEmpleados.setBounds(343, 64, 190, 52);
 		contentPane.add(btnVerEmpleados);
 		
 		JButton btnEliminar = new JButton("Eliminar");
@@ -130,7 +130,7 @@ public class MenuDirector extends JFrame {
 				}
 			}
 		});
-		btnEliminar.setBounds(343, 135, 190, 54);
+		btnEliminar.setBounds(343, 121, 190, 52);
 		contentPane.add(btnEliminar);
 		
 		JButton btnVerTusDatos = new JButton("Ver tus datos");
@@ -149,8 +149,19 @@ public class MenuDirector extends JFrame {
 				}
 			}
 		});
-		btnVerTusDatos.setBounds(343, 195, 190, 54);
+		btnVerTusDatos.setBounds(343, 176, 190, 52);
 		contentPane.add(btnVerTusDatos);
+		
+		JButton btnOpcionesAvanzadas = new JButton("Opciones avanzadas");
+		btnOpcionesAvanzadas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MenuDirector.this.setVisible(false);
+				OpcionesAvanzadasDirector opcionesAvanzadas = new OpcionesAvanzadasDirector(empleado, estudiantes);
+				opcionesAvanzadas.setVisible(true);
+			}
+		});
+		btnOpcionesAvanzadas.setBounds(343, 233, 190, 52);
+		contentPane.add(btnOpcionesAvanzadas);
 		
 		fondo = new JLabel();
 		fondo.setVerticalAlignment(SwingConstants.TOP);
