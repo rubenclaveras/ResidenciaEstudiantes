@@ -25,27 +25,24 @@ public class EnviarCorreo extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtCorreo;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EnviarCorreo frame = new EnviarCorreo();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private String Nombre;
+	private String DNI;
+	private String Usuario;
+	private String Contrasenia;
+	
 
 	/**
 	 * Create the frame.
+	 * @param Contrasenia 
+	 * @param Usuario 
+	 * @param DNI 
+	 * @param Nombre 
 	 */
-	public EnviarCorreo() {
+	public EnviarCorreo(String Nombre, String DNI, String Usuario, String Contrasenia) {
+		this.Nombre= Nombre;
+		this.DNI= DNI;
+		this.Usuario= Usuario;
+		this.Contrasenia= Contrasenia;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -63,8 +60,7 @@ public class EnviarCorreo extends JFrame {
 		txtCorreo.setColumns(10);
 		
 		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnAceptar.addActionListener(e-> {
 
 				Properties props = new Properties();
 				props.setProperty("mail.smtp.host", "smtp.gmail.com");
@@ -77,7 +73,13 @@ public class EnviarCorreo extends JFrame {
 				String passwordRemitente = "residenciaestudiante";
 				String correoReceptor = txtCorreo.getText();
 				String asunto = "Bienvenide a la residencia de estudiantes";
-				String mensaje = "sjdbj";
+				String mensaje = "Saludos " + Nombre + "con Dni: " + DNI +","+"\n"
+						+"Se acaba de registrar usted con los siguentes datos. " + "\n"
+						+ "Usuario: " + Usuario + "\n"
+						+ "Contraseña" + Contrasenia + "\n"+
+						"Por cualquier incomveniente no dude en contactar al correo remitente." + "\n"
+						+ "Estaremos agradecidos de solucionar su problema." + "\n"
+						+"Un cordial saludo.";
 
 				MimeMessage message = new MimeMessage(session);
 				try {
@@ -101,8 +103,6 @@ public class EnviarCorreo extends JFrame {
 					e1.printStackTrace();
 				}
 
-
-			}
 		});
 		btnAceptar.setBounds(62, 175, 115, 29);
 		contentPane.add(btnAceptar);

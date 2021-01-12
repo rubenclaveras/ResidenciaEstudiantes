@@ -88,20 +88,15 @@ public class MenuDirector extends JFrame {
 		contentPane.add(btnSalir);
 		
 		JButton btnVerEstudiantes = new JButton("Ver Estudiantes");
-		btnVerEstudiantes.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnVerEstudiantes.addActionListener(e-> {
 				list.setModel(model_1);
-
-			}
 		});
 		btnVerEstudiantes.setBounds(343, 16, 190, 44);
 		contentPane.add(btnVerEstudiantes);
 		
 		JButton btnVerEmpleados = new JButton("Ver Empleados");
-		btnVerEmpleados.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnVerEmpleados.addActionListener(e-> {
 				list.setModel(model);
-			}
 		});
 		btnVerEmpleados.setBounds(343, 64, 190, 52);
 		contentPane.add(btnVerEmpleados);
@@ -114,7 +109,7 @@ public class MenuDirector extends JFrame {
 					if(nombre.equals(a.getNombre())){
 						CrearBD base = new CrearBD("ResidenciaEstudiantes.db");
 						base.createLink();
-						residencia.logica.datos.EmpleadoBD.borrarEmpleado(base.getConn(), a.getCodigoTrabajador());
+						residencia.logica.datos.EmpleadoBD.borrarEmpleado(base.getConn(), (String) a.getCodigoTrabajador());
 						JOptionPane.showMessageDialog(null, "Trabajador eliminado");
 						base.closeLink();
 					}
@@ -153,12 +148,10 @@ public class MenuDirector extends JFrame {
 		contentPane.add(btnVerTusDatos);
 		
 		JButton btnOpcionesAvanzadas = new JButton("Opciones avanzadas");
-		btnOpcionesAvanzadas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnOpcionesAvanzadas.addActionListener(e-> {
 				MenuDirector.this.setVisible(false);
 				OpcionesAvanzadasDirector opcionesAvanzadas = new OpcionesAvanzadasDirector(empleado, estudiantes);
 				opcionesAvanzadas.setVisible(true);
-			}
 		});
 		btnOpcionesAvanzadas.setBounds(343, 233, 190, 52);
 		contentPane.add(btnOpcionesAvanzadas);
