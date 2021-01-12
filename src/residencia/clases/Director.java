@@ -6,9 +6,9 @@ package residencia.clases;
  * @author Gorka
  * @version 2.0
  */
-public class Director extends Personas {
-	public String codigoDirector;
-	public int salario;
+public class Director<T, V> extends Personas {
+	public T codigoDirector;
+	public V salario;
 
 	/**
 	 * Crea un nuevo director con toda la documentación necesaria
@@ -19,8 +19,8 @@ public class Director extends Personas {
 	 * @param contrasenia - Es la contraseña vinculada con el usuario con la que iniciara sesión el direcctor
 	 * @param salario - Es el salario que cobra el director
 	 */
-	public Director(String nombre, String DNI, int salario,
-			String usuario, String contrasenia, String codigoDirector) {
+	public Director(String nombre, String DNI, V salario,
+			String usuario, String contrasenia, T codigoDirector) {
 		super(nombre,DNI, usuario, contrasenia);
 		// TODO Auto-generated constructor stub
 		this.codigoDirector = codigoDirector;
@@ -30,27 +30,27 @@ public class Director extends Personas {
 	/**
 	 * @return - Devuelve un valor String que contienen el codigo del director 
 	 */
-	public String getCodigoDirector() {
+	public T getCodigoDirector() {
 		return codigoDirector;
 	}
 
 	/**
 	 * @param codigoDirector - Define un valor String que contiene el codigo del director
 	 */
-	public void setCodigoDirector(String codigoDirector) {
+	public void setCodigoDirector(T codigoDirector) {
 		this.codigoDirector = codigoDirector;
 	}
 	
 	/**
 	 * @return - Devuelve un valor int que contienen el salario del director 
 	 */
-	public int getSalario() {
+	public V getSalario() {
 		return salario;
 	}
 	/**
 	 * @param salario - Define un valor int que contiene el salario del director
 	 */
-	public void setSalario(int salario) {
+	public void setSalario(V salario) {
 		this.salario = salario;
 		
 	}

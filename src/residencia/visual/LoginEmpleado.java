@@ -88,8 +88,7 @@ public class LoginEmpleado extends JFrame {
 		contentPane.add(chckbxDirector);
 		
 		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnAceptar.addActionListener(e-> {
 				
 				String usuario = textField.getText();
 				String password = passwordField.getText();
@@ -116,8 +115,6 @@ public class LoginEmpleado extends JFrame {
 					
 					e1.printStackTrace();
 				}
-
-			}
 		});
 		btnAceptar.setBounds(15, 289, 138, 51);
 		contentPane.add(btnAceptar);
@@ -134,12 +131,10 @@ public class LoginEmpleado extends JFrame {
 		contentPane.add(btnCancelar);
 		
 		JButton btnRegistrarse = new JButton("Registrarse");
-		btnRegistrarse.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnRegistrarse.addActionListener(e-> {
 				LoginEmpleado.this.setVisible(false);
 				RegistroEmpleado registroEmpleado = new RegistroEmpleado(empleado);
 				registroEmpleado.setVisible(true);
-			}
 		});
 		btnRegistrarse.setBounds(413, 289, 138, 51);
 		contentPane.add(btnRegistrarse);

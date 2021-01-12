@@ -73,20 +73,17 @@ public class MenuEmpleado extends JFrame {
 		
 		
 		JButton btnListaCompaeros = new JButton("Lista compa\u00F1eros");
-		btnListaCompaeros.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				list.setModel(model);
-			}
-		});
+		btnListaCompaeros.addActionListener(e-> { 
+			list.setModel(model);
+			});
 		btnListaCompaeros.setBounds(341, 16, 160, 50);
 		contentPane.add(btnListaCompaeros);
 		
 		JButton btnCalcularSalario = new JButton("Calcular salario");
-		btnCalcularSalario.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnCalcularSalario.addActionListener(e-> {
 				for (Trabajador a: empleadoBD){
 					if(a.getUsuario().equals(usuario) || a.getContrasenia().equals(password)){
-						int salarioAnual = a.getSalario();
+						int salarioAnual = (int) a.getSalario();
 						int numPagas = 14;
 						int salarioPorPaga= salarioAnual/numPagas;
 						JOptionPane.showMessageDialog(null, "Salario anual: " + salarioAnual + "\n" +
@@ -94,8 +91,6 @@ public class MenuEmpleado extends JFrame {
 						"Numero de pagas: " + numPagas);
 					}
 				}
-
-			}
 		});
 		btnCalcularSalario.setBounds(341, 103, 160, 50);
 		contentPane.add(btnCalcularSalario);
@@ -147,7 +142,7 @@ public class MenuEmpleado extends JFrame {
 		String ocupacion = null;
 		for(Trabajador a: empleadoBD){
 			if(a.getUsuario().equals(usuario) || a.getContrasenia().equals(password)){
-				ocupacion=a.getFuncion();
+				ocupacion=(String) a.getFuncion();
 				break;
 			}
 		}

@@ -77,8 +77,7 @@ public class MenuEstudiante extends JFrame {
 		contentPane.add(btnSalonesDisponibles);
 		
 		JButton btnReservar = new JButton("Reservar");
-		btnReservar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnReservar.addActionListener(e-> {
 				int numSalaComunitaria = Integer.parseInt((String) list.getSelectedValue());
 				String codEstu = null;
 				for(Estudiante c: estudianteBD){
@@ -97,7 +96,6 @@ public class MenuEstudiante extends JFrame {
 						base.closeLink();
 					}
 				}
-			}
 		});
 		btnReservar.setBounds(321, 88, 197, 51);
 		contentPane.add(btnReservar);
@@ -122,8 +120,7 @@ public class MenuEstudiante extends JFrame {
 		contentPane.add(btnCalcularCuota);
 		
 		JButton btnVerTusDatos = new JButton("Ver tus datos");
-		btnVerTusDatos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnVerTusDatos.addActionListener(e-> {
 				for(Estudiante c: estudianteBD){
 					if(c.getUsuario().equals(usuario) || c.getContrasenia().equals(password)){
 						String tipoHabitacion = null;
@@ -143,7 +140,6 @@ public class MenuEstudiante extends JFrame {
 					"Contraseña: " + c.getContrasenia());
 					}
 				}
-			}
 		});
 		btnVerTusDatos.setBounds(321, 222, 197, 51);
 		contentPane.add(btnVerTusDatos);

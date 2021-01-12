@@ -142,8 +142,7 @@ public class RegistroEmpleado extends JFrame {
 		
 		
 		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnAceptar.addActionListener(e-> {
 				String codEmpleado = asignarCodEmpleado();
 				String Nombre = nombre.getText();
 				String DNI = dni.getText();
@@ -175,9 +174,14 @@ public class RegistroEmpleado extends JFrame {
 								Nombre, DNI, salario, Funcion, Usuario, Contrasenia);
 						base.closeLink();
 						JOptionPane.showMessageDialog(null, "Registro completado correctamente");
+						
+						RegistroEmpleado.this.setVisible(false);
+						EnviarCorreo enviarCorreo= new  EnviarCorreo(Nombre, DNI, Usuario, Contrasenia);
+						enviarCorreo.setVisible(true);
 					}
 				}
-			}
+				
+				
 		});
 		btnAceptar.setBounds(385, 235, 132, 43);
 		contentPane.add(btnAceptar);

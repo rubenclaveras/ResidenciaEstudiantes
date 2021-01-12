@@ -168,6 +168,10 @@ public class RegistroEstudiante extends JFrame {
 								Nombre, DNI, salario, numeroHabitacion, Usuario, Contrasenia);
 						base.closeLink();
 						JOptionPane.showMessageDialog(null, "Registro completado correctamente");
+						
+						RegistroEstudiante.this.setVisible(false);
+						EnviarCorreo enviarCorreo= new  EnviarCorreo(Nombre, DNI, Usuario, Contrasenia);
+						enviarCorreo.setVisible(true);
 					}
 				}
 			}
@@ -176,12 +180,10 @@ public class RegistroEstudiante extends JFrame {
 		contentPane.add(btnAceptar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnCancelar.addActionListener(e-> {
 				RegistroEstudiante.this.setVisible(false);
 				PaginaPrincipal paginaPrincipal= new PaginaPrincipal();
 				paginaPrincipal.setVisible(true);
-			}
 		});
 		btnCancelar.setBounds(401, 289, 136, 51);
 		contentPane.add(btnCancelar);

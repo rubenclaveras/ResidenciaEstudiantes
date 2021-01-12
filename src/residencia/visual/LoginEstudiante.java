@@ -77,8 +77,7 @@ public class LoginEstudiante extends JFrame {
 		contentPane.add(passwordField);
 		
 		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnAceptar.addActionListener(e-> {
 				String usuario = usuarioField.getText();
 				String password = passwordField.getText();
 				
@@ -94,10 +93,6 @@ public class LoginEstudiante extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-
-
-				
-			}
 		});
 		btnAceptar.setBounds(26, 288, 145, 52);
 		contentPane.add(btnAceptar);
