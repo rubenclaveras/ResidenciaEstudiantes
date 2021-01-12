@@ -259,10 +259,10 @@ public class RegistroEstudiante extends JFrame {
 	 * @throws Excepciones
 	 */
 	public static int asignarHabitacion() throws Excepciones {
-		int numHabitacion = 0;
+		int numHabitacion = 1;
 		for(Habitacion h: habitacionBD){
-			if(h.isEstaOcupada()== false){
-				numHabitacion= h.getNumero();
+			if (h.isEstaOcupada() == false){
+				numHabitacion = h.getNumero();
 				break;
 			}
 		}
@@ -271,9 +271,7 @@ public class RegistroEstudiante extends JFrame {
 		}else{
 			throw new Excepciones ("Todas las habitaciones estan ocupadas en este instante");
 		}
-		
-		
-		
+	
 	}
 	
 	/**

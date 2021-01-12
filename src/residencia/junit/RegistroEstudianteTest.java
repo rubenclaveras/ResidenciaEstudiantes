@@ -59,14 +59,14 @@ public class RegistroEstudianteTest {
 	@Test
 	public void testAsignarHabitacion() throws Excepciones{
 		numHabitacion= RegistroEstudiante.asignarHabitacion();
-		assertEquals(002, numHabitacion);
+		assertEquals(2, numHabitacion);
 	}
 	
 	@Test
-	public void testCalcularSalarioAssert() throws Excepciones{
+	public void testCalcularCuota() throws Excepciones{
 		numHabitacion = 002;
-		int salario = RegistroEstudiante.calcularCuota(numHabitacion);
-		assertEquals(4200,salario);
+		int cuota = RegistroEstudiante.calcularCuota(numHabitacion);
+		assertEquals(4200,cuota);
 		
 	}
 	
