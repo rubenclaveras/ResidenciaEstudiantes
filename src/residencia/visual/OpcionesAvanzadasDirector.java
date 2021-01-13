@@ -19,7 +19,11 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Array;
 import java.awt.event.ActionEvent;
-
+/**
+ * Clase donde implementaremos algunas opciones avanzadas para incorporar complejidad, como quicksort y mergesort
+ * @author Ruben Claveras
+ *
+ */
 public class OpcionesAvanzadasDirector extends JFrame {
 
 	private JPanel contentPane;
@@ -92,6 +96,45 @@ public class OpcionesAvanzadasDirector extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton2 = new JButton("Empleados ordenados por salario anual");
+		btnNewButton2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ArrayList <Integer> listaSalarios = new ArrayList <Integer> ();
+				for (Trabajador a: empleado ){
+					listaSalarios.add((Integer) a.getSalario());
+				}
+				 
+				 
+				
+				ArrayList <Integer> salariosOrdenados = mergesort(listaSalarios);
+				ArrayList<String> empleadosOrdenados = new ArrayList<String> () ;
+				ArrayList<String> empleadosAuxiliar = new ArrayList<String> () ;
+				for (Trabajador a: empleado){
+					empleadosAuxiliar.add(a.getNombre());
+				}
+				//Todo esto se hace para: crear una lista auxiliar con los nombres de todos los empleados, y a continuacion se van comparando los empleados
+				// con los salarios ordenadas. Si coincide, se añade a una lista con los nombres de los empleados ordenados, y se elimina de la lista auxiliar con los nombres.
+				// Se hace de esta manera para así evitar poner dos veces a un empleado cuando hay mas de uno que paga anualmente la misma cantidad.
+				for (int i= 0;i < (salariosOrdenados.size())-1; i++){
+					for (Trabajador a: empleado){
+						if (a.getSalario() == salariosOrdenados.get(i)){
+							if (empleadosAuxiliar.contains(a.getNombre())){
+								empleadosOrdenados.add(a.getNombre()+ " " + salariosOrdenados.get(i) + "€");
+								empleadosOrdenados.remove(a.getNombre());
+							}
+							
+						}
+					}
+					
+				}
+				JOptionPane.showMessageDialog(null, empleadosOrdenados.get(0)+"\n" +
+						empleadosOrdenados.get(1)+"\n" +
+						empleadosOrdenados.get(2)+"\n" +
+						empleadosOrdenados.get(3)+"\n" +
+						empleadosOrdenados.get(4)+"\n" +
+						empleadosOrdenados.get(5)+"\n"); 
+				
+			}
+		});
 		btnNewButton2.setBounds(15, 84, 313, 52);
 		contentPane.add(btnNewButton2);
 		
@@ -121,7 +164,7 @@ public class OpcionesAvanzadasDirector extends JFrame {
 	 * @param listaCuotas lista con todas las cuotas
 	 * @return lista ordenada
 	 */
-	public ArrayList<Integer> quicksortOrden (ArrayList<Integer> listaCuotas){
+	public static ArrayList<Integer> quicksortOrden (ArrayList<Integer> listaCuotas){
 		return quicksort1(listaCuotas);
 	}
 	/**
@@ -129,7 +172,7 @@ public class OpcionesAvanzadasDirector extends JFrame {
 	 * @param listaCuotas lista con todas las cuotas
 	 * @return lista ordenada
 	 */
-	public ArrayList<Integer> quicksort1 (ArrayList<Integer> listaCuotas){
+	public static ArrayList<Integer> quicksort1 (ArrayList<Integer> listaCuotas){
 		return quicksort2 (listaCuotas, 0, (listaCuotas.size())-1);
 	}
 	/**
@@ -139,7 +182,7 @@ public class OpcionesAvanzadasDirector extends JFrame {
 	 * @param der el puntero que señala por la derecha
 	 * @return lista ordenada
 	 */
-	public ArrayList<Integer> quicksort2 (ArrayList<Integer> listaCuotas, int izq, int der){
+	public static ArrayList<Integer> quicksort2 (ArrayList<Integer> listaCuotas, int izq, int der){
 		
 		if (izq>=der)
 			return listaCuotas;
@@ -173,6 +216,56 @@ public class OpcionesAvanzadasDirector extends JFrame {
 			return listaCuotas;
 		
 		return listaCuotas;
+	}
+	/**
+	 * Metodo para ordenar los empleados en funcion de sus salarios con el metodo mergesort
+	 * @param salarios lista con los salarios cobrados
+	 * @return lista ordenada
+	 */
+	public static ArrayList <Integer> mergesort (ArrayList <Integer> salarios){
+		int i, j, k;
+		if (salarios.size() >1){
+			int izquierda = salarios.size()/2;
+			int derecha = salarios.size() - izquierda;
+			ArrayList <Integer> salariosIzquierda = new ArrayList <Integer> ();
+			ArrayList <Integer> salariosDerecha = new ArrayList <Integer> ();
+			
+			for (i = 0; i < izquierda + derecha; i++){
+				salariosIzquierda.set(i, salarios.get(i));
+			}
+			for (i = izquierda; i < izquierda + derecha; i++){
+				salariosDerecha.set(i - izquierda, salarios.get(i));
+			}
+			salariosIzquierda = mergesort (salariosIzquierda);
+			salariosDerecha = mergesort (salariosDerecha);
+			i = 0;
+			j = 0;
+			k = 0;
+			while (salariosIzquierda.size() != j && salariosDerecha.size() != k){
+				if (salariosIzquierda.get(j) < salariosDerecha.get(k)){
+					salarios.set(i, salariosIzquierda.get(j));
+					i++;
+					j++;
+				}else {
+					salarios.set(i, salariosDerecha.get(k));
+						i++;
+						j++;
+					}
+				}
+			while (salariosIzquierda.size() != j){
+				salarios.set(i, salariosIzquierda.get(j));
+				i++;
+				j++;
+			}
+			while (salariosDerecha.size() != k){
+				salarios.set(i, salariosDerecha.get(k));
+				i++;
+				k++;
+			}
+			
+		}
+		return salarios;
+		
 	}
 	
 	 
