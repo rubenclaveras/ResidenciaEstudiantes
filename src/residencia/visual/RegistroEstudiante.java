@@ -296,11 +296,7 @@ public class RegistroEstudiante extends JFrame {
 				
 			}
 		}
-		if(cuota!=0){
-			return cuota;
-		}else{
-			throw new Excepciones ("No se ha podido calcular el salario");
-		}
+		return cuota;
 		
 		
 		
