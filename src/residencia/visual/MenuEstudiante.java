@@ -134,7 +134,7 @@ public class MenuEstudiante extends JFrame {
 					"Codigo: " + c.getCodigoEstudiante() + "\n" +
 					"Dni: " + c.getDNI() + "\n" + 
 					"Numero de habitacion: "+c.getHabitacion()+ "\n" +
-					"Tipo de habitacion"+ tipoHabitacion + "\n" +
+					"Tipo de habitacion: "+ tipoHabitacion + "\n" +
 					"Cuota: " + c.getCuotaAnual()+ "\n" +
 					"Usuario: " + c.getUsuario() + "\n" +
 					"Contraseña: " + c.getContrasenia());

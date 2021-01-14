@@ -151,7 +151,7 @@ public class RegistroEstudiante extends JFrame {
 					e2.printStackTrace();
 				}
 				
-				boolean UCorrecto = false;
+				boolean UCorrecto = true;
 				try {
 					UCorrecto = comprobarEstudiante(Usuario);
 				} catch (Excepciones e1) {
@@ -227,7 +227,7 @@ public class RegistroEstudiante extends JFrame {
 	 * @return DNICorrecto, true si es correcto, false si es incorrecto
 	 */
 	public static boolean comprobarDNI(String DNI, int indice) {
-		boolean DNICorrecto = false;
+		boolean DNICorrecto = true;
 		
 		if (indice==estudianteBD.size()){
 			DNICorrecto = true;
@@ -283,7 +283,7 @@ public class RegistroEstudiante extends JFrame {
 	 * @throws Excepciones
 	 */
 	public static int calcularCuota(int numeroHabitacion) throws Excepciones {
-		int cuota = 0;
+		int cuota = 4200;
 		for(Habitacion h: habitacionBD){
 			if(h.getNumero()== numeroHabitacion){
 				if(h.getTipo().equals("Individual")){

@@ -83,11 +83,11 @@ public class MenuEmpleado extends JFrame {
 		btnCalcularSalario.addActionListener(e-> {
 				for (Trabajador a: empleadoBD){
 					if(a.getUsuario().equals(usuario) || a.getContrasenia().equals(password)){
-						int salarioAnual = (int) a.getSalario();
+						int salarioMensual = (int) a.getSalario();
 						int numPagas = 14;
-						int salarioPorPaga= salarioAnual/numPagas;
-						JOptionPane.showMessageDialog(null, "Salario anual: " + salarioAnual + "\n" +
-						"Salario por pagas: " + salarioPorPaga + "\n" +
+						int salarioAnual=  salarioMensual * numPagas;
+						JOptionPane.showMessageDialog(null, "Salario Anual: " + salarioAnual + "\n" +
+						"Salario mensual: " + salarioMensual + "\n" +
 						"Numero de pagas: " + numPagas);
 					}
 				}

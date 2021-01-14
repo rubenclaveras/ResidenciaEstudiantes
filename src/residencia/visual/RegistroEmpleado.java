@@ -242,7 +242,7 @@ public class RegistroEmpleado extends JFrame {
 	 * @return DNICorrecto, true si es correcto, false si es incorrecto
 	 */
 	public static boolean comprobarDNI(String DNI, int indice) {
-		boolean DNICorrecto = false;
+		boolean DNICorrecto = true;
 		
 		if (indice==empleadoBD.size()){
 			DNICorrecto = true;
@@ -276,7 +276,7 @@ public class RegistroEmpleado extends JFrame {
 	 * @throws Excepciones
 	 */
 	public static int calcularSalario(String ocupacion) throws Excepciones{
-		int Salario = 0;
+		int Salario = 25000;
 		if(ocupacion.toString() == "Mantenimiento" || ocupacion.toString() == "mantenimiento"){
 			Salario = 25000;
 		}else if (ocupacion.toString() == "Limpieza" || ocupacion.toString() == "limpieza"){
@@ -284,13 +284,7 @@ public class RegistroEmpleado extends JFrame {
 		}else if (ocupacion.toString() == "Director" || ocupacion.toString() == "director"){
 			Salario = 30000;
 		}
-		if(Salario!= 0){
-			return Salario;
-		}else{
-			JOptionPane.showMessageDialog(null, "Función no válida"
-										  +"\n" +"Elige Limpieza o Mantenimiento");
-			throw new Excepciones ("No se ha podido calcular bien el salario");
-		}
+		return Salario;
 		
 	}
 }

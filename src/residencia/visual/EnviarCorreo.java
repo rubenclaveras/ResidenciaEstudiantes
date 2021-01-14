@@ -44,7 +44,7 @@ public class EnviarCorreo extends JFrame {
 		this.Usuario= Usuario;
 		this.Contrasenia= Contrasenia;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 600, 412);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -72,13 +72,15 @@ public class EnviarCorreo extends JFrame {
 				String correoRemitente = "residencia.estudiante.correo@gmail.com";
 				String passwordRemitente = "residenciaestudiante";
 				String correoReceptor = txtCorreo.getText();
-				String asunto = "Bienvenide a la residencia de estudiantes";
-				String mensaje = "Saludos " + Nombre + "con Dni: " + DNI +","+"\n"
+				String asunto = "Bienvenido a nuestra residencia de estudiantes";
+				String mensaje = "Saludos, " + Nombre + "\n"
+						+"\n"
 						+"Se acaba de registrar usted con los siguentes datos. " + "\n"
+						+"DNI: " + DNI + "\n"
 						+ "Usuario: " + Usuario + "\n"
-						+ "Contraseña" + Contrasenia + "\n"+
-						"Por cualquier incomveniente no dude en contactar al correo remitente." + "\n"
-						+ "Estaremos agradecidos de solucionar su problema." + "\n"
+						+ "Contraseña: " + Contrasenia + "\n"+
+						"Si tiene cualquier duda o inconveniente no dude en contactar al correo remitente. Estaremos encantados de solucioner su problema" + "\n"
+						+"\n"
 						+"Un cordial saludo.";
 
 				MimeMessage message = new MimeMessage(session);
@@ -111,6 +113,8 @@ public class EnviarCorreo extends JFrame {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EnviarCorreo.this.dispose();
+				PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
+				paginaPrincipal.setVisible(true);
 			}
 		});
 		btnCancelar.setBounds(239, 175, 115, 29);

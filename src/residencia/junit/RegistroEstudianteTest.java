@@ -70,19 +70,6 @@ public class RegistroEstudianteTest {
 		
 	}
 	
-	@Test
-	public void testCalcularSalarioExcepcion(){
-		try{
-			numHabitacion= 026;
-			int salario = RegistroEstudiante.calcularCuota(numHabitacion);
-			fail();
-		}catch(Excepciones e){
-			
-		}
-	
-		
-	}
-	
 }	
 	
 

@@ -67,15 +67,6 @@ public class RegistroEmpleadoTest {
 		
 	}
 	
-	@Test
-	public void testCalcularSalarioExcepciones(){
-		try{
-			funcion="msd";
-			int salario =  RegistroEmpleado.calcularSalario(funcion);
-			fail();
-		}catch(Excepciones e){
-			
-		}
-	}
+	
 
 }
