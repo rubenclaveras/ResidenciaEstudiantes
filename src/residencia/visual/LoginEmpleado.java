@@ -29,6 +29,7 @@ import java.awt.SystemColor;
 
 /**
  * Clase que permitira iniciar sesion al trabajador y poder acceder al menu correcpondiente 
+ * @author Gorka Esteban
  */
 public class LoginEmpleado extends JFrame {
 

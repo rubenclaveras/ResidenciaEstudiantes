@@ -25,6 +25,7 @@ import java.awt.Font;
 
 /**
  * Clase que muestra una ventana que sera el menu de las diversas acciones que podra realizar el director
+ * @author Gorka Esteban
  */
 public class MenuDirector extends JFrame {
 

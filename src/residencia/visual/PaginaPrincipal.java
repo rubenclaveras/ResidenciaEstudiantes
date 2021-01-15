@@ -28,6 +28,7 @@ import java.awt.Color;
 
 /**
  * Clase que muestra la ventana principal del programa y direcciona a las siguientes ventanas
+ * @author Gorka Esteban
  */
 public class PaginaPrincipal extends JFrame {
 	

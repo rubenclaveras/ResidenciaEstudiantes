@@ -25,6 +25,10 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.SystemColor;
 
+/**
+ * Clase que permitira registrarse al trabajador  
+ * @author Gorka Esteban
+ */
 public class RegistroEmpleado extends JFrame {
 
 	private JPanel contentPane;

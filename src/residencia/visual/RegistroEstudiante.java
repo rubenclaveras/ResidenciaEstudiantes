@@ -25,6 +25,10 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 
+/**
+ * Clase que permitira registrarse al estudiantes  
+ * @author Gorka Esteban
+ */
 public class RegistroEstudiante extends JFrame {
 
 	private JPanel contentPane;

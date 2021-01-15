@@ -9,23 +9,34 @@ import org.junit.Test;
 import residencia.excepciones.Excepciones;
 import residencia.visual.LoginEstudiante;
 
+/**
+ * Clase junit test case que va a comprobar que funcionen correctamente los metodos de la clase LoginEstudiante
+ * @author Gorka
+ * @version 1.0
+ */
 public class LoginEstudianteTest {
 	
 	private String usuario;
 	private String password;
 	
+	/**
+	 * metodo que se ejecutara antes de cada test 
+	 */
 	@Before
 	public void setUp() throws Exception{
 
 		
 	}
-	
+	/**
+	 * metodo que se ejecutara despues de cada test
+	 */
 	@After
 	public void tearDown() throws Exception{
 		
 	}
-	
-
+	/**
+	 * test que hace una prueba del metodo comprobarEstudiantes
+	 */
 	@Test
 	public void testComprobarEstudianteAssert() throws Excepciones {
 		usuario = "alejandro";
@@ -34,7 +45,9 @@ public class LoginEstudianteTest {
 		assertTrue(encontrado);
 		
 	}
-	
+	/**
+	 * test que hace una prueba las excepciones del metodo comprobarEstudiantes
+	 */
 	@Test
 	public void testComprobarEstudianteExcepcion(){
 		try{

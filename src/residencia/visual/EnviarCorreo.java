@@ -21,6 +21,10 @@ import java.awt.event.ActionListener;
 import java.util.Properties;
 import java.awt.event.ActionEvent;
 
+/**
+ * Clase que permitira recibir un correo de toda la informacion del registro y dara la bienvenida a la residencia  
+ * @author Gorka Esteban
+ */
 public class EnviarCorreo extends JFrame {
 
 	private JPanel contentPane;

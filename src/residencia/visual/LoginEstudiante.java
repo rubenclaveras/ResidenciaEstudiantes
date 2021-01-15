@@ -24,7 +24,8 @@ import javax.swing.JPasswordField;
 import java.awt.Font;
 
 /**
- * Clase que permitira iniciar sesion al estudiante y poder acceder al menu correcpondiente 
+ * Clase que permitira iniciar sesion al estudiante y poder acceder al menu correcpondiente ç
+ * @author Gorka Esteban
  */
 public class LoginEstudiante extends JFrame {
 	

@@ -22,6 +22,7 @@ import java.awt.Font;;
 
 /**
  * Clase que muestra una ventana que sera el menu de las diversas acciones que podra realizar el trabajador
+ * @author Gorka Esteban
  */
 public class MenuEmpleado extends JFrame {
 
@@ -137,7 +138,10 @@ public class MenuEmpleado extends JFrame {
 
 	}
 	
-	
+	/**
+	 * Metodo que permite obtener la ocupacion del empleado que se desee con solo el usuario y contraseña
+	 * @return resetearSalones, un booleano que será true si deben resetearse (se resetarán los lunes) o false si no deben resetearse
+	 */
 	public static String obtenerOcupacion(String usuario, String password) throws Excepciones{
 		String ocupacion = null;
 		for(Trabajador a: empleadoBD){

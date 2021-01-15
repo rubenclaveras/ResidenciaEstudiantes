@@ -24,6 +24,7 @@ import java.awt.Font;
 
 /**
  * Clase que muestra una ventana que sera el menu de las diversas acciones que podra realizar el estudiante
+ * @author Gorka Esteban
  */
 public class MenuEstudiante extends JFrame {
 
